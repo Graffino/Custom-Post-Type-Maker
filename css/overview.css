@@ -1,0 +1,96 @@
+/*
+	Hide table navigation
+	Hide search box
+	Hide Quick Edit link
+*/
+.tablenav.top, p.search-box, .row-actions .inline {
+	display: none;
+}
+
+/* Columns */
+#icon-edit {
+	background: url(../img/cptm-icon-32.png) 0 0 no-repeat;
+}
+
+#cptm-cols {
+	position: relative;
+	clear: both;
+}
+
+	#cptm-col-left {
+		margin-right: 307px;
+	}
+
+		#cptm-col-left .wp-list-table th#fields {
+			width: 25%;
+		}
+
+		#cptm-col-left form {
+			position: relative;
+			float: left;
+			width: 100%;
+		}
+
+	#cptm-col-right {
+		float: right;
+		width: 290px;
+		padding-top: 37px !important;
+	}
+
+		#cptm-col-right p.version {
+			font-size: 23px;
+			line-height: 29px;
+			font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', sans-serif;
+			color: #ccc;
+			margin-top: 0;
+		}
+
+	#cptm-cpt-overview {
+		position: relative;
+		float: left;
+		padding-top: 20px;
+		width: 100%;
+	}
+
+/* wp-box */
+.wp-box {
+	border: 1px solid #e1e1e1;
+	position: relative;
+}
+
+	.wp-box .inner {
+		padding: 10px;
+	}
+
+		.wp-box .inner p {
+			color: #666;
+		}
+
+	.wp-box .footer {
+		background: #f5f5f5;
+		border-top: 1px solid #e1e1e1;
+		overflow: hidden;
+		padding: 10px;
+		position: relative;
+	}
+
+		.wp-box .footer ul.left {
+			float: left;
+		}
+
+		.wp-box .footer ul li {
+			margin: 0;
+			padding: 0;
+		}
+
+		.wp-box .footer ul.left li {
+			margin-right: 10px;
+		}
+
+		.wp-box .footer ul.right {
+			float: right;
+		}
+
+		.wp-box .footer ul.right li {
+			margin-left: 10px;
+		}

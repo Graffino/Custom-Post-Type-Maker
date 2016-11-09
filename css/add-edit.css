@@ -1,0 +1,96 @@
+/*
+	Hide padding in publish meta box
+	Hide Visibility in publish meta box
+	Hide post date in publish meta box
+*/
+div#minor-publishing-actions, div#visibility, div.curtime {
+	display: none;
+}
+
+#icon-edit {
+	background: url(../img/cptm-icon-32.png) 0 0 no-repeat;
+}
+
+#cptm_icon_slug_before {
+    display: inline-block;
+    margin-left: -3px;
+    margin-right: 10px;
+    vertical-align: inherit;
+}
+    #cptm_icon_slug_before::before {
+        font-size: 25px;
+    }
+
+#cptm_icon_slug {
+	display: inline-block;
+	width: 50%;
+}
+
+/* meta_box */
+div#cptm_options div.inside, div#cptm_tax_options div.inside {
+	padding: 0;
+	margin: 0;
+}
+
+	table.cptm {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	table.cptm td {
+		border-bottom: 1px solid #e1e1e1;
+		padding: 10px;
+		margin: 0;
+		background: #fff;
+		vertical-align: top;
+	}
+
+		table.cptm td.label {
+			width: 24%;
+			border-right: 1px solid #e1e1e1;
+			background: #f9f9f9;
+			vertical-align: middle;
+		}
+
+		table.cptm td.label.top {
+			vertical-align: top;
+		}
+
+			table.cptm td.label label {
+				font-weight: bold;
+				width: 24%;
+			}
+
+				table.cptm td.label label span.required {
+					color: #f00;
+					font-weight: bold;
+				}
+
+			table.cptm td.label p,  table.cptm td span.default {
+				color: #666;
+			}
+
+		table.cptm td.section {
+			padding: 0;
+		}
+
+			table.cptm td.section h3 {
+				cursor: default;
+				border-bottom: none;
+				padding-left: 10px;
+			}
+
+		table.cptm td .current-cptm-icon {
+			float: left;
+		}
+
+			table.cptm td .current-cptm-icon img {
+				display: block;
+				float: left;
+				padding: 4px 10px 0 0;
+			}
+
+		table.cptm td .remove-cptm-icon, table.cptm td .media-uploader-button {
+			float: left;
+			margin: 0 10px 0 0;
+		}
