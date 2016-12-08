@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Types Maker
 Plugin URI: https://github.com/Graffino/custom-post-types-maker-ui
 Description: Custom Post Types Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.0.1
+Version: 1.0.2
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-types-maker
@@ -1366,7 +1366,7 @@ class Cptm {
 		$attachment_url = $response['url'];
 		$base_url = str_replace( wp_basename( $attachment_url ), '', $attachment_url );
 
-		if( is_array($meta['sizes']) )
+		if( isset( $meta['sizes'] ) && is_array($meta['sizes']) )
 		{
 			foreach( $meta['sizes'] as $k => $v )
 			{
