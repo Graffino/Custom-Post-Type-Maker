@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.0.2
+- [Bugfix] Fixed `undefined` error that prevents media library from loading
+
 ### 1.0.1
 - Compatibility with future version of WP
 
