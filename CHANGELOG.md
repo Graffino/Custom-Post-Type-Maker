@@ -1,5 +1,7 @@
 ## Changelog
 
+### 1.0.1
+- Compatibility with future version of WP
 
 ### 1.0.0
 - [Added] Ability to select [DashIcons](https://developer.wordpress.org/resource/dashicons/#layout) as Custom Post Type icon.
