@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Types Maker
 Plugin URI: https://github.com/Graffino/custom-post-types-maker-ui
 Description: Custom Post Types Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.0.2
+Version: 1.0.3
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-types-maker
@@ -24,7 +24,7 @@ Released under the GPL v.2, http://www.gnu.org/copyleft/gpl.html
  * @copyright	Copyright (c) 2016, Graffino
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package		Custom_Post_Types_Maker
- * @version	 	1.0.1
+ * @version	 	1.0.3
  */
 
 //avoid direct calls to this file
@@ -51,7 +51,7 @@ class Cptm {
 		// vars
 		$this->dir = plugins_url( '', __FILE__ );
 		$this->path = plugin_dir_path( __FILE__ );
-		$this->version = '1.0.0';
+		$this->version = '1.0.3';
 
 		// actions
 		add_action( 'init', array($this, 'init') );
@@ -679,7 +679,7 @@ class Cptm {
 			<tr>
 				<td class="label">
 					<label for="current-cptm-icon"><?php _e( 'Icon', 'custom-post-types-maker' ); ?></label>
-                    <p><?php _e( 'This icon will be overriden in a Dash Icon is specified in the field below.', 'custom-post-types-maker' ); ?></p>
+                    <p><?php _e( 'This icon will be overriden if a Dash Icon is specified in the field below.', 'custom-post-types-maker' ); ?></p>
                 </td>
 				<td>
 					<div class="cptm-icon">
