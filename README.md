@@ -14,6 +14,10 @@ Custom Post Types Maker is the perfect plugin to create Custom Post Types and cu
 
 ## Changelog
 
+### 1.0.3
+- [Bugfix] Fix typos
+
+
 ### 1.0.2
 - [Bugfix] Fixed `undefined` error that prevented media library from loading
 

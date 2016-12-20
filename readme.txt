@@ -51,6 +51,9 @@ Please ask your question in the [Support Forums](http://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.0.3 =
+- [Bugfix] Fix typos
+
 = 1.0.2 =
 - [Bugfix] Fixed `undefined` error that prevented media library from loading
 
