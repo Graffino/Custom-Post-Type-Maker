@@ -1,5 +1,5 @@
 === Custom Post Types Maker ===
-Contributors: graffino
+Contributors: graffino, zeno.popovici, zenopopovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.7
