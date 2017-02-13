@@ -1,9 +1,9 @@
 === Custom Post Types Maker ===
-Contributors: graffino, zeno.popovici, zenopopovici, jornbakhuys
+Contributors: graffino, zeno.popovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.7
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
