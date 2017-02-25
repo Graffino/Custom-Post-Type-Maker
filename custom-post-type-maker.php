@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Custom Post Types Maker
-Plugin URI: https://github.com/Graffino/custom-post-types-maker-ui
-Description: Custom Post Types Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.0.3
+Plugin Name: Custom Post Type Maker
+Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
+Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
+Version: 1.0.4
 Author: Graffino
 Author URI: http://www.graffino.com/
-Text Domain: custom-post-types-maker
+Text Domain: custom-post-type-maker
 Domain Path: /lang
 
 
@@ -24,7 +24,7 @@ Released under the GPL v.2, http://www.gnu.org/copyleft/gpl.html
  * @copyright	Copyright (c) 2016, Graffino
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package		Custom_Post_Types_Maker
- * @version	 	1.0.3
+ * @version	 	1.0.4
  */
 
 //avoid direct calls to this file
@@ -81,16 +81,16 @@ class Cptm {
 
 		// Create cptm post type
 		$labels = array(
-			'name' => __( 'Custom Post Types Maker', 'custom-post-types-maker' ),
-			'singular_name' => __( 'Custom Post Type', 'custom-post-types-maker' ),
-			'add_new' => __( 'Add New' , 'custom-post-types-maker' ),
-			'add_new_item' => __( 'Add New Custom Post Type' , 'custom-post-types-maker' ),
-			'edit_item' =>  __( 'Edit Custom Post Type' , 'custom-post-types-maker' ),
-			'new_item' => __( 'New Custom Post Type' , 'custom-post-types-maker' ),
-			'view_item' => __('View Custom Post Type', 'custom-post-types-maker' ),
-			'search_items' => __('Search Custom Post Types', 'custom-post-types-maker' ),
-			'not_found' =>  __('No Custom Post Types found', 'custom-post-types-maker' ),
-			'not_found_in_trash' => __('No Custom Post Types found in Trash', 'custom-post-types-maker' ),
+			'name' => __( 'Custom Post Type Maker', 'custom-post-type-maker' ),
+			'singular_name' => __( 'Custom Post Type', 'custom-post-type-maker' ),
+			'add_new' => __( 'Add New' , 'custom-post-type-maker' ),
+			'add_new_item' => __( 'Add New Custom Post Type' , 'custom-post-type-maker' ),
+			'edit_item' =>  __( 'Edit Custom Post Type' , 'custom-post-type-maker' ),
+			'new_item' => __( 'New Custom Post Type' , 'custom-post-type-maker' ),
+			'view_item' => __('View Custom Post Type', 'custom-post-type-maker' ),
+			'search_items' => __('Search Custom Post Types', 'custom-post-type-maker' ),
+			'not_found' =>  __('No Custom Post Types found', 'custom-post-type-maker' ),
+			'not_found_in_trash' => __('No Custom Post Types found in Trash', 'custom-post-type-maker' ),
 		);
 
 		register_post_type( 'cptm', array(
@@ -110,16 +110,16 @@ class Cptm {
 
 		// Create cptm_tax post type
 		$labels = array(
-			'name' => __( 'Custom Taxonomies', 'custom-post-types-maker' ),
-			'singular_name' => __( 'Custom Taxonomy', 'custom-post-types-maker' ),
-			'add_new' => __( 'Add New' , 'custom-post-types-maker' ),
-			'add_new_item' => __( 'Add New Custom Taxonomy' , 'custom-post-types-maker' ),
-			'edit_item' =>  __( 'Edit Custom Taxonomy' , 'custom-post-types-maker' ),
-			'new_item' => __( 'New Custom Taxonomy' , 'custom-post-types-maker' ),
-			'view_item' => __('View Custom Taxonomy', 'custom-post-types-maker' ),
-			'search_items' => __('Search Custom Taxonomies', 'custom-post-types-maker' ),
-			'not_found' =>  __('No Custom Taxonomies found', 'custom-post-types-maker' ),
-			'not_found_in_trash' => __('No Custom Taxonomies found in Trash', 'custom-post-types-maker' ),
+			'name' => __( 'Custom Taxonomies', 'custom-post-type-maker' ),
+			'singular_name' => __( 'Custom Taxonomy', 'custom-post-type-maker' ),
+			'add_new' => __( 'Add New' , 'custom-post-type-maker' ),
+			'add_new_item' => __( 'Add New Custom Taxonomy' , 'custom-post-type-maker' ),
+			'edit_item' =>  __( 'Edit Custom Taxonomy' , 'custom-post-type-maker' ),
+			'new_item' => __( 'New Custom Taxonomy' , 'custom-post-type-maker' ),
+			'view_item' => __('View Custom Taxonomy', 'custom-post-type-maker' ),
+			'search_items' => __('Search Custom Taxonomies', 'custom-post-type-maker' ),
+			'not_found' =>  __('No Custom Taxonomies found', 'custom-post-type-maker' ),
+			'not_found_in_trash' => __('No Custom Taxonomies found in Trash', 'custom-post-type-maker' ),
 		);
 
 		register_post_type( 'cptm_tax', array(
@@ -147,8 +147,8 @@ class Cptm {
 	public function cptm_admin_menu() {
 
 		// add cptm page to options menu
-		add_menu_page( __('CPT Maker', 'custom-post-types-maker' ), __('Post Types', 'custom-post-types-maker' ), 'manage_options', 'edit.php?post_type=cptm', '', 'dashicons-layout' );
-		add_submenu_page( 'edit.php?post_type=cptm', __('Taxonomies', 'custom-post-types-maker' ), __('Taxonomies', 'custom-post-types-maker' ), 'manage_options', 'edit.php?post_type=cptm_tax' );
+		add_menu_page( __('CPT Maker', 'custom-post-type-maker' ), __('Post Types', 'custom-post-type-maker' ), 'manage_options', 'edit.php?post_type=cptm', '', 'dashicons-layout' );
+		add_submenu_page( 'edit.php?post_type=cptm', __('Taxonomies', 'custom-post-type-maker' ), __('Taxonomies', 'custom-post-type-maker' ), 'manage_options', 'edit.php?post_type=cptm_tax' );
 
 	} // # function cptm_admin_menu()
 
@@ -240,7 +240,7 @@ class Cptm {
 				$cptm_builtin_taxonomies  = ( array_key_exists( 'cptm_builtin_taxonomies', $cptm_meta ) && $cptm_meta['cptm_builtin_taxonomies'][0] ? $cptm_meta['cptm_builtin_taxonomies'][0] : 'a:0:{}' );
 
 				$cptm_rewrite_options     = array();
-				if ( $cptm_rewrite )      { $cptm_rewrite_options['slug'] = _x( $cptm_custom_rewrite_slug, 'URL Slug', 'custom-post-types-maker' ); }
+				if ( $cptm_rewrite )      { $cptm_rewrite_options['slug'] = _x( $cptm_custom_rewrite_slug, 'URL Slug', 'custom-post-type-maker' ); }
 				if ( $cptm_withfront )    { $cptm_rewrite_options['with_front'] = $cptm_withfront; }
 				if ( $cptm_feeds )        { $cptm_rewrite_options['feeds'] = $cptm_feeds; }
 				if ( $cptm_pages )        { $cptm_rewrite_options['pages'] = $cptm_pages; }
@@ -272,16 +272,16 @@ class Cptm {
 					foreach ($cptms as $cptm_post_type) {
 
 						$labels = array(
-							'name'                => __( $cptm_post_type['cptm_label'], 'custom-post-types-maker' ),
-							'singular_name'       => __( $cptm_post_type['cptm_singular_name'], 'custom-post-types-maker' ),
-							'add_new'             => __( 'Add New' , 'custom-post-types-maker' ),
-							'add_new_item'        => __( 'Add New ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-types-maker' ),
-							'edit_item'           => __( 'Edit ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-types-maker' ),
-							'new_item'            => __( 'New ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-types-maker' ),
-							'view_item'           => __( 'View ' . $cptm_post_type['cptm_singular_name'], 'custom-post-types-maker' ),
-							'search_items'        => __( 'Search ' . $cptm_post_type['cptm_label'], 'custom-post-types-maker' ),
-							'not_found'           => __( 'No ' .  $cptm_post_type['cptm_label'] . ' found', 'custom-post-types-maker' ),
-							'not_found_in_trash'  => __( 'No ' .  $cptm_post_type['cptm_label'] . ' found in Trash', 'custom-post-types-maker' ),
+							'name'                => __( $cptm_post_type['cptm_label'], 'custom-post-type-maker' ),
+							'singular_name'       => __( $cptm_post_type['cptm_singular_name'], 'custom-post-type-maker' ),
+							'add_new'             => __( 'Add New' , 'custom-post-type-maker' ),
+							'add_new_item'        => __( 'Add New ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-type-maker' ),
+							'edit_item'           => __( 'Edit ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-type-maker' ),
+							'new_item'            => __( 'New ' . $cptm_post_type['cptm_singular_name'] , 'custom-post-type-maker' ),
+							'view_item'           => __( 'View ' . $cptm_post_type['cptm_singular_name'], 'custom-post-type-maker' ),
+							'search_items'        => __( 'Search ' . $cptm_post_type['cptm_label'], 'custom-post-type-maker' ),
+							'not_found'           => __( 'No ' .  $cptm_post_type['cptm_label'] . ' found', 'custom-post-type-maker' ),
+							'not_found_in_trash'  => __( 'No ' .  $cptm_post_type['cptm_label'] . ' found in Trash', 'custom-post-type-maker' ),
 						);
 
 						$args = array(
@@ -334,7 +334,7 @@ class Cptm {
 				// dropdown
 				$cptm_tax_show_ui             = ( array_key_exists( 'cptm_tax_show_ui', $cptm_meta ) && $cptm_meta['cptm_tax_show_ui'][0] == '1' ? true : false );
 				$cptm_tax_hierarchical        = ( array_key_exists( 'cptm_tax_hierarchical', $cptm_meta ) && $cptm_meta['cptm_tax_hierarchical'][0] == '1' ? true : false );
-				$cptm_tax_rewrite             = ( array_key_exists( 'cptm_tax_rewrite', $cptm_meta ) && $cptm_meta['cptm_tax_rewrite'][0] == '1' ? array( 'slug' => _x( $cptm_tax_custom_rewrite_slug, 'URL Slug', 'custom-post-types-maker' ) ) : false );
+				$cptm_tax_rewrite             = ( array_key_exists( 'cptm_tax_rewrite', $cptm_meta ) && $cptm_meta['cptm_tax_rewrite'][0] == '1' ? array( 'slug' => _x( $cptm_tax_custom_rewrite_slug, 'URL Slug', 'custom-post-type-maker' ) ) : false );
 				$cptm_tax_query_var           = ( array_key_exists( 'cptm_tax_query_var', $cptm_meta ) && $cptm_meta['cptm_tax_query_var'][0] == '1' ? true : false );
 
 				// checkbox
@@ -358,21 +358,21 @@ class Cptm {
 					foreach ($cptm_taxs as $cptm_taxonomy) {
 
 						$labels = array(
-							'name'                       => _x( $cptm_taxonomy['cptm_tax_label'], 'taxonomy general name', 'custom-post-types-maker' ),
+							'name'                       => _x( $cptm_taxonomy['cptm_tax_label'], 'taxonomy general name', 'custom-post-type-maker' ),
 							'singular_name'              => _x( $cptm_taxonomy['cptm_tax_singular_name'], 'taxonomy singular name' ),
-							'search_items'               => __( 'Search ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' ),
-							'popular_items'              => __( 'Popular ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' ),
-							'all_items'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' ),
-							'parent_item'                => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' ),
-							'parent_item_colon'          => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' . ':' ),
-							'edit_item'                  => __( 'Edit ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' ),
-							'update_item'                => __( 'Update ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' ),
-							'add_new_item'               => __( 'Add New ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' ),
-							'new_item_name'              => __( 'New ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-types-maker' . ' Name' ),
-							'separate_items_with_commas' => __( 'Seperate ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' . ' with commas' ),
-							'add_or_remove_items'        => __( 'Add or remove ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' ),
-							'choose_from_most_used'      => __( 'Choose from the most used ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' ),
-							'menu_name'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-types-maker' )
+							'search_items'               => __( 'Search ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'popular_items'              => __( 'Popular ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'all_items'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'parent_item'                => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
+							'parent_item_colon'          => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' . ':' ),
+							'edit_item'                  => __( 'Edit ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
+							'update_item'                => __( 'Update ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
+							'add_new_item'               => __( 'Add New ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
+							'new_item_name'              => __( 'New ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' . ' Name' ),
+							'separate_items_with_commas' => __( 'Seperate ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' . ' with commas' ),
+							'add_or_remove_items'        => __( 'Add or remove ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'choose_from_most_used'      => __( 'Choose from the most used ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'menu_name'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' )
 						);
 
 						$args = array(
@@ -402,7 +402,7 @@ class Cptm {
 		// add options meta box
 		add_meta_box(
 			'cptm_options',
-			__( 'Options', 'custom-post-types-maker' ),
+			__( 'Options', 'custom-post-type-maker' ),
 			array($this, 'cptm_meta_box'),
 			'cptm',
 			'advanced',
@@ -410,7 +410,7 @@ class Cptm {
 		);
 		add_meta_box(
 			'cptm_tax_options',
-			__( 'Options', 'custom-post-types-maker' ),
+			__( 'Options', 'custom-post-type-maker' ),
 			array($this, 'cptm_tax_meta_box'),
 			'cptm_tax',
 			'advanced',
@@ -492,9 +492,9 @@ class Cptm {
 		<table class="cptm">
 			<tr>
 				<td class="label">
-					<label for="cptm_name"><span class="required">*</span> <?php _e( 'Custom Post Type Name', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'The post type name. Used to retrieve custom post type content. Must be all in lower-case and without any spaces.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. movies', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_name"><span class="required">*</span> <?php _e( 'Custom Post Type Name', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'The post type name. Used to retrieve custom post type content. Must be all in lower-case and without any spaces.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. movies', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_name" id="cptm_name" class="widefat" tabindex="1" value="<?php echo $cptm_name; ?>" />
@@ -502,9 +502,9 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_label"><?php _e( 'Label', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'A plural descriptive name for the post type.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. Movies', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_label"><?php _e( 'Label', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'A plural descriptive name for the post type.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. Movies', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_label" id="cptm_label" class="widefat" tabindex="2" value="<?php echo $cptm_label; ?>" />
@@ -512,9 +512,9 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_singular_name"><?php _e( 'Singular Name', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'A singular descriptive name for the post type.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. Movie', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_singular_name"><?php _e( 'Singular Name', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'A singular descriptive name for the post type.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. Movie', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_singular_name" id="cptm_singular_name" class="widefat" tabindex="3" value="<?php echo $cptm_singular_name; ?>" />
@@ -522,8 +522,8 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label top">
-					<label for="cptm_description"><?php _e( 'Description', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'A short descriptive summary of what the post type is.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_description"><?php _e( 'Description', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'A short descriptive summary of what the post type is.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<textarea name="cptm_description" id="cptm_description" class="widefat" tabindex="4" rows="4"><?php echo $cptm_description; ?></textarea>
@@ -531,55 +531,55 @@ class Cptm {
 			</tr>
 			<tr>
 				<td colspan="2" class="section">
-					<h3><?php _e( 'Visibility', 'custom-post-types-maker' ); ?></h3>
+					<h3><?php _e( 'Visibility', 'custom-post-type-maker' ); ?></h3>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_public"><?php _e( 'Public', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether a post type is intended to be used publicly either via the admin interface or by front-end users.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_public"><?php _e( 'Public', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether a post type is intended to be used publicly either via the admin interface or by front-end users.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_public" id="cptm_public" tabindex="5">
-						<option value="1" <?php selected( $cptm_public, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_public, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_public, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_public, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="section">
-					<h3><?php _e( 'Rewrite Options', 'custom-post-types-maker' ); ?></h3>
+					<h3><?php _e( 'Rewrite Options', 'custom-post-type-maker' ); ?></h3>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_rewrite"><?php _e( 'Rewrite', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Triggers the handling of rewrites for this post type.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_rewrite"><?php _e( 'Rewrite', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Triggers the handling of rewrites for this post type.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_rewrite" id="cptm_rewrite" tabindex="6">
-						<option value="1" <?php selected( $cptm_rewrite, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_rewrite, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_rewrite, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_rewrite, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_withfront"><?php _e( 'With Front', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Should the permastruct be prepended with the front base.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_withfront"><?php _e( 'With Front', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Should the permastruct be prepended with the front base.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_withfront" id="cptm_withfront" tabindex="7">
-						<option value="1" <?php selected( $cptm_withfront, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_withfront, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_withfront, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_withfront, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_custom_rewrite_slug"><?php _e( 'Custom Rewrite Slug', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Customize the permastruct slug.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'Default: [Custom Post Type Name]', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_custom_rewrite_slug"><?php _e( 'Custom Rewrite Slug', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Customize the permastruct slug.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'Default: [Custom Post Type Name]', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_custom_rewrite_slug" id="cptm_custom_rewrite_slug" class="widefat" tabindex="8" value="<?php echo $cptm_custom_rewrite_slug; ?>" />
@@ -587,78 +587,78 @@ class Cptm {
 			</tr>
 			<tr>
 				<td colspan="2" class="section">
-					<h3><?php _e( 'Front-end Options', 'custom-post-types-maker' ); ?></h3>
+					<h3><?php _e( 'Front-end Options', 'custom-post-type-maker' ); ?></h3>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_feeds"><?php _e( 'Feeds', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Should a feed permastruct be built for this post type. Defaults to "has_archive" value.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_feeds"><?php _e( 'Feeds', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Should a feed permastruct be built for this post type. Defaults to "has_archive" value.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_feeds" id="cptm_feeds" tabindex="9">
-						<option value="0" <?php selected( $cptm_feeds, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="1" <?php selected( $cptm_feeds, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?></option>
+						<option value="0" <?php selected( $cptm_feeds, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="1" <?php selected( $cptm_feeds, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_pages"><?php _e( 'Pages', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Should the permastruct provide for pagination.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_pages"><?php _e( 'Pages', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Should the permastruct provide for pagination.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_pages" id="cptm_pages" tabindex="10">
-						<option value="1" <?php selected( $cptm_pages, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_pages, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_pages, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_pages, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_exclude_from_search"><?php _e( 'Exclude From Search', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether to exclude posts with this post type from front end search results.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_exclude_from_search"><?php _e( 'Exclude From Search', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether to exclude posts with this post type from front end search results.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_exclude_from_search" id="cptm_exclude_from_search" tabindex="11">
-						<option value="0" <?php selected( $cptm_exclude_from_search, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="1" <?php selected( $cptm_exclude_from_search, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?></option>
+						<option value="0" <?php selected( $cptm_exclude_from_search, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="1" <?php selected( $cptm_exclude_from_search, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_has_archive"><?php _e( 'Has Archive', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Enables post type archives.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_has_archive"><?php _e( 'Has Archive', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Enables post type archives.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_has_archive" id="cptm_has_archive" tabindex="12">
-						<option value="0" <?php selected( $cptm_has_archive, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="1" <?php selected( $cptm_has_archive, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?></option>
+						<option value="0" <?php selected( $cptm_has_archive, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="1" <?php selected( $cptm_has_archive, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="section">
-					<h3><?php _e( 'Admin Menu Options', 'custom-post-types-maker' ); ?></h3>
+					<h3><?php _e( 'Admin Menu Options', 'custom-post-type-maker' ); ?></h3>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_show_ui"><?php _e( 'Show UI', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether to generate a default UI for managing this post type in the admin.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_show_ui"><?php _e( 'Show UI', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether to generate a default UI for managing this post type in the admin.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_show_ui" id="cptm_show_ui" tabindex="13">
-						<option value="1" <?php selected( $cptm_show_ui, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_show_ui, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_show_ui, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_show_ui, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_menu_position"><?php _e( 'Menu Position', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'The position in the menu order the post type should appear. "Show in Menu" must be true.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_menu_position"><?php _e( 'Menu Position', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'The position in the menu order the post type should appear. "Show in Menu" must be true.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_menu_position" id="cptm_menu_position" class="widefat" tabindex="14" value="<?php echo $cptm_menu_position; ?>" />
@@ -666,34 +666,34 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_show_in_menu"><?php _e( 'Show in Menu', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Where to show the post type in the admin menu. "Show UI" must be true.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_show_in_menu"><?php _e( 'Show in Menu', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Where to show the post type in the admin menu. "Show UI" must be true.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_show_in_menu" id="cptm_show_in_menu" tabindex="15">
-						<option value="1" <?php selected( $cptm_show_in_menu, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_show_in_menu, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_show_in_menu, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_show_in_menu, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="current-cptm-icon"><?php _e( 'Icon', 'custom-post-types-maker' ); ?></label>
-                    <p><?php _e( 'This icon will be overriden if a Dash Icon is specified in the field below.', 'custom-post-types-maker' ); ?></p>
+					<label for="current-cptm-icon"><?php _e( 'Icon', 'custom-post-type-maker' ); ?></label>
+                    <p><?php _e( 'This icon will be overriden if a Dash Icon is specified in the field below.', 'custom-post-type-maker' ); ?></p>
                 </td>
 				<td>
 					<div class="cptm-icon">
 						<div class="current-cptm-icon"><?php if ( $cptm_icon_url ) { ?><img src="<?php echo $cptm_icon_url; ?>" /><?php } ?></div>
 						<a href="/" class="remove-cptm-icon button-secondary"<?php if ( ! $cptm_icon_url ) { ?> style="display: none;"<?php } ?>>Remove icon</a>
-						<a  href="/"class="media-uploader-button button-primary" data-post-id="<?php echo $post->ID; ?>"><?php if ( ! $cptm_icon_url ) { ?><?php _e( 'Add icon', 'custom-post-types-maker' ); ?><?php } else { ?><?php _e( 'Edit icon', 'custom-post-types-maker' ); ?><?php } ?></a>
+						<a  href="/"class="media-uploader-button button-primary" data-post-id="<?php echo $post->ID; ?>"><?php if ( ! $cptm_icon_url ) { ?><?php _e( 'Add icon', 'custom-post-type-maker' ); ?><?php } else { ?><?php _e( 'Edit icon', 'custom-post-type-maker' ); ?><?php } ?></a>
 					</div>
 					<input type="hidden" name="cptm_icon_url" id="cptm_icon_url" class="widefat" value="<?php echo $cptm_icon_url; ?>" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_icon_slug"><?php _e( 'Slug Icon', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'This uses (<a href="https://developer.wordpress.org/resource/dashicons/">Dash Icons</a>) and <strong>overrides</strong> the uploaded icon above.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_icon_slug"><?php _e( 'Slug Icon', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'This uses (<a href="https://developer.wordpress.org/resource/dashicons/">Dash Icons</a>) and <strong>overrides</strong> the uploaded icon above.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<?php if ( $cptm_icon_slug ) { ?><span id="cptm_icon_slug_before" class="dashicons-before <?php echo $cptm_icon_slug; ?>"><?php } ?></span>
@@ -702,72 +702,72 @@ class Cptm {
 			</tr>
 			<tr>
 				<td colspan="2" class="section">
-					<h3><?php _e( 'Wordpress Integration', 'custom-post-types-maker' ); ?></h3>
+					<h3><?php _e( 'Wordpress Integration', 'custom-post-type-maker' ); ?></h3>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_capability_type"><?php _e( 'Capability Type', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'The post type to use to build the read, edit, and delete capabilities.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_capability_type"><?php _e( 'Capability Type', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'The post type to use to build the read, edit, and delete capabilities.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_capability_type" id="cptm_capability_type" tabindex="16">
-						<option value="post" <?php selected( $cptm_capability_type, 'post' ); ?>><?php _e( 'Post', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="page" <?php selected( $cptm_capability_type, 'page' ); ?>><?php _e( 'Page', 'custom-post-types-maker' ); ?></option>
+						<option value="post" <?php selected( $cptm_capability_type, 'post' ); ?>><?php _e( 'Post', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="page" <?php selected( $cptm_capability_type, 'page' ); ?>><?php _e( 'Page', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_hierarchical"><?php _e( 'Hierarchical', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether the post type is hierarchical (e.g. page).', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_hierarchical"><?php _e( 'Hierarchical', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether the post type is hierarchical (e.g. page).', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_hierarchical" id="cptm_hierarchical" tabindex="17">
-						<option value="0" <?php selected( $cptm_hierarchical, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="1" <?php selected( $cptm_hierarchical, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?></option>
+						<option value="0" <?php selected( $cptm_hierarchical, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="1" <?php selected( $cptm_hierarchical, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_query_var"><?php _e( 'Query Var', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Sets the query_var key for this post type.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_query_var"><?php _e( 'Query Var', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Sets the query_var key for this post type.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_query_var" id="cptm_query_var" tabindex="18">
-						<option value="1" <?php selected( $cptm_query_var, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_query_var, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_query_var, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_query_var, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label top">
-					<label for="cptm_supports"><?php _e( 'Supports', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Adds the respective meta boxes when creating content for this Custom Post Type.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_supports"><?php _e( 'Supports', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Adds the respective meta boxes when creating content for this Custom Post Type.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
-					<input type="checkbox" tabindex="19" name="cptm_supports[]" id="cptm_supports_title" value="title" <?php checked( $cptm_supports_title, 'title' ); ?> /> <label for="cptm_supports_title"><?php _e( 'Title', 'custom-post-types-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-types-maker' ); ?>)</span></label><br />
-					<input type="checkbox" tabindex="20" name="cptm_supports[]" id="cptm_supports_editor" value="editor" <?php checked( $cptm_supports_editor, 'editor' ); ?> /> <label for="cptm_supports_editor"><?php _e( 'Editor', 'custom-post-types-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-types-maker' ); ?>)</span></label><br />
-					<input type="checkbox" tabindex="21" name="cptm_supports[]" id="cptm_supports_excerpt" value="excerpt" <?php checked( $cptm_supports_excerpt, 'excerpt' ); ?> /> <label for="cptm_supports_excerpt"><?php _e( 'Excerpt', 'custom-post-types-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-types-maker' ); ?>)</span></label><br />
-					<input type="checkbox" tabindex="22" name="cptm_supports[]" id="cptm_supports_trackbacks" value="trackbacks" <?php checked( $cptm_supports_trackbacks, 'trackbacks' ); ?> /> <label for="cptm_supports_trackbacks"><?php _e( 'Trackbacks', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="23" name="cptm_supports[]" id="cptm_supports_custom_fields" value="custom-fields" <?php checked( $cptm_supports_custom_fields, 'custom-fields' ); ?> /> <label for="cptm_supports_custom_fields"><?php _e( 'Custom Fields', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="24" name="cptm_supports[]" id="cptm_supports_comments" value="comments" <?php checked( $cptm_supports_comments, 'comments' ); ?> /> <label for="cptm_supports_comments"><?php _e( 'Comments', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="25" name="cptm_supports[]" id="cptm_supports_revisions" value="revisions" <?php checked( $cptm_supports_revisions, 'revisions' ); ?> /> <label for="cptm_supports_revisions"><?php _e( 'Revisions', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="26" name="cptm_supports[]" id="cptm_supports_featured_image" value="thumbnail" <?php checked( $cptm_supports_featured_image, 'thumbnail' ); ?> /> <label for="cptm_supports_featured_image"><?php _e( 'Featured Image', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="27" name="cptm_supports[]" id="cptm_supports_author" value="author" <?php checked( $cptm_supports_author, 'author' ); ?> /> <label for="cptm_supports_author"><?php _e( 'Author', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="28" name="cptm_supports[]" id="cptm_supports_page_attributes" value="page-attributes" <?php checked( $cptm_supports_page_attributes, 'page-attributes' ); ?> /> <label for="cptm_supports_page_attributes"><?php _e( 'Page Attributes', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="29" name="cptm_supports[]" id="cptm_supports_post_formats" value="post-formats" <?php checked( $cptm_supports_post_formats, 'post-formats' ); ?> /> <label for="cptm_supports_post_formats"><?php _e( 'Post Formats', 'custom-post-types-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="19" name="cptm_supports[]" id="cptm_supports_title" value="title" <?php checked( $cptm_supports_title, 'title' ); ?> /> <label for="cptm_supports_title"><?php _e( 'Title', 'custom-post-type-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-type-maker' ); ?>)</span></label><br />
+					<input type="checkbox" tabindex="20" name="cptm_supports[]" id="cptm_supports_editor" value="editor" <?php checked( $cptm_supports_editor, 'editor' ); ?> /> <label for="cptm_supports_editor"><?php _e( 'Editor', 'custom-post-type-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-type-maker' ); ?>)</span></label><br />
+					<input type="checkbox" tabindex="21" name="cptm_supports[]" id="cptm_supports_excerpt" value="excerpt" <?php checked( $cptm_supports_excerpt, 'excerpt' ); ?> /> <label for="cptm_supports_excerpt"><?php _e( 'Excerpt', 'custom-post-type-maker' ); ?> <span class="default">(<?php _e( 'default', 'custom-post-type-maker' ); ?>)</span></label><br />
+					<input type="checkbox" tabindex="22" name="cptm_supports[]" id="cptm_supports_trackbacks" value="trackbacks" <?php checked( $cptm_supports_trackbacks, 'trackbacks' ); ?> /> <label for="cptm_supports_trackbacks"><?php _e( 'Trackbacks', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="23" name="cptm_supports[]" id="cptm_supports_custom_fields" value="custom-fields" <?php checked( $cptm_supports_custom_fields, 'custom-fields' ); ?> /> <label for="cptm_supports_custom_fields"><?php _e( 'Custom Fields', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="24" name="cptm_supports[]" id="cptm_supports_comments" value="comments" <?php checked( $cptm_supports_comments, 'comments' ); ?> /> <label for="cptm_supports_comments"><?php _e( 'Comments', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="25" name="cptm_supports[]" id="cptm_supports_revisions" value="revisions" <?php checked( $cptm_supports_revisions, 'revisions' ); ?> /> <label for="cptm_supports_revisions"><?php _e( 'Revisions', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="26" name="cptm_supports[]" id="cptm_supports_featured_image" value="thumbnail" <?php checked( $cptm_supports_featured_image, 'thumbnail' ); ?> /> <label for="cptm_supports_featured_image"><?php _e( 'Featured Image', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="27" name="cptm_supports[]" id="cptm_supports_author" value="author" <?php checked( $cptm_supports_author, 'author' ); ?> /> <label for="cptm_supports_author"><?php _e( 'Author', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="28" name="cptm_supports[]" id="cptm_supports_page_attributes" value="page-attributes" <?php checked( $cptm_supports_page_attributes, 'page-attributes' ); ?> /> <label for="cptm_supports_page_attributes"><?php _e( 'Page Attributes', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="29" name="cptm_supports[]" id="cptm_supports_post_formats" value="post-formats" <?php checked( $cptm_supports_post_formats, 'post-formats' ); ?> /> <label for="cptm_supports_post_formats"><?php _e( 'Post Formats', 'custom-post-type-maker' ); ?></label><br />
 				</td>
 			</tr>
 			<tr>
 				<td class="label top">
-					<label for="cptm_builtin_taxonomies"><?php _e( 'Built-in Taxonomies', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( '', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_builtin_taxonomies"><?php _e( 'Built-in Taxonomies', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( '', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
-					<input type="checkbox" tabindex="30" name="cptm_builtin_taxonomies[]" id="cptm_builtin_taxonomies_categories" value="category" <?php checked( $cptm_builtin_taxonomies_categories, 'category' ); ?> /> <label for="cptm_builtin_taxonomies_categories"><?php _e( 'Categories', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="31" name="cptm_builtin_taxonomies[]" id="cptm_builtin_taxonomies_tags" value="post_tag" <?php checked( $cptm_builtin_taxonomies_tags, 'post_tag' ); ?> /> <label for="cptm_builtin_taxonomies_tags"><?php _e( 'Tags', 'custom-post-types-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="30" name="cptm_builtin_taxonomies[]" id="cptm_builtin_taxonomies_categories" value="category" <?php checked( $cptm_builtin_taxonomies_categories, 'category' ); ?> /> <label for="cptm_builtin_taxonomies_categories"><?php _e( 'Categories', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="31" name="cptm_builtin_taxonomies[]" id="cptm_builtin_taxonomies_tags" value="post_tag" <?php checked( $cptm_builtin_taxonomies_tags, 'post_tag' ); ?> /> <label for="cptm_builtin_taxonomies_tags"><?php _e( 'Tags', 'custom-post-type-maker' ); ?></label><br />
 				</td>
 			</tr>
 		</table>
@@ -817,9 +817,9 @@ class Cptm {
 		<table class="cptm">
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_name"><span class="required">*</span> <?php _e( 'Custom Taxonomy Name', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'The taxonomy name. Used to retrieve custom taxonomy content.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. movies', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_name"><span class="required">*</span> <?php _e( 'Custom Taxonomy Name', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'The taxonomy name. Used to retrieve custom taxonomy content.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. movies', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_tax_name" id="cptm_tax_name" class="widefat" tabindex="1" value="<?php echo $cptm_tax_name; ?>" />
@@ -827,9 +827,9 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_label"><?php _e( 'Label', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'A plural descriptive name for the taxonomy.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. Movies', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_label"><?php _e( 'Label', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'A plural descriptive name for the taxonomy.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. Movies', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_tax_label" id="cptm_tax_label" class="widefat" tabindex="2" value="<?php echo $cptm_tax_label; ?>" />
@@ -837,9 +837,9 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_singular_name"><?php _e( 'Singular Name', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'A singular descriptive name for the taxonomy.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'e.g. Movie', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_singular_name"><?php _e( 'Singular Name', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'A singular descriptive name for the taxonomy.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'e.g. Movie', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_tax_singular_name" id="cptm_tax_singular_name" class="widefat" tabindex="3" value="<?php echo $cptm_tax_singular_name; ?>" />
@@ -847,45 +847,45 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_show_ui"><?php _e( 'Show UI', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether to generate a default UI for managing this taxonomy in the admin.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_show_ui"><?php _e( 'Show UI', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether to generate a default UI for managing this taxonomy in the admin.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_tax_show_ui" id="cptm_tax_show_ui" tabindex="4">
-						<option value="1" <?php selected( $cptm_tax_show_ui, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_tax_show_ui, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_tax_show_ui, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_tax_show_ui, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_hierarchical"><?php _e( 'Hierarchical', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Whether the taxonomy is hierarchical (e.g. page).', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_hierarchical"><?php _e( 'Hierarchical', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether the taxonomy is hierarchical (e.g. page).', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_tax_hierarchical" id="cptm_tax_hierarchical" tabindex="5">
-						<option value="0" <?php selected( $cptm_tax_hierarchical, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="1" <?php selected( $cptm_tax_hierarchical, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?></option>
+						<option value="0" <?php selected( $cptm_tax_hierarchical, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="1" <?php selected( $cptm_tax_hierarchical, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_rewrite"><?php _e( 'Rewrite', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Triggers the handling of rewrites for this taxonomy.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_rewrite"><?php _e( 'Rewrite', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Triggers the handling of rewrites for this taxonomy.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_tax_rewrite" id="cptm_tax_rewrite" tabindex="6">
-						<option value="1" <?php selected( $cptm_tax_rewrite, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_tax_rewrite, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_tax_rewrite, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_tax_rewrite, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_custom_rewrite_slug"><?php _e( 'Custom Rewrite Slug', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Customize the permastruct slug.', 'custom-post-types-maker' ); ?></p>
-					<p><?php _e( 'Default: [Custom Taxonomy Name]', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_custom_rewrite_slug"><?php _e( 'Custom Rewrite Slug', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Customize the permastruct slug.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'Default: [Custom Taxonomy Name]', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<input type="text" name="cptm_tax_custom_rewrite_slug" id="cptm_tax_custom_rewrite_slug" class="widefat" tabindex="7" value="<?php echo $cptm_tax_custom_rewrite_slug; ?>" />
@@ -893,24 +893,24 @@ class Cptm {
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="cptm_tax_query_var"><?php _e( 'Query Var', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( 'Sets the query_var key for this taxonomy.', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_query_var"><?php _e( 'Query Var', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Sets the query_var key for this taxonomy.', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
 					<select name="cptm_tax_query_var" id="cptm_tax_query_var" tabindex="8">
-						<option value="1" <?php selected( $cptm_tax_query_var, '1' ); ?>><?php _e( 'True', 'custom-post-types-maker' ); ?> (<?php _e( 'default', 'custom-post-types-maker' ); ?>)</option>
-						<option value="0" <?php selected( $cptm_tax_query_var, '0' ); ?>><?php _e( 'False', 'custom-post-types-maker' ); ?></option>
+						<option value="1" <?php selected( $cptm_tax_query_var, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_tax_query_var, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="label top">
-					<label for="cptm_tax_post_types"><?php _e( 'Post Types', 'custom-post-types-maker' ); ?></label>
-					<p><?php _e( '', 'custom-post-types-maker' ); ?></p>
+					<label for="cptm_tax_post_types"><?php _e( 'Post Types', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( '', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
-					<input type="checkbox" tabindex="9" name="cptm_tax_post_types[]" id="cptm_tax_post_types_post" value="post" <?php checked( $cptm_tax_post_types_post, 'post' ); ?> /> <label for="cptm_tax_post_types_post"><?php _e( 'Posts', 'custom-post-types-maker' ); ?></label><br />
-					<input type="checkbox" tabindex="10" name="cptm_tax_post_types[]" id="cptm_tax_post_types_page" value="page" <?php checked( $cptm_tax_post_types_page, 'page' ); ?> /> <label for="cptm_tax_post_types_page"><?php _e( 'Pages', 'custom-post-types-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="9" name="cptm_tax_post_types[]" id="cptm_tax_post_types_post" value="post" <?php checked( $cptm_tax_post_types_post, 'post' ); ?> /> <label for="cptm_tax_post_types_post"><?php _e( 'Posts', 'custom-post-type-maker' ); ?></label><br />
+					<input type="checkbox" tabindex="10" name="cptm_tax_post_types[]" id="cptm_tax_post_types_page" value="page" <?php checked( $cptm_tax_post_types_page, 'page' ); ?> /> <label for="cptm_tax_post_types_page"><?php _e( 'Pages', 'custom-post-type-maker' ); ?></label><br />
 					<?php
 						$post_types = get_post_types( array( 'public' => true, '_builtin' => false ) );
 						$i = 10;
@@ -1040,10 +1040,10 @@ class Cptm {
 
 		$cols = array(
 			'cb'                    => '<input type="checkbox" />',
-			'title'                 => __( 'Post Type', 'custom-post-types-maker' ),
-			'custom_post_type_name' => __( 'Custom Post Type Name', 'custom-post-types-maker' ),
-			'label'                 => __( 'Label', 'custom-post-types-maker' ),
-			'description'           => __( 'Description', 'custom-post-types-maker' ),
+			'title'                 => __( 'Post Type', 'custom-post-type-maker' ),
+			'custom_post_type_name' => __( 'Custom Post Type Name', 'custom-post-type-maker' ),
+			'label'                 => __( 'Label', 'custom-post-type-maker' ),
+			'description'           => __( 'Description', 'custom-post-type-maker' ),
 		);
 		return $cols;
 
@@ -1077,9 +1077,9 @@ class Cptm {
 
 		$cols = array(
 			'cb'                    => '<input type="checkbox" />',
-			'title'                 => __( 'Taxonomy', 'custom-post-types-maker' ),
-			'custom_post_type_name' => __( 'Custom Taxonomy Name', 'custom-post-types-maker' ),
-			'label'                 => __( 'Label', 'custom-post-types-maker' )
+			'title'                 => __( 'Taxonomy', 'custom-post-type-maker' ),
+			'custom_post_type_name' => __( 'Custom Taxonomy Name', 'custom-post-type-maker' ),
+			'label'                 => __( 'Label', 'custom-post-type-maker' )
 		);
 		return $cols;
 
@@ -1114,12 +1114,12 @@ class Cptm {
 
 			<div class="wp-box">
 				<div class="inner">
-					<h2><?php _e( 'Custom Post Types Maker', 'custom-post-types-maker' ); ?></h2>
-					<p class="version"><?php _e( 'Version', 'custom-post-types-maker' ); ?> <?php echo $this->version; ?></p>
-					<h3><?php _e( 'Useful links', 'custom-post-types-maker' ); ?></h3>
+					<h2><?php _e( 'Custom Post Type Maker', 'custom-post-type-maker' ); ?></h2>
+					<p class="version"><?php _e( 'Version', 'custom-post-type-maker' ); ?> <?php echo $this->version; ?></p>
+					<h3><?php _e( 'Useful links', 'custom-post-type-maker' ); ?></h3>
 					<ul>
-						<li><a class="thickbox" href="<?php echo admin_url('plugin-install.php'); ?>?tab=plugin-information&plugin=custom-post-types-maker-2&section=changelog&TB_iframe=true&width=600&height=550"><?php _e( 'Changelog', 'custom-post-types-maker' ); ?></a></li>
-						<li><a href="http://wordpress.org/support/plugin/custom-post-types-maker-2" target="_blank"><?php _e( 'Support Forums', 'custom-post-types-maker' ); ?></a></li>
+						<li><a class="thickbox" href="<?php echo admin_url('plugin-install.php'); ?>?tab=plugin-information&plugin=custom-post-type-maker-2&section=changelog&TB_iframe=true&width=600&height=550"><?php _e( 'Changelog', 'custom-post-type-maker' ); ?></a></li>
+						<li><a href="http://wordpress.org/support/plugin/custom-post-type-maker-2" target="_blank"><?php _e( 'Support Forums', 'custom-post-type-maker' ); ?></a></li>
 					</ul>
 				</div>
 				<div class="footer footer-blue">
@@ -1129,7 +1129,7 @@ class Cptm {
                         <li><small>Originally by: http://www.bakhuys.com/</small></li>
 					</ul>
 					<ul class="right">
-						<li><a href="http://wordpress.org/extend/plugins/custom-post-types-maker-2/" target="_blank"><?php _e( 'Vote', 'custom-post-types-maker' ); ?></a></li>
+						<li><a href="http://wordpress.org/extend/plugins/custom-post-type-maker-2/" target="_blank"><?php _e( 'Vote', 'custom-post-type-maker' ); ?></a></li>
 					</ul>
 				</div>
 			</div>
@@ -1139,9 +1139,9 @@ class Cptm {
 
 			// Get all public Custom Post Types
 			$post_types = get_post_types( array( 'public' => true, '_builtin' => false ), 'objects' );
-			// Get all Custom Post Types created by Custom Post Types Maker
+			// Get all Custom Post Types created by Custom Post Type Maker
 			$cptm_posts = get_posts( array( 'post_type' => 'cptm' ) );
-			// Remove all Custom Post Types created by the Custom Post Types Maker plugin
+			// Remove all Custom Post Types created by the Custom Post Type Maker plugin
 			foreach ( $cptm_posts as $cptm_post ) {
 				$values = get_post_custom( $cptm_post->ID );
 				unset( $post_types[ $values['cptm_name'][0] ] );
@@ -1151,24 +1151,24 @@ class Cptm {
 			?>
 			<div id="cptm-cpt-overview" class="hidden">
 				<div id="icon-edit" class="icon32 icon32-posts-cptm"><br></div>
-				<h2><?php _e( 'Other registered Custom Post Types', 'custom-post-types-maker' ); ?></h2>
-				<p><?php _e( 'The Custom Post Types below are registered in WordPress but were not created by the Custom Post Types Maker plugin.', 'custom-post-types-maker' ); ?></p>
+				<h2><?php _e( 'Other registered Custom Post Types', 'custom-post-type-maker' ); ?></h2>
+				<p><?php _e( 'The Custom Post Types below are registered in WordPress but were not created by the Custom Post Type Maker plugin.', 'custom-post-type-maker' ); ?></p>
 				<table class="wp-list-table widefat fixed posts" cellspacing="0">
 					<thead>
 						<tr>
 							<th scope="col" id="cb" class="manage-column column-cb check-column">
 							</th>
 							<th scope="col" id="title" class="manage-column column-title">
-								<span><?php _e( 'Post Type', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Post Type', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" id="custom_post_type_name" class="manage-column column-custom_post_type_name">
-								<span><?php _e( 'Custom Post Type Name', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Custom Post Type Name', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" id="label" class="manage-column column-label">
-								<span><?php _e( 'Label', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Label', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" id="description" class="manage-column column-description">
-								<span><?php _e( 'Description', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Description', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 						</tr>
 					</thead>
@@ -1178,16 +1178,16 @@ class Cptm {
 							<th scope="col" class="manage-column column-cb check-column">
 							</th>
 							<th scope="col" class="manage-column column-title">
-								<span><?php _e( 'Post Type', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Post Type', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" class="manage-column column-custom_post_type_name">
-								<span><?php _e( 'Custom Post Type Name', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Custom Post Type Name', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" class="manage-column column-label">
-								<span><?php _e( 'Label', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Label', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" class="manage-column column-description">
-								<span><?php _e( 'Description', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Description', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 						</tr>
 					</tfoot>
@@ -1212,7 +1212,7 @@ class Cptm {
 
 							if ( count( $post_types ) == 0 ) {
 								?>
-						<tr class="no-items"><td class="colspanchange" colspan="5"><?php _e( 'No Custom Post Types found' , 'custom-post-types-maker' ); ?>.</td></tr>
+						<tr class="no-items"><td class="colspanchange" colspan="5"><?php _e( 'No Custom Post Types found' , 'custom-post-type-maker' ); ?>.</td></tr>
 								<?php
 							}
 						?>
@@ -1239,9 +1239,9 @@ class Cptm {
 
 			// Get all public custom Taxonomies
 			$taxonomies = get_taxonomies( array( 'public' => true, '_builtin' => false ), 'objects' );
-			// Get all custom Taxonomies created by Custom Post Types Maker
+			// Get all custom Taxonomies created by Custom Post Type Maker
 			$cptm_tax_posts = get_posts( array( 'post_type' => 'cptm_tax' ) );
-			// Remove all custom Taxonomies created by the Custom Post Types Maker plugin
+			// Remove all custom Taxonomies created by the Custom Post Type Maker plugin
 			foreach ( $cptm_tax_posts as $cptm_tax_post ) {
 				$values = get_post_custom( $cptm_tax_post->ID );
 				unset( $taxonomies[ $values['cptm_tax_name'][0] ] );
@@ -1251,21 +1251,21 @@ class Cptm {
 			?>
 			<div id="cptm-cpt-overview" class="hidden">
 				<div id="icon-edit" class="icon32 icon32-posts-cptm"><br></div>
-				<h2><?php _e( 'Other registered custom Taxonomies', 'custom-post-types-maker' ); ?></h2>
-				<p><?php _e( 'The custom Taxonomies below are registered in WordPress but were not created by the Custom Post Types Maker plugin.', 'custom-post-types-maker' ); ?></p>
+				<h2><?php _e( 'Other registered custom Taxonomies', 'custom-post-type-maker' ); ?></h2>
+				<p><?php _e( 'The custom Taxonomies below are registered in WordPress but were not created by the Custom Post Type Maker plugin.', 'custom-post-type-maker' ); ?></p>
 				<table class="wp-list-table widefat fixed posts" cellspacing="0">
 					<thead>
 						<tr>
 							<th scope="col" id="cb" class="manage-column column-cb check-column">
 							</th>
 							<th scope="col" id="title" class="manage-column column-title">
-								<span><?php _e( 'Taxonomy', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Taxonomy', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" id="custom_post_type_name" class="manage-column column-custom_taxonomy_name">
-								<span><?php _e( 'Custom Taxonomy Name', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Custom Taxonomy Name', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" id="label" class="manage-column column-label">
-								<span><?php _e( 'Label', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Label', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 						</tr>
 					</thead>
@@ -1275,13 +1275,13 @@ class Cptm {
 							<th scope="col" class="manage-column column-cb check-column">
 							</th>
 							<th scope="col" class="manage-column column-title">
-								<span><?php _e( 'Taxonomy', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Taxonomy', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" class="manage-column column-custom_post_type_name">
-								<span><?php _e( 'Custom Taxonomy Name', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Custom Taxonomy Name', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 							<th scope="col" class="manage-column column-label">
-								<span><?php _e( 'Label', 'custom-post-types-maker' ); ?></span><span class="sorting-indicator"></span>
+								<span><?php _e( 'Label', 'custom-post-type-maker' ); ?></span><span class="sorting-indicator"></span>
 							</th>
 						</tr>
 					</tfoot>
@@ -1305,7 +1305,7 @@ class Cptm {
 
 							if ( count( $taxonomies ) == 0 ) {
 								?>
-						<tr class="no-items"><td class="colspanchange" colspan="4"><?php _e( 'No custom Taxonomies found' , 'custom-post-types-maker' ); ?>.</td></tr>
+						<tr class="no-items"><td class="colspanchange" colspan="4"><?php _e( 'No custom Taxonomies found' , 'custom-post-type-maker' ); ?>.</td></tr>
 								<?php
 							}
 						?>
@@ -1337,17 +1337,17 @@ class Cptm {
 
 		$messages['cptm' ] = array(
 			0 => '', // Unused. Messages start at index 1.
-			1 => __( 'Custom Post Type updated.', 'custom-post-types-maker' ),
-			2 => __( 'Custom Post Type updated.', 'custom-post-types-maker' ),
-			3 => __( 'Custom Post Type deleted.', 'custom-post-types-maker' ),
-			4 => __( 'Custom Post Type updated.', 'custom-post-types-maker' ),
+			1 => __( 'Custom Post Type updated.', 'custom-post-type-maker' ),
+			2 => __( 'Custom Post Type updated.', 'custom-post-type-maker' ),
+			3 => __( 'Custom Post Type deleted.', 'custom-post-type-maker' ),
+			4 => __( 'Custom Post Type updated.', 'custom-post-type-maker' ),
 			/* translators: %s: date and time of the revision */
-			5 => isset($_GET['revision']) ? sprintf( __( 'Custom Post Type restored to revision from %s', 'custom-post-types-maker' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => __( 'Custom Post Type published.', 'custom-post-types-maker' ),
-			7 => __( 'Custom Post Type saved.', 'custom-post-types-maker' ),
-			8 => __( 'Custom Post Type submitted.', 'custom-post-types-maker' ),
-			9 => __( 'Custom Post Type scheduled for.', 'custom-post-types-maker' ),
-			10 => __( 'Custom Post Type draft updated.', 'custom-post-types-maker' ),
+			5 => isset($_GET['revision']) ? sprintf( __( 'Custom Post Type restored to revision from %s', 'custom-post-type-maker' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => __( 'Custom Post Type published.', 'custom-post-type-maker' ),
+			7 => __( 'Custom Post Type saved.', 'custom-post-type-maker' ),
+			8 => __( 'Custom Post Type submitted.', 'custom-post-type-maker' ),
+			9 => __( 'Custom Post Type scheduled for.', 'custom-post-type-maker' ),
+			10 => __( 'Custom Post Type draft updated.', 'custom-post-type-maker' ),
 		);
 
 		return $messages;
