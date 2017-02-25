@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.0.4
+- [Bugfix] Renamed plugin to match WP Plugins
+
 ### 1.0.3
 - [Bugfix] Fix typos
 

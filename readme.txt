@@ -1,17 +1,17 @@
-=== Custom Post Types Maker ===
+=== Custom Post Type Maker ===
 Contributors: graffino, zeno.popovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.7
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Custom Post Types Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
+Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
 
 == Description ==
 
-Custom Post Types Maker is the perfect plugin to create Custom Post Types and custom Taxonomies in a user friendly way, just like managing your regular posts and pages.
+Custom Post Type Maker is the perfect plugin to create Custom Post Types and custom Taxonomies in a user friendly way, just like managing your regular posts and pages.
 
 Originally by [Bakhuys](http://www.bakhuys.com/).
 
@@ -24,11 +24,11 @@ Originally by [Bakhuys](http://www.bakhuys.com/).
 * Uses the WordPress Media Uploader or Dash Icons (Native Wordpress Icons) to let you manage the Custom Post Type icon
 
 = Bug Submission and Forum Support =
-* Support: [Community Support Only](http://wordpress.org/support/plugin/custom-post-types-maker)
-* Bugs: [GitHub](https://github.com/Graffino/Custom-Post-Types-Maker/issues)
+* Support: [Community Support Only](http://wordpress.org/support/plugin/custom-post-type-maker)
+* Bugs: [GitHub](https://github.com/Graffino/custom-post-type-maker/issues)
 
 = Feature requests =
-We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/Custom-Post-Types-Maker/pulls).
+We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
 
 
 == Installation ==
@@ -41,7 +41,7 @@ We're supporting this plugin but not actively developing it. If you're intereste
 
 = I have a question =
 
-Please ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-types-maker).
+Please ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-type-maker).
 
 == Screenshots ==
 
@@ -50,6 +50,9 @@ Please ask your question in the [Support Forums](http://wordpress.org/support/pl
 3. Creating custom Taxonomies
 
 == Changelog ==
+
+= 1.0.4 =
+- [Bugfix] Renamed plugin to match WP Plugins
 
 = 1.0.3 =
 - [Bugfix] Fix typos
