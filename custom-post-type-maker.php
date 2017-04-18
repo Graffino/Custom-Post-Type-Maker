@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.0.4
+Version: 1.1.0
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -24,7 +24,7 @@ Released under the GPL v.2, http://www.gnu.org/copyleft/gpl.html
  * @copyright	Copyright (c) 2016, Graffino
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package		Custom_Post_Types_Maker
- * @version	 	1.0.4
+ * @version	 	1.1.0
  */
 
 //avoid direct calls to this file
@@ -51,7 +51,7 @@ class Cptm {
 		// vars
 		$this->dir = plugins_url( '', __FILE__ );
 		$this->path = plugin_dir_path( __FILE__ );
-		$this->version = '1.0.3';
+		$this->version = '1.1.0';
 
 		// actions
 		add_action( 'init', array($this, 'init') );
@@ -233,6 +233,7 @@ class Cptm {
 				$cptm_feeds               = ( array_key_exists( 'cptm_feeds', $cptm_meta ) && $cptm_meta['cptm_feeds'][0] == '1' ? true : false );
 				$cptm_pages               = ( array_key_exists( 'cptm_pages', $cptm_meta ) && $cptm_meta['cptm_pages'][0] == '1' ? true : false );
 				$cptm_query_var           = ( array_key_exists( 'cptm_query_var', $cptm_meta ) && $cptm_meta['cptm_query_var'][0] == '1' ? true : false );
+				$cptm_publicly_queryable  = ( array_key_exists( 'cptm_publicly_queryable', $cptm_meta ) && $cptm_meta['cptm_publicly_queryable'][0] == '1' ? true : false );
 				$cptm_show_in_menu        = ( array_key_exists( 'cptm_show_in_menu', $cptm_meta ) && $cptm_meta['cptm_show_in_menu'][0] == '1' ? true : false );
 
 				// checkbox
@@ -262,6 +263,7 @@ class Cptm {
 					'cptm_hierarchical'        => (bool) $cptm_hierarchical,
 					'cptm_rewrite'             => $cptm_rewrite_options,
 					'cptm_query_var'           => (bool) $cptm_query_var,
+					'cptm_publicly_queryable'  => (bool) $cptm_publicly_queryable,
 					'cptm_show_in_menu'        => (bool) $cptm_show_in_menu,
 					'cptm_supports'            => unserialize( $cptm_supports ),
 					'cptm_builtin_taxonomies'  => unserialize( $cptm_builtin_taxonomies ),
@@ -298,7 +300,7 @@ class Cptm {
 							'hierarchical'        => $cptm_post_type['cptm_hierarchical'],
 							'show_in_menu'        => $cptm_post_type['cptm_show_in_menu'],
 							'query_var'           => $cptm_post_type['cptm_query_var'],
-							'publicly_queryable'  => true,
+							'publicly_queryable'  => $cptm_post_type['cptm_publicly_queryable'],
 							'_builtin'            => false,
 							'supports'            => $cptm_post_type['cptm_supports'],
 							'taxonomies'          => $cptm_post_type['cptm_builtin_taxonomies']
@@ -460,6 +462,7 @@ class Cptm {
 		$cptm_feeds                         = isset( $values['cptm_feeds'] ) ? esc_attr( $values['cptm_feeds'][0] ) : '';
 		$cptm_pages                         = isset( $values['cptm_pages'] ) ? esc_attr( $values['cptm_pages'][0] ) : '';
 		$cptm_query_var                     = isset( $values['cptm_query_var'] ) ? esc_attr( $values['cptm_query_var'][0] ) : '';
+		$cptm_publicly_queryable            = isset( $values['cptm_publicly_queryable'] ) ? esc_attr( $values['cptm_publicly_queryable'][0] ) : '';
 		$cptm_show_in_menu                  = isset( $values['cptm_show_in_menu'] ) ? esc_attr( $values['cptm_show_in_menu'][0] ) : '';
 
 		// checkbox fields
@@ -742,6 +745,18 @@ class Cptm {
 				</td>
 			</tr>
 			<tr>
+				<td class="label">
+					<label for="cptm_publicly_queryable"><?php _e( 'Publicly Queryable', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Whether the post is visible on the front-end.', 'custom-post-type-maker' ); ?></p>
+				</td>
+				<td>
+					<select name="cptm_publicly_queryable" id="cptm_publicly_queryable" tabindex="18">
+						<option value="1" <?php selected( $cptm_publicly_queryable, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_publicly_queryable, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td class="label top">
 					<label for="cptm_supports"><?php _e( 'Supports', 'custom-post-type-maker' ); ?></label>
 					<p><?php _e( 'Adds the respective meta boxes when creating content for this Custom Post Type.', 'custom-post-type-maker' ); ?></p>
@@ -993,6 +1008,9 @@ class Cptm {
 
 		if( isset( $_POST['cptm_query_var'] ) )
 			update_post_meta( $post_id, 'cptm_query_var', esc_attr( $_POST['cptm_query_var'] ) );
+		
+		if( isset( $_POST['cptm_publicly_queryable'] ) )
+			update_post_meta( $post_id, 'cptm_publicly_queryable', esc_attr( $_POST['cptm_publicly_queryable'] ) );
 
 		if( isset($_POST['cptm_menu_position']) )
 			update_post_meta( $post_id, 'cptm_menu_position', sanitize_text_field( $_POST['cptm_menu_position'] ) );
@@ -1125,8 +1143,8 @@ class Cptm {
 				<div class="footer footer-blue">
 					<ul class="left">
 						<li><?php _e("Created by",'cptm' ); ?> <a href="http://www.graffino.com" target="_blank" title="Graffino">Graffino</a></li>
-                        <li></li>
-                        <li><small>Originally by: http://www.bakhuys.com/</small></li>
+            <li></li>
+            <li><small>Originally by: http://www.bakhuys.com/</small></li>
 					</ul>
 					<ul class="right">
 						<li><a href="http://wordpress.org/extend/plugins/custom-post-type-maker-2/" target="_blank"><?php _e( 'Vote', 'custom-post-type-maker' ); ?></a></li>

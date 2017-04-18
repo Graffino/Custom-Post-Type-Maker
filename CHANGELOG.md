@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.0
+- [Feature] Implemented `publicly_queryable`. Closes: [#5](https://github.com/Graffino/Custom-Post-Type-Maker/issues/5)
+
 ### 1.0.4
 - [Bugfix] Renamed plugin to match WP Plugins
 
