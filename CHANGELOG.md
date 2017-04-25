@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.1.1
+- [Feature] Auto-flush rewrite rules on: custom post save, plugin activation, plugin deactivation.
+- [Bugfix] Made `publicly_queryable` default to true. This fixes permalink errors after upgrading to v1.1.0 on existing installations.
+- [Localization] Add french translation. (Credit: @momo-fr).
+
 ### 1.1.0
 - [Feature] Implemented `publicly_queryable`. Closes: [#5](https://github.com/Graffino/Custom-Post-Type-Maker/issues/5)
 
