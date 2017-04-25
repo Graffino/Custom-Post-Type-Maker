@@ -31,6 +31,9 @@ Originally by [Bakhuys](http://www.bakhuys.com/).
 = Feature requests =
 We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
 
+= Localization =
+Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins/custom-post-type-maker) in your language.
+
 == Installation ==
 
 1. Upload 'custom-post-type-maker' to the '/wp-content/plugins/' directory

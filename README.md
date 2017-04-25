@@ -47,5 +47,5 @@ Please ask your question in the [Support Forums](http://wordpress.org/support/pl
 ## Feature requests
 We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
 
-## Translation
+## Localization
 Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins/custom-post-type-maker) in your language.
