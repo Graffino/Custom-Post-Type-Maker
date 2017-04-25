@@ -12,6 +12,15 @@ Custom Post Type Maker is the perfect plugin to create Custom Post Types and cus
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Click the new menu item 'Post Types' to create a Custom Post Type or a custom Taxonomy
 
+## Frequently Asked Questions
+Please ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-type-maker).
+
+## Feature requests
+We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
+
+## Localization
+Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins/custom-post-type-maker) in your language.
+
 ## Changelog
 
 ### 1.1.1
@@ -41,11 +50,3 @@ Custom Post Type Maker is the perfect plugin to create Custom Post Types and cus
 - [Forked] Forked https://wordpress.org/plugins/custom-post-type-maker/
 
 
-## Frequently Asked Questions
-Please ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-type-maker).
-
-## Feature requests
-We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
-
-## Localization
-Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins/custom-post-type-maker) in your language.
