@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.0
+Version: 1.1.1
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -24,7 +24,7 @@ Released under the GPL v.2, http://www.gnu.org/copyleft/gpl.html
  * @copyright	Copyright (c) 2016, Graffino
  * @license		http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package		Custom_Post_Types_Maker
- * @version	 	1.1.0
+ * @version	 	1.1.1
  */
 
 //avoid direct calls to this file
@@ -51,7 +51,7 @@ class Cptm {
 		// vars
 		$this->dir = plugins_url( '', __FILE__ );
 		$this->path = plugin_dir_path( __FILE__ );
-		$this->version = '1.1.0';
+		$this->version = '1.1.1';
 
 		// actions
 		add_action( 'init', array($this, 'init') );
@@ -60,6 +60,7 @@ class Cptm {
 		add_action( 'admin_enqueue_scripts', array($this, 'cptm_styles') );
 		add_action( 'add_meta_boxes', array($this, 'cptm_create_meta_boxes') );
 		add_action( 'save_post', array($this, 'cptm_save_post') );
+		add_action( 'admin_init', array($this, 'cptm_plugin_settings_flush_rewrite') );
 		add_action( 'manage_posts_custom_column', array($this, 'cptm_custom_columns'), 10, 2 );
 		add_action( 'manage_posts_custom_column', array($this, 'cptm_tax_custom_columns'), 10, 2 );
 		add_action( 'admin_footer', array($this,'cptm_admin_footer') );
@@ -71,6 +72,10 @@ class Cptm {
 		add_filter( 'manage_cptm_tax_posts_columns', array($this, 'cptm_tax_change_columns') );
 		add_filter( 'manage_edit-cptm_tax_sortable_columns', array($this, 'cptm_tax_sortable_columns') );
 		add_filter( 'post_updated_messages', array($this, 'cptm_post_updated_messages') );
+
+		// hooks
+		register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+		register_activation_hook( __FILE__, array($this, 'cptm_plugin_activate_flush_rewrite') );
 
 		// set textdomain
 		load_plugin_textdomain( 'cptm', false, basename( dirname(__FILE__) ).'/lang' );
@@ -233,7 +238,16 @@ class Cptm {
 				$cptm_feeds               = ( array_key_exists( 'cptm_feeds', $cptm_meta ) && $cptm_meta['cptm_feeds'][0] == '1' ? true : false );
 				$cptm_pages               = ( array_key_exists( 'cptm_pages', $cptm_meta ) && $cptm_meta['cptm_pages'][0] == '1' ? true : false );
 				$cptm_query_var           = ( array_key_exists( 'cptm_query_var', $cptm_meta ) && $cptm_meta['cptm_query_var'][0] == '1' ? true : false );
-				$cptm_publicly_queryable  = ( array_key_exists( 'cptm_publicly_queryable', $cptm_meta ) && $cptm_meta['cptm_publicly_queryable'][0] == '1' ? true : false );
+				
+				// If it doesn't exist, it must be set to true ( fix for existing installs )
+				if ( ! array_key_exists( 'cptm_publicly_queryable', $cptm_meta ) ) {
+					$cptm_publicly_queryable = true;
+				} elseif ( $cptm_meta['cptm_publicly_queryable'][0] == '1' ) {
+					$cptm_publicly_queryable = true;
+				} else {
+					$cptm_publicly_queryable = false;
+				}
+
 				$cptm_show_in_menu        = ( array_key_exists( 'cptm_show_in_menu', $cptm_meta ) && $cptm_meta['cptm_show_in_menu'][0] == '1' ? true : false );
 
 				// checkbox
@@ -392,11 +406,6 @@ class Cptm {
 				}
 			}
 		}
-
-		// flush permalink structure
-		// global $wp_rewrite;
-		// $wp_rewrite->flush_rules();
-
 	} // # function cptm_create_custom_post_types()
 
 	public function cptm_create_meta_boxes() {
@@ -1051,8 +1060,24 @@ class Cptm {
 
 		$cptm_tax_post_types = isset( $_POST['cptm_tax_post_types'] ) ? $_POST['cptm_tax_post_types'] : array();
 			update_post_meta( $post_id, 'cptm_tax_post_types', $cptm_tax_post_types );
+			
+			// Update plugin saved
+			update_option( 'cptm_plugin_settings_changed', true );
 
 	} // # function save_post()
+	
+	function cptm_plugin_settings_flush_rewrite() {
+    if ( get_option( 'cptm_plugin_settings_changed' ) == true ) {
+        flush_rewrite_rules();
+        update_option( 'cptm_plugin_settings_changed', false );
+    }
+	} // # function cptm_plugin_settings_flush_rewrite()
+	
+
+	function cptm_plugin_activate_flush_rewrite() {
+		$this->cptm_create_custom_post_types();
+		flush_rewrite_rules();
+	} // # function cptm_plugin_settings_flush_rewrite()
 
 	function cptm_change_columns( $cols ) {
 

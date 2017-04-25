@@ -3,9 +3,10 @@ Contributors: graffino, zeno.popovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.7
-Stable tag: 1.0.4
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.me/zenopopovici/
 
 Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
 
@@ -30,7 +31,6 @@ Originally by [Bakhuys](http://www.bakhuys.com/).
 = Feature requests =
 We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
 
-
 == Installation ==
 
 1. Upload 'custom-post-type-maker' to the '/wp-content/plugins/' directory
@@ -50,6 +50,11 @@ Please ask your question in the [Support Forums](http://wordpress.org/support/pl
 3. Creating custom Taxonomies
 
 == Changelog ==
+
+= 1.1.1 =
+- [Feature] Auto-flush rewrite rules on: custom post save, plugin activation, plugin deactivation.
+- [Bugfix] Made `publicly_queryable` default to true. This fixes permalink errors after upgrading to v1.1.0 on existing installations.
+- [Localization] Add french translation. (Credit: @momo-fr).
 
 = 1.1.0 =
 - [Feature] Implemented `publicly_queryable`. Closes: [#5](https://github.com/Graffino/Custom-Post-Type-Maker/issues/5)
@@ -71,3 +76,7 @@ Please ask your question in the [Support Forums](http://wordpress.org/support/pl
 * [Bugfix] Fixed `add_utility_page provokes "deprecated" notice in 4.5.2`
 * [Forked] Forked https://wordpress.org/plugins/custom-post-type-maker/
 
+== Upgrade Notice ==
+
+= 1.1.1 =
+- Important upgrade: this fixes permalink errors after upgrading to v1.1.0 on existing installations.
