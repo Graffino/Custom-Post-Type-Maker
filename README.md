@@ -23,6 +23,9 @@ Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins
 
 ## Changelog
 
+### 1.1.3
+- Removed forgotten development dump. Sorry about that.
+
 ### 1.1.2
 - [Bugfix] Make `with_front` available in `register_post` when set to `false` (Credit: @cmerrick). Closes: [#7](https://github.com/Graffino/Custom-Post-Type-Maker/issues/7)
 
