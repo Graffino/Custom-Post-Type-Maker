@@ -55,7 +55,6 @@ class Cptm
 	 */
 	function __construct() 
 	{
-
 		// vars
 		$this->dir = plugins_url( '', __FILE__ );
 		$this->path = plugin_dir_path( __FILE__ );
@@ -218,8 +217,8 @@ class Cptm
 		$cptm_post_types = get_posts( $get_cptm );
 
 		// create array of post meta
-		if( $cptm_post_types ) {
-			foreach( $cptm_post_types as $cptm ) {
+		if ( $cptm_post_types ) {
+			foreach ( $cptm_post_types as $cptm ) {
 				$cptm_meta = get_post_meta( $cptm->ID, '', true );
 
 				// text
@@ -274,7 +273,9 @@ class Cptm
 
 				$cptm_rewrite_options     = array();
 				if ( $cptm_rewrite )      { $cptm_rewrite_options['slug'] = _x( $cptm_custom_rewrite_slug, 'URL Slug', 'custom-post-type-maker' ); }
-				if ( $cptm_withfront )    { $cptm_rewrite_options['with_front'] = $cptm_withfront; }
+				
+				$cptm_rewrite_options['with_front'] = $cptm_withfront;
+
 				if ( $cptm_feeds )        { $cptm_rewrite_options['feeds'] = $cptm_feeds; }
 				if ( $cptm_pages )        { $cptm_rewrite_options['pages'] = $cptm_pages; }
 
@@ -300,7 +301,7 @@ class Cptm
 					'cptm_supports'            => unserialize( $cptm_supports ),
 					'cptm_builtin_taxonomies'  => unserialize( $cptm_builtin_taxonomies ),
 				);
-
+				
 				// register custom post types
 				if ( is_array( $cptms ) ) {
 					foreach ($cptms as $cptm_post_type) {
@@ -337,8 +338,8 @@ class Cptm
 							'supports'            => $cptm_post_type['cptm_supports'],
 							'taxonomies'          => $cptm_post_type['cptm_builtin_taxonomies']
 						);
-
-						if( $cptm_post_type['cptm_name'] != 'no_name' )
+						var_dump($args); //die();
+						if ( $cptm_post_type['cptm_name'] != 'no_name' )
 							register_post_type( $cptm_post_type['cptm_name'], $args);
 					}
 				}
@@ -355,8 +356,8 @@ class Cptm
 		$cptm_taxonomies = get_posts( $get_cptm_tax );
 
 		// create array of post meta
-		if( $cptm_taxonomies ) {
-			foreach( $cptm_taxonomies as $cptm_tax ) {
+		if ( $cptm_taxonomies ) {
+			foreach ( $cptm_taxonomies as $cptm_tax ) {
 				$cptm_meta = get_post_meta( $cptm_tax->ID, '', true );
 
 				// text
@@ -418,7 +419,7 @@ class Cptm
 							'query_var'           => $cptm_taxonomy['cptm_tax_query_var'],
 						);
 
-						if( $cptm_taxonomy['cptm_tax_name'] != 'no_name' )
+						if ( $cptm_taxonomy['cptm_tax_name'] != 'no_name' )
 							register_taxonomy( $cptm_taxonomy['cptm_tax_name'], $cptm_taxonomy['cptm_tax_builtin_taxonomies'], $args );
 					}
 				}
@@ -993,70 +994,70 @@ class Cptm
 			return;
 
 		// if our nonce isn't there, or we can't verify it, bail
-		if( !isset( $_POST['cptm_meta_box_nonce_field'] ) || !wp_verify_nonce( $_POST['cptm_meta_box_nonce_field'], 'cptm_meta_box_nonce_action' ) ) return;
+		if ( !isset( $_POST['cptm_meta_box_nonce_field'] ) || !wp_verify_nonce( $_POST['cptm_meta_box_nonce_field'], 'cptm_meta_box_nonce_action' ) ) return;
 
 		// update custom post type meta values
-		if( isset($_POST['cptm_name']) )
+		if ( isset($_POST['cptm_name']) )
 			update_post_meta( $post_id, 'cptm_name', sanitize_text_field( str_replace( ' ', '', $_POST['cptm_name'] ) ) );
 
-		if( isset($_POST['cptm_label']) )
+		if ( isset($_POST['cptm_label']) )
 			update_post_meta( $post_id, 'cptm_label', sanitize_text_field( $_POST['cptm_label'] ) );
 
-		if( isset($_POST['cptm_singular_name']) )
+		if ( isset($_POST['cptm_singular_name']) )
 			update_post_meta( $post_id, 'cptm_singular_name', sanitize_text_field( $_POST['cptm_singular_name'] ) );
 
-		if( isset($_POST['cptm_description']) )
+		if ( isset($_POST['cptm_description']) )
 			update_post_meta( $post_id, 'cptm_description', esc_textarea( $_POST['cptm_description'] ) );
 
-		if( isset($_POST['cptm_icon_slug']) )
+		if ( isset($_POST['cptm_icon_slug']) )
 			update_post_meta( $post_id, 'cptm_icon_slug', esc_textarea( $_POST['cptm_icon_slug'] ) );
 		
-        if( isset($_POST['cptm_icon_url']) )
+        if ( isset($_POST['cptm_icon_url']) )
 			update_post_meta( $post_id, 'cptm_icon_url', esc_textarea( $_POST['cptm_icon_url'] ) );
 
-		if( isset( $_POST['cptm_public'] ) )
+		if ( isset( $_POST['cptm_public'] ) )
 			update_post_meta( $post_id, 'cptm_public', esc_attr( $_POST['cptm_public'] ) );
 
-		if( isset( $_POST['cptm_show_ui'] ) )
+		if ( isset( $_POST['cptm_show_ui'] ) )
 			update_post_meta( $post_id, 'cptm_show_ui', esc_attr( $_POST['cptm_show_ui'] ) );
 
-		if( isset( $_POST['cptm_has_archive'] ) )
+		if ( isset( $_POST['cptm_has_archive'] ) )
 			update_post_meta( $post_id, 'cptm_has_archive', esc_attr( $_POST['cptm_has_archive'] ) );
 
-		if( isset( $_POST['cptm_exclude_from_search'] ) )
+		if ( isset( $_POST['cptm_exclude_from_search'] ) )
 			update_post_meta( $post_id, 'cptm_exclude_from_search', esc_attr( $_POST['cptm_exclude_from_search'] ) );
 
-		if( isset( $_POST['cptm_capability_type'] ) )
+		if ( isset( $_POST['cptm_capability_type'] ) )
 			update_post_meta( $post_id, 'cptm_capability_type', esc_attr( $_POST['cptm_capability_type'] ) );
 
-		if( isset( $_POST['cptm_hierarchical'] ) )
+		if ( isset( $_POST['cptm_hierarchical'] ) )
 			update_post_meta( $post_id, 'cptm_hierarchical', esc_attr( $_POST['cptm_hierarchical'] ) );
 
-		if( isset( $_POST['cptm_rewrite'] ) )
+		if ( isset( $_POST['cptm_rewrite'] ) )
 			update_post_meta( $post_id, 'cptm_rewrite', esc_attr( $_POST['cptm_rewrite'] ) );
 
-		if( isset( $_POST['cptm_withfront'] ) )
+		if ( isset( $_POST['cptm_withfront'] ) )
 			update_post_meta( $post_id, 'cptm_withfront', esc_attr( $_POST['cptm_withfront'] ) );
 
-		if( isset( $_POST['cptm_feeds'] ) )
+		if ( isset( $_POST['cptm_feeds'] ) )
 			update_post_meta( $post_id, 'cptm_feeds', esc_attr( $_POST['cptm_feeds'] ) );
 
-		if( isset( $_POST['cptm_pages'] ) )
+		if ( isset( $_POST['cptm_pages'] ) )
 			update_post_meta( $post_id, 'cptm_pages', esc_attr( $_POST['cptm_pages'] ) );
 
-		if( isset($_POST['cptm_custom_rewrite_slug']) )
+		if ( isset($_POST['cptm_custom_rewrite_slug']) )
 			update_post_meta( $post_id, 'cptm_custom_rewrite_slug', sanitize_text_field( $_POST['cptm_custom_rewrite_slug'] ) );
 
-		if( isset( $_POST['cptm_query_var'] ) )
+		if ( isset( $_POST['cptm_query_var'] ) )
 			update_post_meta( $post_id, 'cptm_query_var', esc_attr( $_POST['cptm_query_var'] ) );
 		
-		if( isset( $_POST['cptm_publicly_queryable'] ) )
+		if ( isset( $_POST['cptm_publicly_queryable'] ) )
 			update_post_meta( $post_id, 'cptm_publicly_queryable', esc_attr( $_POST['cptm_publicly_queryable'] ) );
 
-		if( isset($_POST['cptm_menu_position']) )
+		if ( isset($_POST['cptm_menu_position']) )
 			update_post_meta( $post_id, 'cptm_menu_position', sanitize_text_field( $_POST['cptm_menu_position'] ) );
 
-		if( isset( $_POST['cptm_show_in_menu'] ) )
+		if ( isset( $_POST['cptm_show_in_menu'] ) )
 			update_post_meta( $post_id, 'cptm_show_in_menu', esc_attr( $_POST['cptm_show_in_menu'] ) );
 
 		$cptm_supports = isset( $_POST['cptm_supports'] ) ? $_POST['cptm_supports'] : array();
@@ -1066,28 +1067,28 @@ class Cptm
 			update_post_meta( $post_id, 'cptm_builtin_taxonomies', $cptm_builtin_taxonomies );
 
 		// update taxonomy meta values
-		if( isset($_POST['cptm_tax_name']) )
+		if ( isset($_POST['cptm_tax_name']) )
 			update_post_meta( $post_id, 'cptm_tax_name', sanitize_text_field( str_replace( ' ', '', $_POST['cptm_tax_name'] ) ) );
 
-		if( isset($_POST['cptm_tax_label']) )
+		if ( isset($_POST['cptm_tax_label']) )
 			update_post_meta( $post_id, 'cptm_tax_label', sanitize_text_field( $_POST['cptm_tax_label'] ) );
 
-		if( isset($_POST['cptm_tax_singular_name']) )
+		if ( isset($_POST['cptm_tax_singular_name']) )
 			update_post_meta( $post_id, 'cptm_tax_singular_name', sanitize_text_field( $_POST['cptm_tax_singular_name'] ) );
 
-		if( isset( $_POST['cptm_tax_show_ui'] ) )
+		if ( isset( $_POST['cptm_tax_show_ui'] ) )
 			update_post_meta( $post_id, 'cptm_tax_show_ui', esc_attr( $_POST['cptm_tax_show_ui'] ) );
 
-		if( isset( $_POST['cptm_tax_hierarchical'] ) )
+		if ( isset( $_POST['cptm_tax_hierarchical'] ) )
 			update_post_meta( $post_id, 'cptm_tax_hierarchical', esc_attr( $_POST['cptm_tax_hierarchical'] ) );
 
-		if( isset( $_POST['cptm_tax_rewrite'] ) )
+		if ( isset( $_POST['cptm_tax_rewrite'] ) )
 			update_post_meta( $post_id, 'cptm_tax_rewrite', esc_attr( $_POST['cptm_tax_rewrite'] ) );
 
-		if( isset($_POST['cptm_tax_custom_rewrite_slug']) )
+		if ( isset($_POST['cptm_tax_custom_rewrite_slug']) )
 			update_post_meta( $post_id, 'cptm_tax_custom_rewrite_slug', sanitize_text_field( $_POST['cptm_tax_custom_rewrite_slug'] ) );
 
-		if( isset( $_POST['cptm_tax_query_var'] ) )
+		if ( isset( $_POST['cptm_tax_query_var'] ) )
 			update_post_meta( $post_id, 'cptm_tax_query_var', esc_attr( $_POST['cptm_tax_query_var'] ) );
 
 		$cptm_tax_post_types = isset( $_POST['cptm_tax_post_types'] ) ? $_POST['cptm_tax_post_types'] : array();
@@ -1247,7 +1248,7 @@ class Cptm
 			</div>
 		</div>
 		<?php
-		if( 'cptm' == $post_type ) {
+		if ( 'cptm' == $post_type ) {
 
 			// Get all public Custom Post Types
 			$post_types = get_post_types( array( 'public' => true, '_builtin' => false ), 'objects' );
@@ -1347,7 +1348,7 @@ class Cptm
 			<?php
 			}
 		}
-		if( 'cptm_tax' == $post_type ) {
+		if ( 'cptm_tax' == $post_type ) {
 
 			// Get all public custom Taxonomies
 			$taxonomies = get_taxonomies( array( 'public' => true, '_builtin' => false ), 'objects' );
@@ -1481,7 +1482,7 @@ class Cptm
 	function wp_prepare_attachment_for_js( $response, $attachment, $meta )
 	{
 		// only for image
-		if( $response['type'] != 'image' )
+		if ( $response['type'] != 'image' )
 		{
 			return $response;
 		}
@@ -1489,11 +1490,11 @@ class Cptm
 		$attachment_url = $response['url'];
 		$base_url = str_replace( wp_basename( $attachment_url ), '', $attachment_url );
 
-		if( isset( $meta['sizes'] ) && is_array($meta['sizes']) )
+		if ( isset( $meta['sizes'] ) && is_array($meta['sizes']) )
 		{
-			foreach( $meta['sizes'] as $k => $v )
+			foreach ( $meta['sizes'] as $k => $v )
 			{
-				if( !isset($response['sizes'][ $k ]) )
+				if ( !isset($response['sizes'][ $k ]) )
 				{
 					$response['sizes'][ $k ] = array(
 						'height'      =>  $v['height'],
