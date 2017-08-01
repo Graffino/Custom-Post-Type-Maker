@@ -39,14 +39,22 @@ if ( ! function_exists( 'add_filter' ) ) {
  *
  * @since	1.0.0
  */
-class Cptm {
+class Cptm 
+{
+	
 
-	// vars
-	var $dir,
-		$path,
-		$version;
+	/** @var string $dir Plugin dir */
+	private $dir;
+	/** @var string $path Plugin path */
+	private $path;
+	/** @var string $version Plugin version */
+	private $version;
 
-	function __construct() {
+	/**
+	 * Constructor
+	 */
+	function __construct() 
+	{
 
 		// vars
 		$this->dir = plugins_url( '', __FILE__ );
@@ -79,11 +87,13 @@ class Cptm {
 
 		// set textdomain
 		load_plugin_textdomain( 'cptm', false, basename( dirname(__FILE__) ).'/lang' );
+	}
 
-	}  // # function __construct()
-
-	public function init() {
-
+	/**
+	 * Initialize plugin
+	 */
+	public function init() 
+	{
 		// Create cptm post type
 		$labels = array(
 			'name' => __( 'Custom Post Type Maker', 'custom-post-type-maker' ),
@@ -146,19 +156,25 @@ class Cptm {
 		if ( function_exists( 'add_image_size' ) ) {
 			add_image_size( 'cptm_icon', 16, 16, true );
 		}
+	}
 
-	} // # function init()
-
-	public function cptm_admin_menu() {
-
+	/**
+	 * Add admin menu items
+	 */
+	public function cptm_admin_menu() 
+	{
 		// add cptm page to options menu
 		add_menu_page( __('CPT Maker', 'custom-post-type-maker' ), __('Post Types', 'custom-post-type-maker' ), 'manage_options', 'edit.php?post_type=cptm', '', 'dashicons-layout' );
 		add_submenu_page( 'edit.php?post_type=cptm', __('Taxonomies', 'custom-post-type-maker' ), __('Taxonomies', 'custom-post-type-maker' ), 'manage_options', 'edit.php?post_type=cptm_tax' );
-
-	} // # function cptm_admin_menu()
-
-	public function cptm_styles( $hook ) {
-
+	}
+	
+	/**
+	 * Register admin styles
+	 *
+	 * @param string $hook Wordpress hook
+	 */
+	public function cptm_styles( $hook ) 
+	{
 		// register overview style
 		if ( $hook == 'edit.php' && isset($_GET['post_type']) && ( $_GET['post_type'] == 'cptm' || $_GET['post_type'] == 'cptm_tax' ) ) {
 			wp_register_style( 'cptm_admin_styles', $this->dir . '/css/overview.css' );
@@ -181,11 +197,13 @@ class Cptm {
 
 			wp_enqueue_media();
 		}
-
-	} // # function cptm_styles()
-
-	public function cptm_create_custom_post_types() {
-
+	}
+	
+	/**
+	 * Create custom post types
+	 */
+	public function cptm_create_custom_post_types()
+	{
 		// vars
 		$cptms = array();
 		$cptm_taxs = array();
@@ -406,10 +424,13 @@ class Cptm {
 				}
 			}
 		}
-	} // # function cptm_create_custom_post_types()
+	}
 
-	public function cptm_create_meta_boxes() {
-
+	/**
+	 * Create admin meta boxes
+	 */
+	public function cptm_create_meta_boxes()
+	{
 		// add options meta box
 		add_meta_box(
 			'cptm_options',
@@ -427,11 +448,14 @@ class Cptm {
 			'advanced',
 			'high'
 		);
-
-	} // # function cptm_create_meta_boxes()
-
+	}
+	
+	/**
+	 * Create custom post meta box
+	 *
+	 * @param  object $post Wordpress $post object
+	 */
 	public function cptm_meta_box( $post ) {
-
 		// get post meta values
 		$values = get_post_custom( $post->ID );
 
@@ -797,11 +821,15 @@ class Cptm {
 		</table>
 
 		<?php
+	}
 
-	} // # function cptm_meta_box()
-
-	public function cptm_tax_meta_box( $post ) {
-
+	/**
+	 * Create custom post taxonomy meta box
+	 *
+	 * @param  object $post Wordpress $post object
+	 */
+	public function cptm_tax_meta_box( $post ) 
+	{
 		// get post meta values
 		$values = get_post_custom( $post->ID );
 
@@ -950,11 +978,15 @@ class Cptm {
 			</tr>
 		</table>
 		<?php
-
-	} // # function cptm_meta_box()
-
-	public function cptm_save_post( $post_id ) {
-
+	}
+	
+	/**
+	 * Save custom post
+	 *
+	 * @param  int $post_id Wordpress Post ID
+	 */
+	public function cptm_save_post( $post_id ) 
+	{
 		// verify if this is an auto save routine.
 		// If it is our form has not been submitted, so we dont want to do anything
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
@@ -1060,27 +1092,39 @@ class Cptm {
 
 		$cptm_tax_post_types = isset( $_POST['cptm_tax_post_types'] ) ? $_POST['cptm_tax_post_types'] : array();
 			update_post_meta( $post_id, 'cptm_tax_post_types', $cptm_tax_post_types );
-			
+
 			// Update plugin saved
 			update_option( 'cptm_plugin_settings_changed', true );
-
-	} // # function save_post()
+	}
 	
-	function cptm_plugin_settings_flush_rewrite() {
+	/**
+	 * Flush rewrite rules
+	 */
+	function cptm_plugin_settings_flush_rewrite() 
+	{
     if ( get_option( 'cptm_plugin_settings_changed' ) == true ) {
         flush_rewrite_rules();
         update_option( 'cptm_plugin_settings_changed', false );
     }
-	} // # function cptm_plugin_settings_flush_rewrite()
-	
+	}
 
-	function cptm_plugin_activate_flush_rewrite() {
+	/**
+	 * Flush rewrite rules on plugin activation
+	 */
+	function cptm_plugin_activate_flush_rewrite() 
+	{
 		$this->cptm_create_custom_post_types();
 		flush_rewrite_rules();
-	} // # function cptm_plugin_settings_flush_rewrite()
-
-	function cptm_change_columns( $cols ) {
-
+	}
+	
+	/**
+	 * Modify existing columns
+	 *
+	 * @param  array $cols  Post columns
+	 * @return object       Modified columns
+	 */
+	function cptm_change_columns( $cols ) 
+	{
 		$cols = array(
 			'cb'                    => '<input type="checkbox" />',
 			'title'                 => __( 'Post Type', 'custom-post-type-maker' ),
@@ -1089,19 +1133,28 @@ class Cptm {
 			'description'           => __( 'Description', 'custom-post-type-maker' ),
 		);
 		return $cols;
-
-	} // # function cptm_change_columns()
-
-	function cptm_sortable_columns() {
-
+	}
+	
+	/**
+	 * Make columns sortable
+	 *
+	 * @return array Sortable array
+	 */
+	function cptm_sortable_columns() 
+	{
 		return array(
 			'title'                 => 'title'
 		);
+	}
 
-	} // # function cptm_sortable_columns()
-
-	function cptm_custom_columns( $column, $post_id ) {
-
+	/**
+	 * Insert custom column
+	 *
+	 * @param  string $column  Column name
+	 * @param  int    $post_id Wordpress Post ID
+	 */
+	function cptm_custom_columns( $column, $post_id ) 
+	{
 		switch ( $column ) {
 			case "custom_post_type_name":
 				echo get_post_meta( $post_id, 'cptm_name', true);
@@ -1113,11 +1166,16 @@ class Cptm {
 				echo get_post_meta( $post_id, 'cptm_description', true);
 				break;
 		}
-
-	} // # function cptm_custom_columns()
-
-	function cptm_tax_change_columns( $cols ) {
-
+	}
+	
+	/**
+	 * Modify existing taxonomy columns
+	 *
+	 * @param  array $cols Taxonomy columns
+	 * @return array       Modified taxonomy columns
+	 */
+	function cptm_tax_change_columns( $cols ) 
+	{
 		$cols = array(
 			'cb'                    => '<input type="checkbox" />',
 			'title'                 => __( 'Taxonomy', 'custom-post-type-maker' ),
@@ -1125,19 +1183,28 @@ class Cptm {
 			'label'                 => __( 'Label', 'custom-post-type-maker' )
 		);
 		return $cols;
-
-	} // # function cptm_tax_change_columns()
-
-	function cptm_tax_sortable_columns() {
-
+	}
+	
+	/**
+	 * Make taxonomy columns sortable
+	 *
+	 * @return array Sortable array
+	 */
+	function cptm_tax_sortable_columns() 
+	{
 		return array(
 			'title'                 => 'title'
 		);
-
-	} // # function cptm_tax_sortable_columns()
-
-	function cptm_tax_custom_columns( $column, $post_id ) {
-
+	}
+	
+	/**
+	 * Insert custom taxonomy columns
+	 *
+	 * @param  string $column  Column name
+	 * @param  int    $post_id Wordpress Post ID
+	 */
+	function cptm_tax_custom_columns( $column, $post_id ) 
+	{
 		switch ( $column ) {
 			case "custom_post_type_name":
 				echo get_post_meta( $post_id, 'cptm_tax_name', true);
@@ -1146,11 +1213,13 @@ class Cptm {
 				echo get_post_meta( $post_id, 'cptm_tax_label', true);
 				break;
 		}
-
-	} // # function cptm_tax_custom_columns()
-
-	function cptm_admin_footer() {
-
+	}
+	
+	/**
+	 * Insert admin footer
+	 */
+	function cptm_admin_footer() 
+	{
 		global $post_type;
 		?>
 		<div id="cptm-col-right" class="hidden">
@@ -1371,11 +1440,16 @@ class Cptm {
 			<?php
 			}
 		}
-
-	} // # function cptm_admin_footer()
-
-	function cptm_post_updated_messages( $messages ) {
-
+	}
+	
+	/**
+	 * Update messages
+	 *
+	 * @param  array $messages Update messages
+	 * @return array           Update messages
+	 */
+	function cptm_post_updated_messages( $messages ) 
+	{
 		global $post, $post_ID;
 
 		$messages['cptm' ] = array(
@@ -1394,9 +1468,16 @@ class Cptm {
 		);
 
 		return $messages;
-
-	} // # function cptm_post_updated_messages()
-
+	}
+	
+	/**
+	 * Prepare attachment for Ajax Upload Request
+	 * @param  array  $response    Response
+	 * @param  string $attachment  File contents
+	 * @param  array  $meta        File meta contents
+	 *
+	 * @return array               Modified response
+	 */
 	function wp_prepare_attachment_for_js( $response, $attachment, $meta )
 	{
 		// only for image
@@ -1404,7 +1485,6 @@ class Cptm {
 		{
 			return $response;
 		}
-
 
 		$attachment_url = $response['url'];
 		$base_url = str_replace( wp_basename( $attachment_url ), '', $attachment_url );
@@ -1426,8 +1506,7 @@ class Cptm {
 		}
 
 		return $response;
-	} // # function wp_prepare_attachment_for_js()
-
+	}
 }
 
 /**
