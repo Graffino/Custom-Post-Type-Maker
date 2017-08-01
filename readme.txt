@@ -3,7 +3,7 @@ Contributors: graffino, zeno.popovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.me/zenopopovici/
@@ -66,6 +66,9 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 
 == Changelog ==
 
+= 1.1.3
+- Removed forgotten development dump. Sorry about that.
+
 = 1.1.2 =
 - [Bugfix] Make `with_front` available in `register_post` when set to `false` (Credit: @cmerrick). Closes: [#7](https://github.com/Graffino/Custom-Post-Type-Maker/issues/7)
 
@@ -95,6 +98,9 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 * [Forked] Forked https://wordpress.org/plugins/custom-post-type-maker/
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+- Removed forgotten development dump in v1.1.2. Sorry about that.
 
 = 1.1.1 =
 - Important upgrade: this fixes permalink errors after upgrading to v1.1.0 on existing installations.
