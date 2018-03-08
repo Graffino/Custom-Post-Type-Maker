@@ -66,6 +66,9 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 
 == Changelog ==
 
+= 1.1.4
+- Add ability to show custom taxonomy column in post listing.
+
 = 1.1.3
 - Removed forgotten development dump. Sorry about that.
 
