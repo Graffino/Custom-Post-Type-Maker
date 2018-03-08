@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.4
+- Add ability to show custom taxonomy column in post listing.
+
 ### 1.1.3
 - Removed forgotten development dump. Sorry about that.
 
@@ -30,4 +33,3 @@
 - [Added] Ability to select [DashIcons](https://developer.wordpress.org/resource/dashicons/#layout) as Custom Post Type icon.
 - [Bugfix] Fixed `add_utility_page provokes "deprecated" notice in 4.5.2`
 - [Forked] Forked https://wordpress.org/plugins/custom-post-type-maker/
-
