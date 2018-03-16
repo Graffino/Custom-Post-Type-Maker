@@ -255,6 +255,7 @@ class Cptm
 				$cptm_feeds               = ( array_key_exists( 'cptm_feeds', $cptm_meta ) && $cptm_meta['cptm_feeds'][0] == '1' ? true : false );
 				$cptm_pages               = ( array_key_exists( 'cptm_pages', $cptm_meta ) && $cptm_meta['cptm_pages'][0] == '1' ? true : false );
 				$cptm_query_var           = ( array_key_exists( 'cptm_query_var', $cptm_meta ) && $cptm_meta['cptm_query_var'][0] == '1' ? true : false );
+				$cptm_show_in_rest        = ( array_key_exists( 'cptm_show_in_rest', $cptm_meta ) && $cptm_meta['cptm_show_in_rest'][0] == '1' ? true : false );
 
 				// If it doesn't exist, it must be set to true ( fix for existing installs )
 				if ( ! array_key_exists( 'cptm_publicly_queryable', $cptm_meta ) ) {
@@ -296,6 +297,7 @@ class Cptm
 					'cptm_hierarchical'        => (bool) $cptm_hierarchical,
 					'cptm_rewrite'             => $cptm_rewrite_options,
 					'cptm_query_var'           => (bool) $cptm_query_var,
+					'cptm_show_in_rest'        => (bool) $cptm_show_in_rest,
 					'cptm_publicly_queryable'  => (bool) $cptm_publicly_queryable,
 					'cptm_show_in_menu'        => (bool) $cptm_show_in_menu,
 					'cptm_supports'            => unserialize( $cptm_supports ),
@@ -333,6 +335,7 @@ class Cptm
 							'hierarchical'        => $cptm_post_type['cptm_hierarchical'],
 							'show_in_menu'        => $cptm_post_type['cptm_show_in_menu'],
 							'query_var'           => $cptm_post_type['cptm_query_var'],
+							'show_in_rest'        => $cptm_post_type['cptm_show_in_rest'],
 							'publicly_queryable'  => $cptm_post_type['cptm_publicly_queryable'],
 							'_builtin'            => false,
 							'supports'            => $cptm_post_type['cptm_supports'],
@@ -370,6 +373,7 @@ class Cptm
 				$cptm_tax_hierarchical        = ( array_key_exists( 'cptm_tax_hierarchical', $cptm_meta ) && $cptm_meta['cptm_tax_hierarchical'][0] == '1' ? true : false );
 				$cptm_tax_rewrite             = ( array_key_exists( 'cptm_tax_rewrite', $cptm_meta ) && $cptm_meta['cptm_tax_rewrite'][0] == '1' ? array( 'slug' => _x( $cptm_tax_custom_rewrite_slug, 'URL Slug', 'custom-post-type-maker' ) ) : false );
 				$cptm_tax_query_var           = ( array_key_exists( 'cptm_tax_query_var', $cptm_meta ) && $cptm_meta['cptm_tax_query_var'][0] == '1' ? true : false );
+				$cptm_tax_show_in_rest        = ( array_key_exists( 'cptm_tax_show_in_rest', $cptm_meta ) && $cptm_meta['cptm_tax_show_in_rest'][0] == '1' ? true : false );
 				$cptm_tax_show_admin_column           = ( array_key_exists( 'cptm_tax_show_admin_column', $cptm_meta ) && $cptm_meta['cptm_tax_show_admin_column'][0] == '1' ? true : false );
 
 
@@ -386,6 +390,7 @@ class Cptm
 					'cptm_tax_hierarchical'        => (bool) $cptm_tax_hierarchical,
 					'cptm_tax_rewrite'             => $cptm_tax_rewrite,
 					'cptm_tax_query_var'           => (bool) $cptm_tax_query_var,
+					'cptm_tax_show_in_rest'        => (bool) $cptm_tax_show_in_rest,
 					'cptm_tax_show_admin_column'   => (bool) $cptm_tax_show_admin_column,
 					'cptm_tax_builtin_taxonomies'  => unserialize( $cptm_tax_post_types ),
 				);
@@ -419,6 +424,7 @@ class Cptm
 							'show_ui'             => $cptm_taxonomy['cptm_tax_show_ui'],
 							'hierarchical'        => $cptm_taxonomy['cptm_tax_hierarchical'],
 							'query_var'           => $cptm_taxonomy['cptm_tax_query_var'],
+							'show_in_rest'        => $cptm_taxonomy['cptm_tax_show_in_rest'],
 							'show_admin_column'   => $cptm_taxonomy['cptm_tax_show_admin_column'],
 						);
 
@@ -499,6 +505,7 @@ class Cptm
 		$cptm_feeds                         = isset( $values['cptm_feeds'] ) ? esc_attr( $values['cptm_feeds'][0] ) : '';
 		$cptm_pages                         = isset( $values['cptm_pages'] ) ? esc_attr( $values['cptm_pages'][0] ) : '';
 		$cptm_query_var                     = isset( $values['cptm_query_var'] ) ? esc_attr( $values['cptm_query_var'][0] ) : '';
+		$cptm_show_in_rest                  = isset( $values['cptm_show_in_rest'] ) ? esc_attr( $values['cptm_show_in_rest'][0] ) : '';
 		$cptm_publicly_queryable            = isset( $values['cptm_publicly_queryable'] ) ? esc_attr( $values['cptm_publicly_queryable'][0] ) : '';
 		$cptm_show_in_menu                  = isset( $values['cptm_show_in_menu'] ) ? esc_attr( $values['cptm_show_in_menu'][0] ) : '';
 
@@ -783,6 +790,18 @@ class Cptm
 			</tr>
 			<tr>
 				<td class="label">
+					<label for="cptm_show_in_rest"><?php _e( 'Show in REST', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Sets the show_in_rest key for this post type.', 'custom-post-type-maker' ); ?></p>
+				</td>
+				<td>
+					<select name="cptm_show_in_rest" id="cptm_show_in_rest" tabindex="18">
+						<option value="1" <?php selected( $cptm_show_in_rest, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_show_in_rest, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">
 					<label for="cptm_publicly_queryable"><?php _e( 'Publicly Queryable', 'custom-post-type-maker' ); ?></label>
 					<p><?php _e( 'Whether the post is visible on the front-end.', 'custom-post-type-maker' ); ?></p>
 				</td>
@@ -848,6 +867,7 @@ class Cptm
 		$cptm_tax_hierarchical                  = isset( $values['cptm_tax_hierarchical'] ) ? esc_attr( $values['cptm_tax_hierarchical'][0] ) : '';
 		$cptm_tax_rewrite                       = isset( $values['cptm_tax_rewrite'] ) ? esc_attr( $values['cptm_tax_rewrite'][0] ) : '';
 		$cptm_tax_query_var                     = isset( $values['cptm_tax_query_var'] ) ? esc_attr( $values['cptm_tax_query_var'][0] ) : '';
+		$cptm_tax_show_in_rest                  = isset( $values['cptm_tax_show_in_rest'] ) ? esc_attr( $values['cptm_tax_show_in_rest'][0] ) : '';
 		$cptm_tax_show_admin_column             = isset( $values['cptm_tax_show_admin_column'] ) ? esc_attr( $values['cptm_tax_show_admin_column'][0] ) : '';
 
 		// checkbox fields
@@ -962,6 +982,17 @@ class Cptm
 			</tr>
 			<tr>
 				<td class="label">
+					<label for="cptm_tax_show_in_rest"><?php _e( 'Show in REST', 'custom-post-type-maker' ); ?></label>
+					<p><?php _e( 'Sets the show_in_rest key for this taxonomy.', 'custom-post-type-maker' ); ?></p>
+				</td>
+				<td>
+					<select name="cptm_tax_show_in_rest" id="cptm_tax_show_in_rest" tabindex="8">
+						<option value="1" <?php selected( $cptm_tax_show_in_rest, '1' ); ?>><?php _e( 'True', 'custom-post-type-maker' ); ?> (<?php _e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="0" <?php selected( $cptm_tax_show_in_rest, '0' ); ?>><?php _e( 'False', 'custom-post-type-maker' ); ?></option>
+					</select>
+				</td>
+			<tr>
+				<td class="label">
 					<label for="cptm_tax_show_admin_column"><?php _e( 'Admin Column', 'custom-post-type-maker' ); ?></label>
 					<p><?php _e( 'Show this taxonomy as a column in the custom post listing.', 'custom-post-type-maker' ); ?></p>
 				</td>
@@ -1067,6 +1098,9 @@ class Cptm
 		if ( isset( $_POST['cptm_query_var'] ) )
 			update_post_meta( $post_id, 'cptm_query_var', esc_attr( $_POST['cptm_query_var'] ) );
 
+		if ( isset( $_POST['cptm_show_in_rest'] ) )
+			update_post_meta( $post_id, 'cptm_show_in_rest', esc_attr( $_POST['cptm_show_in_rest'] ) );
+
 		if ( isset( $_POST['cptm_publicly_queryable'] ) )
 			update_post_meta( $post_id, 'cptm_publicly_queryable', esc_attr( $_POST['cptm_publicly_queryable'] ) );
 
@@ -1106,6 +1140,9 @@ class Cptm
 
 		if ( isset( $_POST['cptm_tax_query_var'] ) )
 			update_post_meta( $post_id, 'cptm_tax_query_var', esc_attr( $_POST['cptm_tax_query_var'] ) );
+
+		if ( isset( $_POST['cptm_tax_show_in_rest'] ) )
+			update_post_meta( $post_id, 'cptm_tax_show_in_rest', esc_attr( $_POST['cptm_tax_show_in_rest'] ) );
 
 		if ( isset( $_POST['cptm_tax_show_admin_column'] ) )
 			update_post_meta( $post_id, 'cptm_tax_show_admin_column', esc_attr( $_POST['cptm_tax_show_admin_column'] ) );
