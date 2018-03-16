@@ -23,6 +23,9 @@ Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins
 
 ## Changelog
 
+### 1.1.5
+- Add ability to show custom post in REST API (Thanks @asithade)[#14](https://github.com/Graffino/Custom-Post-Type-Maker/issues/14).
+
 ### 1.1.4
 - Add ability to show custom taxonomy column in post listing.
 
