@@ -3,7 +3,7 @@ Contributors: graffino, zeno.popovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
 Tested up to: 4.9
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.me/zenopopovici/
@@ -65,6 +65,9 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 3. Creating custom Taxonomies
 
 == Changelog ==
+
+= 1.1.6
+- Fixes tab navigation (Thanks @mediengestalter2)[#16](https://github.com/Graffino/Custom-Post-Type-Maker/issues/16)
 
 = 1.1.5
 - Add ability to show custom post in REST API (Thanks @asithade)[#14](https://github.com/Graffino/Custom-Post-Type-Maker/issues/14).
