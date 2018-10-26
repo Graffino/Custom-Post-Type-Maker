@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.6
+- Fixes tab navigation (Thanks @mediengestalter2)[#16](https://github.com/Graffino/Custom-Post-Type-Maker/issues/16)
+
 ### 1.1.5
 - Add ability to show custom post in REST API (Thanks @asithade)[#14](https://github.com/Graffino/Custom-Post-Type-Maker/issues/14).
 
