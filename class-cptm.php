@@ -1040,7 +1040,7 @@ class Cptm {
 
 		// update custom post type meta values
 		if ( isset( $_POST['cptm_name'] ) ) {
-			update_post_meta( $post_id, 'cptm_name', sanitize_text_field( str_replace( ' ', '', $_POST['cptm_name'] ) ) );
+			update_post_meta( $post_id, 'cptm_name', sanitize_text_field( strtolower( str_replace( ' ', '', $_POST['cptm_name'] ) ) ) );
 		}
 
 		if ( isset( $_POST['cptm_label'] ) ) {
