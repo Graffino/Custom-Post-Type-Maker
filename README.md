@@ -26,6 +26,10 @@ Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins
 
 ## Changelog
 
+## 1.1.8
+
+- Fixes undefined variable (Thanks @richardshea,@kubik101)[#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21), [#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21)
+
 ### 1.1.7
 
 - Makes code compatible with WordPressCore PHP Linter
