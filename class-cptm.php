@@ -475,10 +475,10 @@ class Cptm {
 		$values = get_post_custom( $post->ID );
 
 		// text fields
-		$cptm_name         = isset( $values['cptm_name'] ) ? esc_attr( $values['cptm_name'][0] ) : '';
-		$cptm_label        = isset( $values['cptm_label'] ) ? esc_attr( $values['cptm_label'][0] ) : '';
-		$cptm_singular_nam = isset( $values['cptm_singular_name'] ) ? esc_attr( $values['cptm_singular_name'][0] ) : '';
-		$cptm_description  = isset( $values['cptm_description'] ) ? esc_attr( $values['cptm_description'][0] ) : '';
+		$cptm_name          = isset( $values['cptm_name'] ) ? esc_attr( $values['cptm_name'][0] ) : '';
+		$cptm_label         = isset( $values['cptm_label'] ) ? esc_attr( $values['cptm_label'][0] ) : '';
+		$cptm_singular_name = isset( $values['cptm_singular_name'] ) ? esc_attr( $values['cptm_singular_name'][0] ) : '';
+		$cptm_description   = isset( $values['cptm_description'] ) ? esc_attr( $values['cptm_description'][0] ) : '';
 
 		// Custom post icon (uploaded)
 		$cptm_icon_url = isset( $values['cptm_icon_url'] ) ? esc_attr( $values['cptm_icon_url'][0] ) : '';
