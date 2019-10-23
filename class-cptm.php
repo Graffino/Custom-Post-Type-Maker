@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.7
+Version: 1.1.8
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -475,10 +475,10 @@ class Cptm {
 		$values = get_post_custom( $post->ID );
 
 		// text fields
-		$cptm_name         = isset( $values['cptm_name'] ) ? esc_attr( $values['cptm_name'][0] ) : '';
-		$cptm_label        = isset( $values['cptm_label'] ) ? esc_attr( $values['cptm_label'][0] ) : '';
-		$cptm_singular_nam = isset( $values['cptm_singular_name'] ) ? esc_attr( $values['cptm_singular_name'][0] ) : '';
-		$cptm_description  = isset( $values['cptm_description'] ) ? esc_attr( $values['cptm_description'][0] ) : '';
+		$cptm_name          = isset( $values['cptm_name'] ) ? esc_attr( $values['cptm_name'][0] ) : '';
+		$cptm_label         = isset( $values['cptm_label'] ) ? esc_attr( $values['cptm_label'][0] ) : '';
+		$cptm_singular_name = isset( $values['cptm_singular_name'] ) ? esc_attr( $values['cptm_singular_name'][0] ) : '';
+		$cptm_description   = isset( $values['cptm_description'] ) ? esc_attr( $values['cptm_description'][0] ) : '';
 
 		// Custom post icon (uploaded)
 		$cptm_icon_url = isset( $values['cptm_icon_url'] ) ? esc_attr( $values['cptm_icon_url'][0] ) : '';
@@ -873,20 +873,6 @@ class Cptm {
 		$cptm_tax_show_in_rest      = isset( $values['cptm_tax_show_in_rest'] ) ? esc_attr( $values['cptm_tax_show_in_rest'][0] ) : '';
 		$cptm_tax_show_admin_column = isset( $values['cptm_tax_show_admin_column'] ) ? esc_attr( $values['cptm_tax_show_admin_column'][0] ) : '';
 
-		// checkbox fields
-		$cptm_tax_supports                 = isset( $values['cptm_tax_supports'] ) ? unserialize( $values['cptm_tax_supports'][0] ) : array();
-		$cptm_tax_supports_title           = ( isset( $values['cptm_tax_supports'] ) && in_array( 'title', $cptm_supports ) ? 'title' : '' );
-		$cptm_tax_supports_editor          = ( isset( $values['cptm_tax_supports'] ) && in_array( 'editor', $cptm_supports ) ? 'editor' : '' );
-		$cptm_tax_supports_excerpt         = ( isset( $values['cptm_tax_supports'] ) && in_array( 'excerpt', $cptm_supports ) ? 'excerpt' : '' );
-		$cptm_tax_supports_trackbacks      = ( isset( $values['cptm_tax_supports'] ) && in_array( 'trackbacks', $cptm_supports ) ? 'trackbacks' : '' );
-		$cptm_tax_supports_custom_fields   = ( isset( $values['cptm_tax_supports'] ) && in_array( 'custom-fields', $cptm_supports ) ? 'custom-fields' : '' );
-		$cptm_tax_supports_comments        = ( isset( $values['cptm_tax_supports'] ) && in_array( 'comments', $cptm_supports ) ? 'comments' : '' );
-		$cptm_tax_supports_revisions       = ( isset( $values['cptm_tax_supports'] ) && in_array( 'revisions', $cptm_supports ) ? 'revisions' : '' );
-		$cptm_tax_supports_featured_image  = ( isset( $values['cptm_tax_supports'] ) && in_array( 'thumbnail', $cptm_supports ) ? 'thumbnail' : '' );
-		$cptm_tax_supports_author          = ( isset( $values['cptm_tax_supports'] ) && in_array( 'author', $cptm_supports ) ? 'author' : '' );
-		$cptm_tax_supports_page_attributes = ( isset( $values['cptm_tax_supports'] ) && in_array( 'page-attributes', $cptm_supports ) ? 'page-attributes' : '' );
-		$cptm_tax_supports_post_formats    = ( isset( $values['cptm_tax_supports'] ) && in_array( 'post-formats', $cptm_supports ) ? 'post-formats' : '' );
-
 		$cptm_tax_post_types      = isset( $values['cptm_tax_post_types'] ) ? unserialize( $values['cptm_tax_post_types'][0] ) : array();
 		$cptm_tax_post_types_post = ( isset( $values['cptm_tax_post_types'] ) && in_array( 'post', $cptm_tax_post_types ) ? 'post' : '' );
 		$cptm_tax_post_types_page = ( isset( $values['cptm_tax_post_types'] ) && in_array( 'page', $cptm_tax_post_types ) ? 'page' : '' );
@@ -1054,7 +1040,7 @@ class Cptm {
 
 		// update custom post type meta values
 		if ( isset( $_POST['cptm_name'] ) ) {
-			update_post_meta( $post_id, 'cptm_name', sanitize_text_field( str_replace( ' ', '', $_POST['cptm_name'] ) ) );
+			update_post_meta( $post_id, 'cptm_name', sanitize_text_field( strtolower( str_replace( ' ', '', $_POST['cptm_name'] ) ) ) );
 		}
 
 		if ( isset( $_POST['cptm_label'] ) ) {
