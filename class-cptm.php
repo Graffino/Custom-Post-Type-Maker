@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.7
+Version: 1.1.8
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker

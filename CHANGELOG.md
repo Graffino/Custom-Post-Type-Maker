@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.8
+
+- Fixes undefined variable (Thanks @richardshea,@kubik101)[#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21), [#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21)
+
+### 1.1.7
+
+- Makes code compatible with WordPressCore PHP Linter
+- Marks plugin compatible with future WordPress versions
+
 ## 1.1.6
 
 - Fixes tab navigation (Thanks @mediengestalter2)[#16](https://github.com/Graffino/Custom-Post-Type-Maker/issues/16)
