@@ -31,7 +31,7 @@ GNU General Public License for more details.
  * @copyright Copyright (c) 2018, Graffino
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package   Custom_Post_Types_Maker
- * @version   1.1.7
+ * @version   1.1.9
  */
 
 //avoid direct calls to this file
