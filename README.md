@@ -26,7 +26,11 @@ Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins
 
 ## Changelog
 
-## 1.1.8
+### 1.1.9
+
+- Compatibility with future version of WP
+
+### 1.1.8
 
 - Fixes undefined variable (Thanks @richardshea,@kubik101)[#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21), [#20](https://github.com/Graffino/Custom-Post-Type-Maker/issues/21)
 
