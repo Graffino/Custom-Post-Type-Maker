@@ -26,6 +26,10 @@ Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins
 
 ## Changelog
 
+## 1.1.10
+
+- Compatibility with future version of WP
+
 ### 1.1.9
 
 - Compatibility with future version of WP
