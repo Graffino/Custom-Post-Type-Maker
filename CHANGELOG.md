@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.11
+
+- Update assets
+
 ## 1.1.10
 
 - Compatibility with future version of WP
