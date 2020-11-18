@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.13
+
+- Fix translations. Add .pot template file, reported by @wicko77
+
 ## 1.1.12
 
 - Remove 'All' from taxonomy names as suggested by @gnowland
