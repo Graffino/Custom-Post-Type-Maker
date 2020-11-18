@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Custom Post Type Maker
-Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
+Plugin URI: https://github.com/Graffino/custom-post-type-maker
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.12
+Version: 1.1.13
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -31,7 +31,7 @@ GNU General Public License for more details.
  * @copyright Copyright (c) 2018, Graffino
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package   Custom_Post_Types_Maker
- * @version   1.1.12
+ * @version   1.1.13
  */
 
 //avoid direct calls to this file
@@ -61,7 +61,7 @@ class Cptm {
 		// vars
 		$this->dir     = plugins_url( '', __FILE__ );
 		$this->path    = plugin_dir_path( __FILE__ );
-		$this->version = '1.1.12';
+		$this->version = '1.1.13';
 
 		// actions
 		add_action( 'init', array( $this, 'init' ) );
@@ -88,7 +88,7 @@ class Cptm {
 		register_activation_hook( __FILE__, array( $this, 'cptm_plugin_activate_flush_rewrite' ) );
 
 		// set textdomain
-		load_plugin_textdomain( 'cptm', false, basename( dirname( __FILE__ ) ) . '/lang' );
+		load_plugin_textdomain( 'custom-post-type-maker', false, basename( dirname( __FILE__ ) ) . '/lang' );
 	}
 
 	/**
