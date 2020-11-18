@@ -66,6 +66,10 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 
 == Changelog ==
 
+= 1.1.12 =
+
+- Remove 'All' from taxonomy names as suggested by @gnowland
+
 = 1.1.11 =
 
 - Update assets

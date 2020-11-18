@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker-ui
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.11
+Version: 1.1.12
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -31,7 +31,7 @@ GNU General Public License for more details.
  * @copyright Copyright (c) 2018, Graffino
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package   Custom_Post_Types_Maker
- * @version   1.1.11
+ * @version   1.1.12
  */
 
 //avoid direct calls to this file
@@ -61,7 +61,7 @@ class Cptm {
 		// vars
 		$this->dir     = plugins_url( '', __FILE__ );
 		$this->path    = plugin_dir_path( __FILE__ );
-		$this->version = '1.1.11';
+		$this->version = '1.1.12';
 
 		// actions
 		add_action( 'init', array( $this, 'init' ) );
@@ -109,20 +109,23 @@ class Cptm {
 			'not_found_in_trash' => __( 'No Custom Post Types found in Trash', 'custom-post-type-maker' ),
 		);
 
-		register_post_type( 'cptm', array(
-			'labels'          => $labels,
-			'public'          => false,
-			'show_ui'         => true,
-			'_builtin'        => false,
-			'capability_type' => 'page',
-			'hierarchical'    => false,
-			'rewrite'         => false,
-			'query_var'       => 'cptm',
-			'supports'        => array(
-				'title',
-			),
-			'show_in_menu'    => false,
-		));
+		register_post_type(
+			'cptm',
+			array(
+				'labels'          => $labels,
+				'public'          => false,
+				'show_ui'         => true,
+				'_builtin'        => false,
+				'capability_type' => 'page',
+				'hierarchical'    => false,
+				'rewrite'         => false,
+				'query_var'       => 'cptm',
+				'supports'        => array(
+					'title',
+				),
+				'show_in_menu'    => false,
+			)
+		);
 
 		// Create cptm_tax post type
 		$labels = array(
@@ -138,20 +141,23 @@ class Cptm {
 			'not_found_in_trash' => __( 'No Custom Taxonomies found in Trash', 'custom-post-type-maker' ),
 		);
 
-		register_post_type( 'cptm_tax', array(
-			'labels'          => $labels,
-			'public'          => false,
-			'show_ui'         => true,
-			'_builtin'        => false,
-			'capability_type' => 'page',
-			'hierarchical'    => false,
-			'rewrite'         => false,
-			'query_var'       => 'cptm_tax',
-			'supports'        => array(
-				'title',
-			),
-			'show_in_menu'    => false,
-		));
+		register_post_type(
+			'cptm_tax',
+			array(
+				'labels'          => $labels,
+				'public'          => false,
+				'show_ui'         => true,
+				'_builtin'        => false,
+				'capability_type' => 'page',
+				'hierarchical'    => false,
+				'rewrite'         => false,
+				'query_var'       => 'cptm_tax',
+				'supports'        => array(
+					'title',
+				),
+				'show_in_menu'    => false,
+			)
+		);
 
 		// Add image size for the Custom Post Type icon
 		if ( function_exists( 'add_image_size' ) ) {
@@ -409,7 +415,7 @@ class Cptm {
 							'singular_name'              => _x( $cptm_taxonomy['cptm_tax_singular_name'], 'taxonomy singular name' ),
 							'search_items'               => __( 'Search ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
 							'popular_items'              => __( 'Popular ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
-							'all_items'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'all_items'                  => __( $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
 							'parent_item'                => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
 							'parent_item_colon'          => __( 'Parent ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' . ':' ),
 							'edit_item'                  => __( 'Edit ' . $cptm_taxonomy['cptm_tax_singular_name'], 'custom-post-type-maker' ),
@@ -419,7 +425,7 @@ class Cptm {
 							'separate_items_with_commas' => __( 'Seperate ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' . ' with commas' ),
 							'add_or_remove_items'        => __( 'Add or remove ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
 							'choose_from_most_used'      => __( 'Choose from the most used ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
-							'menu_name'                  => __( 'All ' . $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
+							'menu_name'                  => __( $cptm_taxonomy['cptm_tax_label'], 'custom-post-type-maker' ),
 						);
 
 						$args = array(
@@ -1001,10 +1007,12 @@ class Cptm {
 					<input type="checkbox" tabindex="11" name="cptm_tax_post_types[]" id="cptm_tax_post_types_post" value="post" <?php checked( $cptm_tax_post_types_post, 'post' ); ?> /> <label for="cptm_tax_post_types_post"><?php _e( 'Posts', 'custom-post-type-maker' ); ?></label><br />
 					<input type="checkbox" tabindex="12" name="cptm_tax_post_types[]" id="cptm_tax_post_types_page" value="page" <?php checked( $cptm_tax_post_types_page, 'page' ); ?> /> <label for="cptm_tax_post_types_page"><?php _e( 'Pages', 'custom-post-type-maker' ); ?></label><br />
 					<?php
-					$post_types = get_post_types( array(
-						'public'   => true,
-						'_builtin' => false,
-					));
+					$post_types = get_post_types(
+						array(
+							'public'   => true,
+							'_builtin' => false,
+						)
+					);
 
 					$i = 13;
 					foreach ( $post_types as $post_type ) {
@@ -1326,10 +1334,13 @@ class Cptm {
 		if ( 'cptm' == $post_type ) {
 
 			// Get all public Custom Post Types
-			$post_types = get_post_types( array(
-				'public'   => true,
-				'_builtin' => false,
-			), 'objects' );
+			$post_types = get_post_types(
+				array(
+					'public'   => true,
+					'_builtin' => false,
+				),
+				'objects'
+			);
 			// Get all Custom Post Types created by Custom Post Type Maker
 			$cptm_posts = get_posts( array( 'post_type' => 'cptm' ) );
 			// Remove all Custom Post Types created by the Custom Post Type Maker plugin
@@ -1430,10 +1441,13 @@ class Cptm {
 		if ( 'cptm_tax' == $post_type ) {
 
 			// Get all public custom Taxonomies
-			$taxonomies = get_taxonomies( array(
-				'public'   => true,
-				'_builtin' => false,
-			), 'objects' );
+			$taxonomies = get_taxonomies(
+				array(
+					'public'   => true,
+					'_builtin' => false,
+				),
+				'objects'
+			);
 			// Get all custom Taxonomies created by Custom Post Type Maker
 			$cptm_tax_posts = get_posts( array( 'post_type' => 'cptm_tax' ) );
 			// Remove all custom Taxonomies created by the Custom Post Type Maker plugin
