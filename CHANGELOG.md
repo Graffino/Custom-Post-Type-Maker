@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.14
+
+- Compatibility with future version of WP
+
 ## 1.1.13
 
 - Fix translations. Add .pot template file, reported by @wicko77
