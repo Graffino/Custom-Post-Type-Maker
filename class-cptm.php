@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.14
+Version: 1.1.15
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -31,7 +31,7 @@ GNU General Public License for more details.
  * @copyright Copyright (c) 2018, Graffino
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package   Custom_Post_Types_Maker
- * @version   1.1.14
+ * @version   1.1.15
  */
 
 //avoid direct calls to this file
@@ -61,7 +61,7 @@ class Cptm {
 		// vars
 		$this->dir     = plugins_url( '', __FILE__ );
 		$this->path    = plugin_dir_path( __FILE__ );
-		$this->version = '1.1.14';
+		$this->version = '1.1.15';
 
 		// actions
 		add_action( 'init', array( $this, 'init' ) );
@@ -890,7 +890,7 @@ class Cptm {
 			<tr>
 				<td class="label">
 					<label for="cptm_tax_name"><span class="required">*</span> <?php _e( 'Custom Taxonomy Name', 'custom-post-type-maker' ); ?></label>
-					<p><?php _e( 'The taxonomy name. Used to retrieve custom taxonomy content.', 'custom-post-type-maker' ); ?></p>
+					<p><?php _e( 'The taxonomy name (use lowercase only). Used to retrieve custom taxonomy content. Must be all in lower-case and without any spaces.', 'custom-post-type-maker' ); ?></p>
 					<p><?php _e( 'e.g. movies', 'custom-post-type-maker' ); ?></p>
 				</td>
 				<td>
@@ -1144,7 +1144,7 @@ class Cptm {
 
 		// Update taxonomy meta values
 		if ( isset( $_POST['cptm_tax_name'] ) ) {
-			update_post_meta( $post_id, 'cptm_tax_name', sanitize_text_field( str_replace( ' ', '', $_POST['cptm_tax_name'] ) ) );
+			update_post_meta( $post_id, 'cptm_tax_name', sanitize_text_field( strtolower( str_replace( ' ', '', $_POST['cptm_tax_name'] ) ) ) );
 		}
 
 		if ( isset( $_POST['cptm_tax_label'] ) ) {

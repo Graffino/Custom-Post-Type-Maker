@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.15
+
+- Better sanitize taxonomy name as suggested by @ldeejay
+
 ## 1.1.14
 
 - Compatibility with future version of WP
