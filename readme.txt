@@ -2,8 +2,8 @@
 Contributors: graffino, zenopopovici, jornbakhuys
 Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
 Requires at least: 3.0.0
-Tested up to: 5.7
-Stable tag: 1.1.15
+Tested up to: 6.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.me/zenopopovici/
@@ -29,6 +29,11 @@ Originally by [Bakhuys](http://www.bakhuys.com/).
 1. Upload 'custom-post-type-maker' to the '/wp-content/plugins/' directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Click the new menu item 'Post Types' to create a Custom Post Type or a custom Taxonomy.
+
+== Additional configuration ==
+
+You can add `CPTM_DONT_GENERATE_ICON` in `wp-config.php` to prevent CPTM to generate the 16x16px WordPress image_size. You can do this after you upload an initial icon.
+We've added this option because some users have very large image galleries and the additional WordPress image_size matters.
 
 == Frequently Asked Questions ==
 
@@ -65,6 +70,12 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 3. Creating custom Taxonomies
 
 == Changelog ==
+
+= 1.2.0 =
+
+- Added `CPTM_DONT_GENERATE_ICON` constant for disabling the 16x16px image_size via wp-config.php as suggested by @clubside and @ldeejay
+- Fixed spelling as suggested by @ldeejay
+- Compatibility with latest version of WP
 
 = 1.1.15 =
 
