@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/custom-post-type-maker
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.1.15
+Version: 1.2.0
 Author: Graffino
 Author URI: http://www.graffino.com/
 Text Domain: custom-post-type-maker
@@ -61,7 +61,7 @@ class Cptm {
 		// vars
 		$this->dir     = plugins_url( '', __FILE__ );
 		$this->path    = plugin_dir_path( __FILE__ );
-		$this->version = '1.1.15';
+		$this->version = '1.2.0';
 
 		// actions
 		add_action( 'init', array( $this, 'init' ) );
@@ -160,7 +160,7 @@ class Cptm {
 		);
 
 		// Add image size for the Custom Post Type icon
-		if ( function_exists( 'add_image_size' ) ) {
+		if ( function_exists( 'add_image_size' ) && ! defined( 'CPTM_DONT_GENERATE_ICON' ) ) {
 			add_image_size( 'cptm_icon', 16, 16, true );
 		}
 	}
@@ -741,8 +741,8 @@ class Cptm {
 					<div class="cptm-icon">
 						<div class="current-cptm-icon">
 						<?php if ( $cptm_icon_url ) { ?><img src="<?php echo $cptm_icon_url; ?>" /><?php } ?></div>
-						<a href="/" class="remove-cptm-icon button-secondary"<?php if ( ! $cptm_icon_url ) { ?> style="display: none;"<?php } ?> tabindex="16">Remove icon</a>
-						<a  href="/"class="media-uploader-button button-primary" data-post-id="<?php echo $post->ID; ?>" tabindex="17"><?php if ( ! $cptm_icon_url ) { ?><?php _e( 'Add icon', 'custom-post-type-maker' ); ?><?php } else { ?><?php _e( 'Edit icon', 'custom-post-type-maker' ); ?><?php } ?></a>
+						<a href="/" class="remove-cptm-icon button-secondary"<?php if ( ! $cptm_icon_url ) { ?> style="display: none;"<?php } ?> tabindex="16">Remove Icon</a>
+						<a  href="/"class="media-uploader-button button-primary" data-post-id="<?php echo $post->ID; ?>" tabindex="17"><?php if ( ! $cptm_icon_url ) { ?><?php _e( 'Add icon', 'custom-post-type-maker' ); ?><?php } else { ?><?php _e( 'Upload Icon', 'custom-post-type-maker' ); ?><?php } ?></a>
 					</div>
 					<input type="hidden" name="cptm_icon_url" id="cptm_icon_url" class="widefat" value="<?php echo $cptm_icon_url; ?>" />
 				</td>

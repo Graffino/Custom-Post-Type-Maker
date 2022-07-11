@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+- Added `CPTM_DONT_GENERATE_ICON` constant for disabling the 16x16px image_size via wp-config.php as suggested by @clubside and @ldeejay
+- Fixed spelling as suggested by @ldeejay
+- Compatibility with latest version of WP
+
 ## 1.1.15
 
 - Better sanitize taxonomy name as suggested by @ldeejay
