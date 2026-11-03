@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  html, body { margin: 0; width: 772px; height: 250px; overflow: hidden; }
+  .b { position: relative; width: 772px; height: 250px; background: radial-gradient(120% 140% at 15% 20%, #2b3653 0%, #1b2233 55%, #131826 100%); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .grid { position: absolute; right: -30px; top: -20px; width: 420px; height: 300px; display: grid; grid-template-columns: repeat(4, 86px); gap: 14px; transform: rotate(-8deg); opacity: .9; }
+  .card { height: 58px; border-radius: 10px; border: 1.5px solid rgba(217,183,126,.22); background: rgba(255,255,255,.03); position: relative; }
+  .card::before { content: ""; position: absolute; left: 10px; top: 12px; width: 40px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.14); }
+  .card::after { content: ""; position: absolute; left: 10px; top: 26px; width: 62px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.07); box-shadow: 0 9px 0 rgba(255,255,255,.07); }
+  .card.on { border-color: rgba(217,183,126,.7); background: rgba(217,183,126,.10); }
+  .fade { position: absolute; inset: 0; background: linear-gradient(90deg, #1b2233 38%, rgba(27,34,51,.6) 62%, rgba(27,34,51,0) 100%); }
+  .mark { position: absolute; left: 44px; top: 53px; width: 144px; height: 144px; border-radius: 32px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06); }
+  .mark img { width: 144px; height: 144px; display: block; }
+  .t { position: absolute; left: 218px; top: 74px; }
+  h1 { margin: 0; color: #fff; font-size: 40px; font-weight: 700; letter-spacing: -.5px; line-height: 1.05; }
+  p { margin: 12px 0 0; color: #d9b77e; font-size: 17px; font-weight: 500; letter-spacing: .2px; }
+  .chips { margin-top: 16px; display: flex; gap: 8px; }
+  .chip { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 4px 10px; }
+</style></head><body><div class="b">
+  <div class="grid">
+    <div class="card"></div><div class="card"></div><div class="card on"></div><div class="card"></div>
+    <div class="card"></div><div class="card on"></div><div class="card"></div><div class="card"></div>
+    <div class="card"></div><div class="card"></div><div class="card"></div><div class="card on"></div>
+    <div class="card on"></div><div class="card"></div><div class="card"></div><div class="card"></div>
+  </div>
+  <div class="fade"></div>
+  <div class="mark"><img src="icon.svg" alt=""></div>
+  <div class="t">
+    <h1>Custom Post Type Maker</h1>
+    <p>Post types and taxonomies, without code.</p>
+    <div class="chips"><span class="chip">Block editor</span><span class="chip">REST API</span><span class="chip">No code</span></div>
+  </div>
+</div></body></html>

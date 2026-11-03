@@ -1,0 +1,15 @@
+.github export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+.distignore export-ignore
+.DS_Store export-ignore
+.claude export-ignore
+.dev export-ignore
+docs export-ignore
+assets export-ignore
+AGENTS.md export-ignore
+CLAUDE.md export-ignore
+CONTEXT.md export-ignore
+phpcs.xml export-ignore
+tests export-ignore
+bin export-ignore

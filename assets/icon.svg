@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>Custom Post Type Maker</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26304a"/>
+      <stop offset="1" stop-color="#161c2b"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <!-- mailbox: post, body, door, letter slot -->
+  <rect x="112" y="150" width="16" height="64" rx="4" fill="#ffffff"/>
+  <path d="M60 120a60 60 0 0 1 120 0v30a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10z" fill="#ffffff"/>
+  <path d="M60 120a30 30 0 0 1 60 0v40H70a10 10 0 0 1-10-10z" fill="#e3e7ef"/>
+  <rect x="130" y="104" width="36" height="10" rx="5" fill="#d9b77e"/>
+  <!-- "make" badge -->
+  <circle cx="186" cy="184" r="34" fill="#d9b77e" stroke="#1b2233" stroke-width="8"/>
+  <rect x="182" y="166" width="8" height="36" rx="4" fill="#1b2233"/>
+  <rect x="168" y="180" width="36" height="8" rx="4" fill="#1b2233"/>
+</svg>

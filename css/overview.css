@@ -8,10 +8,6 @@
 }
 
 /* Columns */
-#icon-edit {
-	background: url(../img/cptm-icon-32.png) 0 0 no-repeat;
-}
-
 #cptm-cols {
 	position: relative;
 	clear: both;
