@@ -12,6 +12,8 @@
 - PATTERN-004 · Flush rewrite rules through an option flag · approved
 - PATTERN-005 · Read definition meta with array_key_exists and a default · approved
 - PATTERN-006 · Conventional commit subjects · approved
+- PATTERN-007 · A new definition setting is optional and passed only when set · candidate
+- PATTERN-008 · Build meta box rows with the row helpers · candidate
 
 ---
 
@@ -67,3 +69,19 @@
 - **Example:** commits fa591e9, f733bd2, 2a4e6ef
 - **Why:** All commits since 2021 use this shape.
 - **Source:** git · confidence medium
+
+## PATTERN-007 · A new definition setting is optional and passed only when set
+- **Status:** candidate
+- **Use when:** you add a register_post_type or register_taxonomy argument to the forms.
+- **How:** Store '1', '0' or '' (or text, '' when empty). Show "WordPress default" as the first option (`optional_bool_row()`). In the register code, pass the argument only when the value is not empty (`meta_optional_flag()`).
+- **Example:** class-cptm.php `register_post_type_definition()` (the "Settings added in 1.3.0" loops)
+- **Why:** Definitions saved by older versions do not have the key; they must keep the WordPress default (C-001).
+- **Source:** code · confidence medium
+
+## PATTERN-008 · Build meta box rows with the row helpers
+- **Status:** candidate
+- **Use when:** you add a field to the Options meta box.
+- **How:** Call `text_row()`, `bool_row()`, `optional_bool_row()` or `checkbox_row()`. They escape all output and keep the `tabindex` order.
+- **Example:** class-cptm.php `cptm_meta_box()`
+- **Why:** The 1.2.0 forms repeated the markup per field, and several fields printed values without escaping.
+- **Source:** code · confidence medium

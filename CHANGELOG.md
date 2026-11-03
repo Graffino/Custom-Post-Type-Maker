@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0
+
+- Security: only administrators (`manage_options`) can view, create, edit or delete post type and taxonomy definitions. Before, Editors could reach these screens through a direct URL.
+- Security: the save handler checks the user's capability, sanitizes every field, and accepts only known values for supports, built-in taxonomies and post types.
+- Security: all values on the admin screens are escaped on output. Stored data is read without `unserialize()` of objects.
+- Post type and taxonomy names are validated: lower-case letters, numbers, dashes and underscores, at most 20 (post types) or 32 (taxonomies) characters, and no reserved or already registered names.
+- New post type options: Show in Navigation Menus, Show in Admin Bar, REST Base, REST Namespace, Can Export, Delete With User, Archive Slug.
+- New taxonomy options: Public, Publicly Queryable, Show in Navigation Menus, Show in Tag Cloud, Show in Quick Edit, REST Base, Default Term.
+- Full, translatable label sets for custom post types and taxonomies (current WordPress labels).
+- Each post type and taxonomy is now registered once per request (before, more definitions caused repeated registrations).
+- Fixed: the list of "Other registered" post types and taxonomies showed your own definitions when you had more than 5.
+- Fixed: the plugin columns printed on the post lists of other post types.
+- Fixed: dead Changelog, Support and Vote links; untranslatable strings; "Seperate" typo.
+- Requires PHP 8.1 and WordPress 6.5 or later. Tested up to WordPress 7.1.
+
 ## 1.2.0
 
 - Added `CPTM_DONT_GENERATE_ICON` constant for disabling the 16x16px image_size via wp-config.php as suggested by @clubside and @ldeejay

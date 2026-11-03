@@ -32,9 +32,11 @@
   - `cptm_tax` text: `cptm_tax_name`, `cptm_tax_label`, `cptm_tax_singular_name`, `cptm_tax_custom_rewrite_slug`.
   - `cptm_tax` '1'/'0' flags: `cptm_tax_show_ui`, `cptm_tax_hierarchical`, `cptm_tax_rewrite`, `cptm_tax_query_var`, `cptm_tax_show_in_rest`, `cptm_tax_show_admin_column`.
   - `cptm_tax` serialized string array: `cptm_tax_post_types`.
+  - Added in 1.3.0, values '1', '0' or '' (''= WordPress default; the argument is not passed): `cptm_show_in_nav_menus`, `cptm_show_in_admin_bar`, `cptm_can_export`, `cptm_delete_with_user`, `cptm_tax_public`, `cptm_tax_publicly_queryable`, `cptm_tax_show_in_nav_menus`, `cptm_tax_show_tagcloud`, `cptm_tax_show_in_quick_edit`.
+  - Added in 1.3.0, text ('' = not passed): `cptm_archive_slug`, `cptm_rest_base`, `cptm_rest_namespace`, `cptm_tax_rest_base`, `cptm_tax_default_term`.
   - Only definitions with `post_status` publish are registered. The fallback name 'no_name' is never registered.
 - **Rules:** Never rename or remove a key. Never change the meaning of a stored value. A new key needs a default that keeps old definitions unchanged (PATTERN-005).
-- **Evidence:** class-cptm.php:227-292 (read), class-cptm.php:1049-1187 (write)
+- **Evidence:** class-cptm.php `register_post_type_definition()`, `register_taxonomy_definition()` (read); `cptm_save_post()`, `cptm_tax_save_post()` (write). 1.2.0 read code: commit dfdd9cc, class-cptm.php:227-292.
 - **Source:** code · confidence high
 
 ### C-002 · Plugin identity custom-post-type-maker/class-cptm.php
@@ -99,5 +101,5 @@ _None. The plugin consumes no interface from another Graffino repo._
 - **We rely on:**
   - Post type args: labels, description, menu_icon, rewrite (slug, with_front, feeds, pages), menu_position, public, show_ui, has_archive, exclude_from_search, capability_type, hierarchical, show_in_menu, query_var, show_in_rest, publicly_queryable, supports, taxonomies.
   - Taxonomy args: label, labels, rewrite (slug or false), show_ui, hierarchical, query_var, show_in_rest, show_admin_column.
-- **Known quirks:** `show_in_rest` needs WordPress 4.7 or later, but `readme.txt` says "Requires at least: 3.0.0".
+- **Known quirks:** The plugin requires WordPress 6.5 (D-009). Labels that an older version does not know are ignored.
 - **Evidence:** class-cptm.php:335-356, class-cptm.php:431-443, class-cptm.php:191-203

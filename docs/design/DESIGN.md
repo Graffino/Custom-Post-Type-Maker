@@ -93,7 +93,7 @@ The plugin defines no tokens. The tables list the values the CSS uses today, so 
 | (none) panel | #f9f9f9 / #f5f5f5 | — | label column, sidebar footer (add-edit.css:51; overview.css:70) |
 | (none) muted text | #666 | — | help text (add-edit.css:70; overview.css:66) |
 | (none) heading | #ccc | — | sidebar title (overview.css:44) |
-| (none) required | #f00 | — | required-field marker (add-edit.css:65) |
+| (none) required | #d63638 | — | required-field marker, the wp-admin error colour (add-edit.css:61) |
 
 WordPress admin has no dark mode. "Dark" stays empty.
 
@@ -123,5 +123,3 @@ WordPress admin has no dark mode. "Dark" stays empty.
 |---|---|---|
 | css/overview.css:21, :36 | 307px, 290px fixed sidebar width | WordPress admin layout (`#poststuff` columns) |
 | css/overview.css:43 | Helvetica Neue font stack | wp-admin default font |
-| css/add-edit.css:11, css/overview.css:12 | `../img/cptm-icon-32.png` | the file does not exist: remove the rule |
-| css/add-edit.css:65 | #f00 | wp-admin error colour (`#d63638`) |

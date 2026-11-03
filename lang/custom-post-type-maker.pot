@@ -1,668 +1,1069 @@
-#, fuzzy
+# Copyright (C) 2026 Graffino
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Custom Post Type Maker\n"
-"POT-Creation-Date: 2020-11-19 00:11+0200\n"
-"PO-Revision-Date: 2020-11-19 00:10+0200\n"
-"Last-Translator: Zeno Popovici <zeno@graffino.com>\n"
-"Language-Team: Zeno Popovici <zeno@graffino.com>\n"
+"Project-Id-Version: Custom Post Type Maker 1.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-post-type-maker\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: class-cptm.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"POT-Creation-Date: 2026-11-03T17:57:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: custom-post-type-maker\n"
 
-#. Plugin Name of the plugin/theme
-#: class-cptm.php:100 class-cptm.php:1313
+#. Plugin Name of the plugin
+#: class-cptm.php
+#: class-cptm.php:139
+#: class-cptm.php:1398
 msgid "Custom Post Type Maker"
 msgstr ""
 
-#: class-cptm.php:101
-msgid "Custom Post Type"
+#. Plugin URI of the plugin
+#: class-cptm.php
+msgid "https://github.com/Graffino/Custom-Post-Type-Maker"
 msgstr ""
 
-#: class-cptm.php:102 class-cptm.php:134 class-cptm.php:325
-msgid "Add New"
+#. Description of the plugin
+#: class-cptm.php
+msgid "Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way."
 msgstr ""
 
-#: class-cptm.php:103
-msgid "Add New Custom Post Type"
+#. Author of the plugin
+#: class-cptm.php
+msgid "Graffino"
 msgstr ""
 
-#: class-cptm.php:104
-msgid "Edit Custom Post Type"
-msgstr ""
-
-#: class-cptm.php:105
-msgid "New Custom Post Type"
-msgstr ""
-
-#: class-cptm.php:106
-msgid "View Custom Post Type"
-msgstr ""
-
-#: class-cptm.php:107
-msgid "Search Custom Post Types"
-msgstr ""
-
-#: class-cptm.php:108 class-cptm.php:1417
-msgid "No Custom Post Types found"
-msgstr ""
-
-#: class-cptm.php:109
-msgid "No Custom Post Types found in Trash"
-msgstr ""
-
-#: class-cptm.php:132
-msgid "Custom Taxonomies"
-msgstr ""
-
-#: class-cptm.php:133
-msgid "Custom Taxonomy"
-msgstr ""
-
-#: class-cptm.php:135
-msgid "Add New Custom Taxonomy"
-msgstr ""
-
-#: class-cptm.php:136
-msgid "Edit Custom Taxonomy"
-msgstr ""
-
-#: class-cptm.php:137
-msgid "New Custom Taxonomy"
-msgstr ""
-
-#: class-cptm.php:138
-msgid "View Custom Taxonomy"
-msgstr ""
-
-#: class-cptm.php:139
-msgid "Search Custom Taxonomies"
+#. Author URI of the plugin
+#: class-cptm.php
+msgid "https://www.graffino.com/"
 msgstr ""
 
 #: class-cptm.php:140
-msgid "No Custom Taxonomies found"
+msgid "Custom Post Type"
 msgstr ""
 
 #: class-cptm.php:141
-msgid "No Custom Taxonomies found in Trash"
-msgstr ""
-
 #: class-cptm.php:173
-msgid "CPT Maker"
+msgid "Add New"
 msgstr ""
 
-#: class-cptm.php:173 class-cptm.php:1003
-msgid "Post Types"
+#: class-cptm.php:142
+msgid "Add New Custom Post Type"
+msgstr ""
+
+#: class-cptm.php:143
+msgid "Edit Custom Post Type"
+msgstr ""
+
+#: class-cptm.php:144
+msgid "New Custom Post Type"
+msgstr ""
+
+#: class-cptm.php:145
+msgid "View Custom Post Type"
+msgstr ""
+
+#: class-cptm.php:146
+msgid "Search Custom Post Types"
+msgstr ""
+
+#: class-cptm.php:147
+msgid "No Custom Post Types found"
+msgstr ""
+
+#: class-cptm.php:148
+msgid "No Custom Post Types found in Trash"
+msgstr ""
+
+#: class-cptm.php:171
+msgid "Custom Taxonomies"
+msgstr ""
+
+#: class-cptm.php:172
+msgid "Custom Taxonomy"
 msgstr ""
 
 #: class-cptm.php:174
+msgid "Add New Custom Taxonomy"
+msgstr ""
+
+#: class-cptm.php:175
+msgid "Edit Custom Taxonomy"
+msgstr ""
+
+#: class-cptm.php:176
+msgid "New Custom Taxonomy"
+msgstr ""
+
+#: class-cptm.php:177
+msgid "View Custom Taxonomy"
+msgstr ""
+
+#: class-cptm.php:178
+msgid "Search Custom Taxonomies"
+msgstr ""
+
+#: class-cptm.php:179
+msgid "No Custom Taxonomies found"
+msgstr ""
+
+#: class-cptm.php:180
+msgid "No Custom Taxonomies found in Trash"
+msgstr ""
+
+#: class-cptm.php:212
+msgid "CPT Maker"
+msgstr ""
+
+#: class-cptm.php:212
+#: class-cptm.php:956
+msgid "Post Types"
+msgstr ""
+
+#: class-cptm.php:213
 msgid "Taxonomies"
 msgstr ""
 
-#: class-cptm.php:326 class-cptm.php:423
-msgid "Add New "
+#: class-cptm.php:246
+msgid "Add Icon"
 msgstr ""
 
-#: class-cptm.php:327 class-cptm.php:421
-msgid "Edit "
+#: class-cptm.php:247
+msgid "Select icon"
 msgstr ""
 
-#: class-cptm.php:328 class-cptm.php:424
-msgid "New "
-msgstr ""
-
-#: class-cptm.php:329
-msgid "View "
-msgstr ""
-
-#: class-cptm.php:330 class-cptm.php:416
-msgid "Search "
-msgstr ""
-
-#: class-cptm.php:331 class-cptm.php:332
-msgid "No "
-msgstr ""
-
-#: class-cptm.php:417
-msgid "Popular "
-msgstr ""
-
-#: class-cptm.php:419 class-cptm.php:420
-msgid "Parent "
-msgstr ""
-
-#: class-cptm.php:422
-msgid "Update "
-msgstr ""
-
-#: class-cptm.php:425
-msgid "Seperate "
-msgstr ""
-
-#: class-cptm.php:426
-msgid "Add or remove "
-msgstr ""
-
-#: class-cptm.php:427
-msgid "Choose from the most used "
-msgstr ""
-
-#: class-cptm.php:458 class-cptm.php:466
-msgid "Options"
-msgstr ""
-
-#: class-cptm.php:551 class-cptm.php:1221 class-cptm.php:1367
-#: class-cptm.php:1386
-msgid "Custom Post Type Name"
-msgstr ""
-
-#: class-cptm.php:552
-msgid ""
-"The post type name. Used to retrieve custom post type content. Must be all "
-"in lower-case and without any spaces."
-msgstr ""
-
-#: class-cptm.php:553 class-cptm.php:894
-msgid "e.g. movies"
-msgstr ""
-
-#: class-cptm.php:561 class-cptm.php:902 class-cptm.php:1222
-#: class-cptm.php:1270 class-cptm.php:1370 class-cptm.php:1389
-#: class-cptm.php:1477 class-cptm.php:1493
-msgid "Label"
-msgstr ""
-
-#: class-cptm.php:562
-msgid "A plural descriptive name for the post type."
-msgstr ""
-
-#: class-cptm.php:563 class-cptm.php:904
-msgid "e.g. Movies"
-msgstr ""
-
-#: class-cptm.php:571 class-cptm.php:912
-msgid "Singular Name"
-msgstr ""
-
-#: class-cptm.php:572
-msgid "A singular descriptive name for the post type."
-msgstr ""
-
-#: class-cptm.php:573 class-cptm.php:914
-msgid "e.g. Movie"
-msgstr ""
-
-#: class-cptm.php:581 class-cptm.php:1223 class-cptm.php:1373
-#: class-cptm.php:1392
-msgid "Description"
-msgstr ""
-
-#: class-cptm.php:582
-msgid "A short descriptive summary of what the post type is."
-msgstr ""
-
-#: class-cptm.php:590
-msgid "Visibility"
-msgstr ""
-
-#: class-cptm.php:595
-msgid "Public"
-msgstr ""
-
-#: class-cptm.php:596
-msgid ""
-"Whether a post type is intended to be used publicly either via the admin "
-"interface or by front-end users."
-msgstr ""
-
-#: class-cptm.php:600 class-cptm.php:617 class-cptm.php:629 class-cptm.php:657
-#: class-cptm.php:668 class-cptm.php:681 class-cptm.php:693 class-cptm.php:709
-#: class-cptm.php:730 class-cptm.php:785 class-cptm.php:796 class-cptm.php:808
-#: class-cptm.php:820 class-cptm.php:927 class-cptm.php:940 class-cptm.php:951
-#: class-cptm.php:973 class-cptm.php:985 class-cptm.php:996
-msgid "True"
-msgstr ""
-
-#: class-cptm.php:600 class-cptm.php:617 class-cptm.php:629 class-cptm.php:656
-#: class-cptm.php:668 class-cptm.php:680 class-cptm.php:692 class-cptm.php:709
-#: class-cptm.php:730 class-cptm.php:772 class-cptm.php:784 class-cptm.php:796
-#: class-cptm.php:808 class-cptm.php:820 class-cptm.php:831 class-cptm.php:832
-#: class-cptm.php:833 class-cptm.php:927 class-cptm.php:939 class-cptm.php:951
-#: class-cptm.php:973 class-cptm.php:985 class-cptm.php:996
-msgid "default"
-msgstr ""
-
-#: class-cptm.php:601 class-cptm.php:618 class-cptm.php:630 class-cptm.php:656
-#: class-cptm.php:669 class-cptm.php:680 class-cptm.php:692 class-cptm.php:710
-#: class-cptm.php:731 class-cptm.php:784 class-cptm.php:797 class-cptm.php:809
-#: class-cptm.php:821 class-cptm.php:928 class-cptm.php:939 class-cptm.php:952
-#: class-cptm.php:974 class-cptm.php:986 class-cptm.php:997
-msgid "False"
-msgstr ""
-
-#: class-cptm.php:607
-msgid "Rewrite Options"
-msgstr ""
-
-#: class-cptm.php:612 class-cptm.php:946
-msgid "Rewrite"
-msgstr ""
-
-#: class-cptm.php:613
-msgid "Triggers the handling of rewrites for this post type."
-msgstr ""
-
-#: class-cptm.php:624
-msgid "With Front"
-msgstr ""
-
-#: class-cptm.php:625
-msgid "Should the permastruct be prepended with the front base."
-msgstr ""
-
-#: class-cptm.php:636 class-cptm.php:958
-msgid "Custom Rewrite Slug"
-msgstr ""
-
-#: class-cptm.php:637 class-cptm.php:959
-msgid "Customize the permastruct slug."
-msgstr ""
-
-#: class-cptm.php:638
-msgid "Default: [Custom Post Type Name]"
-msgstr ""
-
-#: class-cptm.php:646
-msgid "Front-end Options"
-msgstr ""
-
-#: class-cptm.php:651
-msgid "Feeds"
-msgstr ""
-
-#: class-cptm.php:652
-msgid ""
-"Should a feed permastruct be built for this post type. Defaults to "
-"\"has_archive\" value."
-msgstr ""
-
-#: class-cptm.php:663 class-cptm.php:1008
-msgid "Pages"
-msgstr ""
-
-#: class-cptm.php:664
-msgid "Should the permastruct provide for pagination."
-msgstr ""
-
-#: class-cptm.php:675
-msgid "Exclude From Search"
-msgstr ""
-
-#: class-cptm.php:676
-msgid ""
-"Whether to exclude posts with this post type from front end search results."
-msgstr ""
-
-#: class-cptm.php:687
-msgid "Has Archive"
-msgstr ""
-
-#: class-cptm.php:688
-msgid "Enables post type archives."
-msgstr ""
-
-#: class-cptm.php:699
-msgid "Admin Menu Options"
-msgstr ""
-
-#: class-cptm.php:704 class-cptm.php:922
-msgid "Show UI"
-msgstr ""
-
-#: class-cptm.php:705
-msgid ""
-"Whether to generate a default UI for managing this post type in the admin."
-msgstr ""
-
-#: class-cptm.php:716
-msgid "Menu Position"
-msgstr ""
-
-#: class-cptm.php:717
-msgid ""
-"The position in the menu order the post type should appear. \"Show in Menu\" "
-"must be true."
-msgstr ""
-
-#: class-cptm.php:725
-msgid "Show in Menu"
-msgstr ""
-
-#: class-cptm.php:726
-msgid ""
-"Where to show the post type in the admin menu. \"Show UI\" must be true."
-msgstr ""
-
-#: class-cptm.php:737
-msgid "Icon"
-msgstr ""
-
-#: class-cptm.php:738
-msgid ""
-"This icon will be overriden if a Dash Icon is specified in the field below."
-msgstr ""
-
-#: class-cptm.php:745
+#: class-cptm.php:248
+#: class-cptm.php:837
 msgid "Add icon"
 msgstr ""
 
-#: class-cptm.php:745
-msgid "Edit icon"
+#: class-cptm.php:249
+#: class-cptm.php:837
+msgid "Upload Icon"
 msgstr ""
 
-#: class-cptm.php:752
-msgid "Slug Icon"
+#. translators: %s: singular post type name
+#: class-cptm.php:330
+#, php-format
+msgid "Add %s"
 msgstr ""
 
-#: class-cptm.php:753
-msgid ""
-"This uses (<a href=\"https://developer.WordPress.org/resource/dashicons/"
-"\">Dash Icons</a>) and <strong>overrides</strong> the uploaded icon above."
+#. translators: %s: singular post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:332
+#: class-cptm.php:423
+#, php-format
+msgid "Add New %s"
 msgstr ""
 
-#: class-cptm.php:762
-msgid "WordPress Integration"
+#. translators: %s: singular post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:334
+#: class-cptm.php:417
+#, php-format
+msgid "Edit %s"
 msgstr ""
 
-#: class-cptm.php:767
-msgid "Capability Type"
+#. translators: %s: singular post type name
+#: class-cptm.php:336
+#, php-format
+msgid "New %s"
 msgstr ""
 
-#: class-cptm.php:768
-msgid "The post type to use to build the read, edit, and delete capabilities."
+#. translators: %s: singular post type name
+#. translators: %s: plural post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:338
+#: class-cptm.php:340
+#: class-cptm.php:419
+#, php-format
+msgid "View %s"
 msgstr ""
 
-#: class-cptm.php:772
-msgid "Post"
+#. translators: %s: plural post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:342
+#: class-cptm.php:407
+#, php-format
+msgid "Search %s"
 msgstr ""
 
-#: class-cptm.php:773
-msgid "Page"
+#. translators: %s: plural post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:344
+#: class-cptm.php:433
+#, php-format
+msgid "No %s found"
 msgstr ""
 
-#: class-cptm.php:779 class-cptm.php:934
-msgid "Hierarchical"
+#. translators: %s: plural post type name
+#: class-cptm.php:346
+#, php-format
+msgid "No %s found in Trash"
 msgstr ""
 
-#: class-cptm.php:780
-msgid "Whether the post type is hierarchical (e.g. page)."
+#. translators: %s: singular post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:348
+#: class-cptm.php:415
+#, php-format
+msgid "Parent %s:"
 msgstr ""
 
-#: class-cptm.php:791 class-cptm.php:968
-msgid "Query Var"
+#. translators: %s: plural post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:350
+#: class-cptm.php:411
+#, php-format
+msgid "All %s"
 msgstr ""
 
-#: class-cptm.php:792
-msgid "Sets the query_var key for this post type."
+#. translators: %s: singular post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:352
+#: class-cptm.php:450
+#, php-format
+msgid "%s Archives"
 msgstr ""
 
-#: class-cptm.php:803 class-cptm.php:980
-msgid "Show in REST"
+#. translators: %s: singular post type name
+#: class-cptm.php:354
+#, php-format
+msgid "%s Attributes"
 msgstr ""
 
-#: class-cptm.php:804
-msgid "Sets the show_in_rest key for this post type."
+#. translators: %s: singular post type name
+#: class-cptm.php:356
+#, php-format
+msgid "Insert into %s"
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:358
+#, php-format
+msgid "Uploaded to this %s"
+msgstr ""
+
+#: class-cptm.php:359
+msgid "Featured image"
+msgstr ""
+
+#: class-cptm.php:360
+msgid "Set featured image"
+msgstr ""
+
+#: class-cptm.php:361
+msgid "Remove featured image"
+msgstr ""
+
+#: class-cptm.php:362
+msgid "Use as featured image"
+msgstr ""
+
+#. translators: %s: plural post type name
+#: class-cptm.php:364
+#, php-format
+msgid "Filter %s list"
+msgstr ""
+
+#: class-cptm.php:365
+msgid "Filter by date"
+msgstr ""
+
+#. translators: %s: plural post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:367
+#: class-cptm.php:439
+#, php-format
+msgid "%s list navigation"
+msgstr ""
+
+#. translators: %s: plural post type name
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:369
+#: class-cptm.php:441
+#, php-format
+msgid "%s list"
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:371
+#, php-format
+msgid "%s published."
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:373
+#, php-format
+msgid "%s published privately."
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:375
+#, php-format
+msgid "%s reverted to draft."
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:377
+#, php-format
+msgid "%s trashed."
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:379
+#, php-format
+msgid "%s scheduled."
+msgstr ""
+
+#. translators: %s: singular post type name
+#: class-cptm.php:381
+#, php-format
+msgid "%s updated."
+msgstr ""
+
+#. translators: %s: singular post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:383
+#: class-cptm.php:446
+#, php-format
+msgid "%s Link"
+msgstr ""
+
+#. translators: %s: singular post type name
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:385
+#: class-cptm.php:448
+#, php-format
+msgid "A link to a %s."
+msgstr ""
+
+#. translators: %s: plural post type name
+#: class-cptm.php:387
+#, php-format
+msgid "Single item: %s"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:409
+#, php-format
+msgid "Popular %s"
+msgstr ""
+
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:413
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:421
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:425
+#, php-format
+msgid "New %s Name"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:427
+#, php-format
+msgid "Separate %s with commas"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:429
+#, php-format
+msgid "Add or remove %s"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:431
+#, php-format
+msgid "Choose from the most used %s"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:435
+#, php-format
+msgid "No %s"
+msgstr ""
+
+#. translators: %s: singular taxonomy name
+#: class-cptm.php:437
+#, php-format
+msgid "Filter by %s"
+msgstr ""
+
+#: class-cptm.php:442
+msgid "Most Used"
+msgstr ""
+
+#. translators: %s: plural taxonomy name
+#: class-cptm.php:444
+#, php-format
+msgid "&larr; Go to %s"
+msgstr ""
+
+#: class-cptm.php:631
+#: class-cptm.php:639
+msgid "Options"
+msgstr ""
+
+#: class-cptm.php:719
+#: class-cptm.php:742
+msgid "True"
+msgstr ""
+
+#: class-cptm.php:719
+#: class-cptm.php:743
+msgid "False"
+msgstr ""
+
+#: class-cptm.php:719
+#: class-cptm.php:769
+#: class-cptm.php:867
+msgid "default"
+msgstr ""
+
+#: class-cptm.php:741
+msgid "WordPress default"
+msgstr ""
+
+#: class-cptm.php:798
+#: class-cptm.php:1227
+#: class-cptm.php:1433
+msgid "Custom Post Type Name"
+msgstr ""
+
+#: class-cptm.php:798
+msgid "The post type name. Used to retrieve custom post type content. Lower-case letters, numbers, dashes and underscores only, at most 20 characters."
+msgstr ""
+
+#: class-cptm.php:798
+msgid "e.g. movies"
+msgstr ""
+
+#: class-cptm.php:799
+#: class-cptm.php:940
+#: class-cptm.php:1228
+#: class-cptm.php:1276
+#: class-cptm.php:1346
+msgid "Label"
+msgstr ""
+
+#: class-cptm.php:799
+msgid "A plural descriptive name for the post type."
+msgstr ""
+
+#: class-cptm.php:799
+msgid "e.g. Movies"
+msgstr ""
+
+#: class-cptm.php:800
+#: class-cptm.php:941
+msgid "Singular Name"
+msgstr ""
+
+#: class-cptm.php:800
+msgid "A singular descriptive name for the post type."
+msgstr ""
+
+#: class-cptm.php:800
+msgid "e.g. Movie"
+msgstr ""
+
+#: class-cptm.php:803
+#: class-cptm.php:1229
+#: class-cptm.php:1348
+msgid "Description"
+msgstr ""
+
+#: class-cptm.php:803
+msgid "A short descriptive summary of what the post type is."
+msgstr ""
+
+#: class-cptm.php:809
+msgid "Visibility"
+msgstr ""
+
+#: class-cptm.php:810
+#: class-cptm.php:943
+msgid "Public"
+msgstr ""
+
+#: class-cptm.php:810
+msgid "Whether a post type is intended to be used publicly either via the admin interface or by front-end users."
+msgstr ""
+
+#: class-cptm.php:812
+msgid "Rewrite Options"
+msgstr ""
+
+#: class-cptm.php:813
+#: class-cptm.php:949
+msgid "Rewrite"
+msgstr ""
+
+#: class-cptm.php:813
+msgid "Triggers the handling of rewrites for this post type."
+msgstr ""
+
+#: class-cptm.php:814
+msgid "With Front"
+msgstr ""
+
+#: class-cptm.php:814
+msgid "Should the permastruct be prepended with the front base."
 msgstr ""
 
 #: class-cptm.php:815
-msgid "Publicly Queryable"
+#: class-cptm.php:950
+msgid "Custom Rewrite Slug"
 msgstr ""
 
-#: class-cptm.php:816
-msgid "Whether the post is visible on the front-end."
+#: class-cptm.php:815
+#: class-cptm.php:950
+msgid "Customize the permastruct slug."
+msgstr ""
+
+#: class-cptm.php:815
+#: class-cptm.php:876
+msgid "Default: [Custom Post Type Name]"
+msgstr ""
+
+#: class-cptm.php:817
+msgid "Front-end Options"
+msgstr ""
+
+#: class-cptm.php:818
+msgid "Feeds"
+msgstr ""
+
+#: class-cptm.php:818
+msgid "Should a feed permastruct be built for this post type. Defaults to \"has_archive\" value."
+msgstr ""
+
+#: class-cptm.php:819
+#: class-cptm.php:928
+msgid "Pages"
+msgstr ""
+
+#: class-cptm.php:819
+msgid "Should the permastruct provide for pagination."
+msgstr ""
+
+#: class-cptm.php:820
+msgid "Exclude From Search"
+msgstr ""
+
+#: class-cptm.php:820
+msgid "Whether to exclude posts with this post type from front end search results."
+msgstr ""
+
+#: class-cptm.php:821
+msgid "Has Archive"
+msgstr ""
+
+#: class-cptm.php:821
+msgid "Enables post type archives."
+msgstr ""
+
+#: class-cptm.php:822
+msgid "Archive Slug"
+msgstr ""
+
+#: class-cptm.php:822
+msgid "The URL slug of the archive. \"Has Archive\" must be true."
+msgstr ""
+
+#: class-cptm.php:822
+msgid "Default: [Custom Rewrite Slug]"
+msgstr ""
+
+#: class-cptm.php:824
+msgid "Admin Menu Options"
+msgstr ""
+
+#: class-cptm.php:825
+#: class-cptm.php:942
+msgid "Show UI"
+msgstr ""
+
+#: class-cptm.php:825
+msgid "Whether to generate a default UI for managing this post type in the admin."
+msgstr ""
+
+#: class-cptm.php:826
+msgid "Menu Position"
+msgstr ""
+
+#: class-cptm.php:826
+msgid "The position in the menu order the post type should appear. \"Show in Menu\" must be true."
 msgstr ""
 
 #: class-cptm.php:827
-msgid "Supports"
+msgid "Show in Menu"
+msgstr ""
+
+#: class-cptm.php:827
+msgid "Where to show the post type in the admin menu. \"Show UI\" must be true."
 msgstr ""
 
 #: class-cptm.php:828
-msgid ""
-"Adds the respective meta boxes when creating content for this Custom Post "
-"Type."
+#: class-cptm.php:945
+msgid "Show in Navigation Menus"
 msgstr ""
 
-#: class-cptm.php:831
-msgid "Title"
+#: class-cptm.php:828
+msgid "Makes this post type available for selection in navigation menus."
+msgstr ""
+
+#: class-cptm.php:829
+msgid "Show in Admin Bar"
+msgstr ""
+
+#: class-cptm.php:829
+msgid "Makes this post type available via the admin bar."
 msgstr ""
 
 #: class-cptm.php:832
-msgid "Editor"
+msgid "Icon"
 msgstr ""
 
-#: class-cptm.php:833
-msgid "Excerpt"
-msgstr ""
-
-#: class-cptm.php:834
-msgid "Trackbacks"
-msgstr ""
-
-#: class-cptm.php:835
-msgid "Custom Fields"
+#: class-cptm.php:832
+msgid "This icon will be overridden if a Dash Icon is specified in the field below."
 msgstr ""
 
 #: class-cptm.php:836
-msgid "Comments"
+msgid "Remove Icon"
 msgstr ""
 
-#: class-cptm.php:837
-msgid "Revisions"
+#: class-cptm.php:844
+msgid "Slug Icon"
 msgstr ""
 
-#: class-cptm.php:838
-msgid "Featured Image"
-msgstr ""
-
-#: class-cptm.php:839
-msgid "Author"
-msgstr ""
-
-#: class-cptm.php:840
-msgid "Page Attributes"
-msgstr ""
-
-#: class-cptm.php:841
-msgid "Post Formats"
-msgstr ""
-
-#: class-cptm.php:846
-msgid "Built-in Taxonomies"
+#. translators: %s: link to the Dashicons list
+#: class-cptm.php:849
+#, php-format
+msgid "This uses %s and overrides the uploaded icon above."
 msgstr ""
 
 #: class-cptm.php:850
-msgid "Categories"
+msgid "Dashicons"
 msgstr ""
 
-#: class-cptm.php:851
-msgid "Tags"
+#: class-cptm.php:861
+msgid "WordPress Integration"
 msgstr ""
 
-#: class-cptm.php:892 class-cptm.php:1269 class-cptm.php:1474
-#: class-cptm.php:1490
-msgid "Custom Taxonomy Name"
+#: class-cptm.php:864
+msgid "Capability Type"
+msgstr ""
+
+#: class-cptm.php:864
+msgid "The post type to use to build the read, edit, and delete capabilities."
+msgstr ""
+
+#: class-cptm.php:867
+msgid "Post"
+msgstr ""
+
+#: class-cptm.php:868
+msgid "Page"
+msgstr ""
+
+#: class-cptm.php:873
+#: class-cptm.php:948
+msgid "Hierarchical"
+msgstr ""
+
+#: class-cptm.php:873
+msgid "Whether the post type is hierarchical (e.g. page)."
+msgstr ""
+
+#: class-cptm.php:874
+#: class-cptm.php:951
+msgid "Query Var"
+msgstr ""
+
+#: class-cptm.php:874
+msgid "Sets the query_var key for this post type."
+msgstr ""
+
+#: class-cptm.php:875
+#: class-cptm.php:952
+msgid "Show in REST"
+msgstr ""
+
+#: class-cptm.php:875
+msgid "Sets the show_in_rest key for this post type. The block editor needs it."
+msgstr ""
+
+#: class-cptm.php:876
+#: class-cptm.php:953
+msgid "REST Base"
+msgstr ""
+
+#: class-cptm.php:876
+#: class-cptm.php:953
+msgid "The base of the REST API route."
+msgstr ""
+
+#: class-cptm.php:877
+msgid "REST Namespace"
+msgstr ""
+
+#: class-cptm.php:877
+msgid "The namespace of the REST API route."
+msgstr ""
+
+#: class-cptm.php:877
+msgid "Default: wp/v2"
+msgstr ""
+
+#: class-cptm.php:878
+#: class-cptm.php:944
+msgid "Publicly Queryable"
+msgstr ""
+
+#: class-cptm.php:878
+msgid "Whether the post is visible on the front-end."
+msgstr ""
+
+#: class-cptm.php:879
+msgid "Can Export"
+msgstr ""
+
+#: class-cptm.php:879
+msgid "Whether the content of this post type can be exported with the WordPress export tool."
+msgstr ""
+
+#: class-cptm.php:880
+msgid "Delete With User"
+msgstr ""
+
+#: class-cptm.php:880
+msgid "Whether to delete the posts of a user when the user is deleted."
+msgstr ""
+
+#: class-cptm.php:884
+msgid "Supports"
+msgstr ""
+
+#: class-cptm.php:886
+msgid "Title"
+msgstr ""
+
+#: class-cptm.php:887
+msgid "Editor"
+msgstr ""
+
+#: class-cptm.php:888
+msgid "Excerpt"
+msgstr ""
+
+#: class-cptm.php:889
+msgid "Trackbacks"
+msgstr ""
+
+#: class-cptm.php:890
+msgid "Custom Fields"
+msgstr ""
+
+#: class-cptm.php:891
+msgid "Comments"
+msgstr ""
+
+#: class-cptm.php:892
+msgid "Revisions"
 msgstr ""
 
 #: class-cptm.php:893
-msgid "The taxonomy name. Used to retrieve custom taxonomy content."
+msgid "Featured Image"
 msgstr ""
 
-#: class-cptm.php:903
-msgid "A plural descriptive name for the taxonomy."
+#: class-cptm.php:894
+msgid "Author"
 msgstr ""
 
-#: class-cptm.php:913
-msgid "A singular descriptive name for the taxonomy."
+#: class-cptm.php:895
+msgid "Page Attributes"
 msgstr ""
 
-#: class-cptm.php:923
-msgid ""
-"Whether to generate a default UI for managing this taxonomy in the admin."
+#: class-cptm.php:896
+msgid "Post Formats"
 msgstr ""
 
-#: class-cptm.php:935
-msgid "Whether the taxonomy is hierarchical (e.g. page)."
+#: class-cptm.php:899
+msgid "Adds the respective meta boxes when creating content for this Custom Post Type."
 msgstr ""
 
-#: class-cptm.php:947
-msgid "Triggers the handling of rewrites for this taxonomy."
+#: class-cptm.php:904
+msgid "Built-in Taxonomies"
 msgstr ""
 
-#: class-cptm.php:960
-msgid "Default: [Custom Taxonomy Name]"
+#: class-cptm.php:906
+msgid "Categories"
 msgstr ""
 
-#: class-cptm.php:969
-msgid "Sets the query_var key for this taxonomy."
+#: class-cptm.php:907
+msgid "Tags"
 msgstr ""
 
-#: class-cptm.php:981
-msgid "Sets the show_in_rest key for this taxonomy."
-msgstr ""
-
-#: class-cptm.php:991
-msgid "Admin Column"
-msgstr ""
-
-#: class-cptm.php:992
-msgid "Show this taxonomy as a column in the custom post listing."
-msgstr ""
-
-#: class-cptm.php:1007
+#: class-cptm.php:927
 msgid "Posts"
 msgstr ""
 
-#: class-cptm.php:1220 class-cptm.php:1364 class-cptm.php:1383
+#: class-cptm.php:939
+#: class-cptm.php:1275
+#: class-cptm.php:1451
+msgid "Custom Taxonomy Name"
+msgstr ""
+
+#: class-cptm.php:939
+msgid "The taxonomy name. Used to retrieve custom taxonomy content. Lower-case letters, numbers, dashes and underscores only, at most 32 characters."
+msgstr ""
+
+#: class-cptm.php:939
+msgid "e.g. genres"
+msgstr ""
+
+#: class-cptm.php:940
+msgid "A plural descriptive name for the taxonomy."
+msgstr ""
+
+#: class-cptm.php:940
+msgid "e.g. Genres"
+msgstr ""
+
+#: class-cptm.php:941
+msgid "A singular descriptive name for the taxonomy."
+msgstr ""
+
+#: class-cptm.php:941
+msgid "e.g. Genre"
+msgstr ""
+
+#: class-cptm.php:942
+msgid "Whether to generate a default UI for managing this taxonomy in the admin."
+msgstr ""
+
+#: class-cptm.php:943
+msgid "Whether the taxonomy is intended for use publicly either via the admin interface or by front-end users."
+msgstr ""
+
+#: class-cptm.php:944
+msgid "Whether the taxonomy is publicly queryable on the front-end."
+msgstr ""
+
+#: class-cptm.php:945
+msgid "Makes this taxonomy available for selection in navigation menus."
+msgstr ""
+
+#: class-cptm.php:946
+msgid "Show in Tag Cloud"
+msgstr ""
+
+#: class-cptm.php:946
+msgid "Whether to list the taxonomy in the Tag Cloud widget."
+msgstr ""
+
+#: class-cptm.php:947
+msgid "Show in Quick Edit"
+msgstr ""
+
+#: class-cptm.php:947
+msgid "Whether to show the taxonomy in the quick and bulk edit panels."
+msgstr ""
+
+#: class-cptm.php:948
+msgid "Whether the taxonomy is hierarchical (e.g. category)."
+msgstr ""
+
+#: class-cptm.php:949
+msgid "Triggers the handling of rewrites for this taxonomy."
+msgstr ""
+
+#: class-cptm.php:950
+#: class-cptm.php:953
+msgid "Default: [Custom Taxonomy Name]"
+msgstr ""
+
+#: class-cptm.php:951
+msgid "Sets the query_var key for this taxonomy."
+msgstr ""
+
+#: class-cptm.php:952
+msgid "Sets the show_in_rest key for this taxonomy. The block editor needs it."
+msgstr ""
+
+#: class-cptm.php:954
+msgid "Admin Column"
+msgstr ""
+
+#: class-cptm.php:954
+msgid "Show this taxonomy as a column in the custom post listing."
+msgstr ""
+
+#: class-cptm.php:955
+msgid "Default Term"
+msgstr ""
+
+#: class-cptm.php:955
+msgid "The name of a term that WordPress creates and assigns to new posts. Leave empty for none."
+msgstr ""
+
+#: class-cptm.php:1063
+msgid "The name is required. Use lower-case letters, numbers, dashes and underscores only."
+msgstr ""
+
+#. translators: %d: maximum number of characters
+#: class-cptm.php:1067
+#, php-format
+msgid "The name is too long. Use at most %d characters."
+msgstr ""
+
+#. translators: %s: the name
+#: class-cptm.php:1074
+#, php-format
+msgid "The name \"%s\" is reserved or already registered. Use a different name."
+msgstr ""
+
+#: class-cptm.php:1226
+#: class-cptm.php:1432
 msgid "Post Type"
 msgstr ""
 
-#: class-cptm.php:1268 class-cptm.php:1471 class-cptm.php:1487
+#: class-cptm.php:1274
+#: class-cptm.php:1450
 msgid "Taxonomy"
 msgstr ""
 
-#: class-cptm.php:1314
-msgid "Version"
-msgstr ""
-
-#: class-cptm.php:1315
-msgid "Useful links"
-msgstr ""
-
-#: class-cptm.php:1317
-msgid "Changelog"
-msgstr ""
-
-#: class-cptm.php:1318
-msgid "Support Forums"
-msgstr ""
-
-#: class-cptm.php:1323
-msgid "Created by"
-msgstr ""
-
-#: class-cptm.php:1328
-msgid "Vote"
-msgstr ""
-
-#: class-cptm.php:1356
-msgid "Other registered Custom Post Types"
-msgstr ""
-
-#: class-cptm.php:1357
-msgid ""
-"The Custom Post Types below are registered in WordPress but were not created "
-"by the Custom Post Type Maker plugin."
-msgstr ""
-
-#: class-cptm.php:1430 class-cptm.php:1530
+#. translators: %d: number of items
+#: class-cptm.php:1375
 #, php-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: class-cptm.php:1463
+#: class-cptm.php:1399
+msgid "Version"
+msgstr ""
+
+#: class-cptm.php:1400
+msgid "Useful links"
+msgstr ""
+
+#: class-cptm.php:1402
+msgid "Changelog"
+msgstr ""
+
+#: class-cptm.php:1403
+msgid "Support Forums"
+msgstr ""
+
+#: class-cptm.php:1408
+msgid "Created by"
+msgstr ""
+
+#: class-cptm.php:1413
+msgid "Vote"
+msgstr ""
+
+#: class-cptm.php:1427
+msgid "Other registered Custom Post Types"
+msgstr ""
+
+#: class-cptm.php:1428
+msgid "The Custom Post Types below are registered in WordPress but were not created by the Custom Post Type Maker plugin."
+msgstr ""
+
+#: class-cptm.php:1429
+msgid "No Custom Post Types found."
+msgstr ""
+
+#: class-cptm.php:1445
 msgid "Other registered custom Taxonomies"
 msgstr ""
 
-#: class-cptm.php:1464
-msgid ""
-"The custom Taxonomies below are registered in WordPress but were not created "
-"by the Custom Post Type Maker plugin."
+#: class-cptm.php:1446
+msgid "The custom Taxonomies below are registered in WordPress but were not created by the Custom Post Type Maker plugin."
 msgstr ""
 
-#: class-cptm.php:1517
-msgid "No custom Taxonomies found"
+#: class-cptm.php:1447
+msgid "No custom Taxonomies found."
 msgstr ""
 
-#: class-cptm.php:1554 class-cptm.php:1555 class-cptm.php:1557
+#: class-cptm.php:1469
+#: class-cptm.php:1470
+#: class-cptm.php:1472
 msgid "Custom Post Type updated."
 msgstr ""
 
-#: class-cptm.php:1556
+#: class-cptm.php:1471
 msgid "Custom Post Type deleted."
 msgstr ""
 
-#: class-cptm.php:1559
+#. translators: %s: date and time of the revision
+#: class-cptm.php:1474
 #, php-format
 msgid "Custom Post Type restored to revision from %s"
 msgstr ""
 
-#: class-cptm.php:1560
+#: class-cptm.php:1475
 msgid "Custom Post Type published."
 msgstr ""
 
-#: class-cptm.php:1561
+#: class-cptm.php:1476
 msgid "Custom Post Type saved."
 msgstr ""
 
-#: class-cptm.php:1562
+#: class-cptm.php:1477
 msgid "Custom Post Type submitted."
 msgstr ""
 
-#: class-cptm.php:1563
-msgid "Custom Post Type scheduled for."
+#: class-cptm.php:1478
+msgid "Custom Post Type scheduled."
 msgstr ""
 
-#: class-cptm.php:1564
+#: class-cptm.php:1479
 msgid "Custom Post Type draft updated."
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-msgid "https://github.com/Graffino/custom-post-type-maker"
+#: class-cptm.php:1484
+#: class-cptm.php:1485
+#: class-cptm.php:1487
+msgid "Custom Taxonomy updated."
 msgstr ""
 
-#. Description of the plugin/theme
-msgid ""
-"Custom Post Type Maker lets you create Custom Post Types and custom "
-"Taxonomies in a user friendly way."
+#: class-cptm.php:1486
+msgid "Custom Taxonomy deleted."
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "Graffino"
+#: class-cptm.php:1489
+msgid "Custom Taxonomy published."
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://www.graffino.com/"
+#: class-cptm.php:1490
+msgid "Custom Taxonomy saved."
+msgstr ""
+
+#: class-cptm.php:1491
+msgid "Custom Taxonomy submitted."
+msgstr ""
+
+#: class-cptm.php:1492
+msgid "Custom Taxonomy scheduled."
+msgstr ""
+
+#: class-cptm.php:1493
+msgid "Custom Taxonomy draft updated."
 msgstr ""

@@ -85,6 +85,11 @@ php -l class-cptm.php
 npx @wp-playground/cli@latest server --port=9400 --wp=latest --login \
   --mount=.:/wordpress/wp-content/plugins/custom-post-type-maker
 
+# Rebuild the translation template (WP-CLI inside Playground). Run 2026-11-03: OK.
+# Blueprint step: wp i18n make-pot <plugin dir> <plugin dir>/lang/custom-post-type-maker.pot --exclude=.dev,docs,.claude,assets
+npx @wp-playground/cli@latest run-blueprint --wp=latest --php=8.1 \
+  --mount=.:/wordpress/wp-content/plugins/custom-post-type-maker --blueprint=<makepot.json>
+
 # Read the release channel (read-only).
 svn ls https://plugins.svn.wordpress.org/custom-post-type-maker/tags/
 ```

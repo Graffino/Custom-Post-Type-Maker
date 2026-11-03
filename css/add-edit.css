@@ -7,10 +7,6 @@ div#minor-publishing-actions, div#visibility, div.curtime {
 	display: none;
 }
 
-#icon-edit {
-	background: url(../img/cptm-icon-32.png) 0 0 no-repeat;
-}
-
 #cptm_icon_slug_before {
     display: inline-block;
     margin-left: -3px;
@@ -62,7 +58,7 @@ div#cptm_options div.inside, div#cptm_tax_options div.inside {
 			}
 
 				table.cptm td.label label span.required {
-					color: #f00;
+					color: #d63638;
 					font-weight: bold;
 				}
 

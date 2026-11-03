@@ -1,9 +1,10 @@
 === Custom Post Type Maker ===
 Contributors: graffino, zenopopovici, jornbakhuys
-Tags: custom, post, type, custom post type, custom post types, maker, make, cpt, post types, taxonomy, taxonomies, tax, custom taxonomies
-Requires at least: 3.0.0
-Tested up to: 6.0
-Stable tag: 1.2.0
+Tags: custom post type, custom post types, taxonomy, custom taxonomy, cpt
+Requires at least: 6.5
+Tested up to: 7.1
+Requires PHP: 8.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.me/zenopopovici/
@@ -38,7 +39,7 @@ We've added this option because some users have very large image galleries and t
 == Frequently Asked Questions ==
 
 = Where do I get support? =
-Ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-type-maker). Please note that due to restricted time availability we're not actively answering questions, unless a real bug is reported. See: "What should I try before reporting a bug" section.
+Ask your question in the [Support Forums](https://wordpress.org/support/plugin/custom-post-type-maker/). Please note that due to restricted time availability we're not actively answering questions, unless a real bug is reported. See: "What should I try before reporting a bug" section.
 
 = What should I try before reporting a bug? =
 1. Disable all your plugins except "Custom Post Type Maker".
@@ -70,6 +71,21 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 3. Creating custom Taxonomies
 
 == Changelog ==
+
+= 1.3.0 =
+
+- Security: only administrators (`manage_options`) can view, create, edit or delete post type and taxonomy definitions. Before, Editors could reach these screens through a direct URL.
+- Security: the save handler checks the user's capability, sanitizes every field, and accepts only known values for supports, built-in taxonomies and post types.
+- Security: all values on the admin screens are escaped on output. Stored data is read without `unserialize()` of objects.
+- Post type and taxonomy names are validated: lower-case letters, numbers, dashes and underscores, at most 20 (post types) or 32 (taxonomies) characters, and no reserved or already registered names.
+- New post type options: Show in Navigation Menus, Show in Admin Bar, REST Base, REST Namespace, Can Export, Delete With User, Archive Slug.
+- New taxonomy options: Public, Publicly Queryable, Show in Navigation Menus, Show in Tag Cloud, Show in Quick Edit, REST Base, Default Term.
+- Full, translatable label sets for custom post types and taxonomies (current WordPress labels).
+- Each post type and taxonomy is now registered once per request (before, more definitions caused repeated registrations).
+- Fixed: the list of "Other registered" post types and taxonomies showed your own definitions when you had more than 5.
+- Fixed: the plugin columns printed on the post lists of other post types.
+- Fixed: dead Changelog, Support and Vote links; untranslatable strings; "Seperate" typo.
+- Requires PHP 8.1 and WordPress 6.5 or later. Tested up to WordPress 7.1.
 
 = 1.2.0 =
 
@@ -152,6 +168,9 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 * [Forked] Forked https://wordpress.org/plugins/custom-post-type-maker/
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+- Security release. Requires PHP 8.1 and WordPress 6.5. Only administrators can now manage post types and taxonomies.
 
 = 1.1.3 =
 - Removed forgotten development dump in v1.1.2. Sorry about that.

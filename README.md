@@ -1,12 +1,17 @@
 # Custom Post Type Maker
 
-![Custom Post Type Maker](https://github.com/Graffino/Custom-Post-Type-Maker/blob/master/assets/banner-1544x500.png)
+![Custom Post Type Maker](https://github.com/Graffino/Custom-Post-Type-Maker/blob/develop/assets/banner-1544x500.png)
 
 Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way. Originally by [Bakhuys](http://www.bakhuys.com/).
 
 ## Description
 
 Custom Post Type Maker is the perfect plugin to create Custom Post Types and custom Taxonomies in a user friendly way, just like managing your regular posts and pages.
+
+## Requirements
+
+- WordPress 6.5 or later
+- PHP 8.1 or later
 
 ## Installation
 
@@ -21,7 +26,7 @@ We've added this option because some users have very large image galleries and t
 
 ## Frequently Asked Questions
 
-Please ask your question in the [Support Forums](http://wordpress.org/support/plugin/custom-post-type-maker).
+Please ask your question in the [Support Forums](https://wordpress.org/support/plugin/custom-post-type-maker/).
 
 ## Feature requests
 
