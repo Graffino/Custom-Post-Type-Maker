@@ -1,0 +1,17 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/edit.php?post_type=cptm",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "login": true,
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "custom-post-type-maker" },
+      "options": { "activate": true }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require '/wordpress/wp-load.php'; $id = wp_insert_post( array( 'post_type' => 'cptm', 'post_status' => 'publish', 'post_title' => 'Books' ) ); foreach ( array( 'cptm_name' => 'book', 'cptm_label' => 'Books', 'cptm_singular_name' => 'Book', 'cptm_description' => 'An example post type made with Custom Post Type Maker.', 'cptm_icon_slug' => 'dashicons-book-alt', 'cptm_public' => '1', 'cptm_show_ui' => '1', 'cptm_show_in_menu' => '1', 'cptm_show_in_rest' => '1', 'cptm_has_archive' => '1', 'cptm_rewrite' => '1', 'cptm_withfront' => '1', 'cptm_pages' => '1', 'cptm_query_var' => '1', 'cptm_publicly_queryable' => '1' ) as $k => $v ) { update_post_meta( $id, $k, $v ); } update_post_meta( $id, 'cptm_supports', array( 'title', 'editor', 'thumbnail', 'excerpt' ) ); update_option( 'cptm_plugin_settings_changed', true );"
+    }
+  ]
+}

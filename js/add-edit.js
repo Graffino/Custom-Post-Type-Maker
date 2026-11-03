@@ -1,7 +1,8 @@
 (function($){
 	var file_frame;
-	
-	jQuery('.media-uploader-button').click(function(e) {
+	var l10n = window.cptmL10n || {};
+
+	$('.media-uploader-button').on('click', function(e) {
 		e.preventDefault();
 
 		if ( file_frame ) {
@@ -10,30 +11,25 @@
 		}
 
 		file_frame = wp.media.frames.file_frame = wp.media({
-			title: 'Add Icon',
+			title: l10n.frameTitle,
 			button: {
-				text: 'Select icon',
+				text: l10n.frameButton,
+			},
+			library: {
+				type: 'image',
 			},
 			multiple: false
 		});
 
 		file_frame.on( 'select', function() {
-			attachment = file_frame.state().get('selection').first().toJSON();
-			console.log(attachment);
+			var attachment = file_frame.state().get('selection').first().toJSON();
 			if ( attachment ) {
-
-				var url;
-
-				if ( attachment.sizes.cptm_icon ) {
-					url = attachment.sizes.cptm_icon.url;
-				} else {
-					url = attachment.url;
-				}
-				jQuery('#cptm_icon_url').val( url );
-				jQuery('.current-cptm-icon').html('<img src="'+url+'" height="16" width="16" />');
-				jQuery('.remove-cptm-icon').show();
-				jQuery('.media-uploader-button').html('Edit icon');
-
+				// The cptm_icon size does not exist when CPTM_DONT_GENERATE_ICON is set (C-003).
+				var url = ( attachment.sizes && attachment.sizes.cptm_icon ) ? attachment.sizes.cptm_icon.url : attachment.url;
+				$('#cptm_icon_url').val( url );
+				$('.current-cptm-icon').empty().append( $('<img>', { src: url, height: 16, width: 16, alt: '' }) );
+				$('.remove-cptm-icon').show();
+				$('.media-uploader-button').text( l10n.uploadIcon );
 			}
 		});
 
@@ -41,11 +37,19 @@
 		return false;
 	});
 
-	jQuery('.remove-cptm-icon').click(function(e) {
+	// Capability type: show the name field only for "Custom".
+	var $capabilitySelect = $('#cptm_capability_type_select');
+	var toggleCapability = function() {
+		$('#cptm_capability_type_custom').toggle( 'custom' === $capabilitySelect.val() );
+	};
+	$capabilitySelect.on('change', toggleCapability);
+	toggleCapability();
+
+	$('.remove-cptm-icon').on('click', function(e) {
 		e.preventDefault();
-		jQuery('#cptm_icon_url').val('');
-		jQuery('.current-cptm-icon').html('');
-		jQuery('.remove-cptm-icon').hide();
-		jQuery('.media-uploader-button').html('Add icon');
+		$('#cptm_icon_url').val('');
+		$('.current-cptm-icon').empty();
+		$('.remove-cptm-icon').hide();
+		$('.media-uploader-button').text( l10n.addIcon );
 	});
 })(jQuery);

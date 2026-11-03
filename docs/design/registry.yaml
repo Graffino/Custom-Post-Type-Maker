@@ -1,0 +1,64 @@
+# docs/design/registry.yaml — every screen and shared component, by DS- ID.
+# Plans and commits cite the ID. kind: foundation | component | screen
+# status: draft | approved | implemented | deprecated (never delete an entry; tasks may cite it)
+designs:
+  - id: DS-cptm-post-type-list
+    kind: screen
+    source: class-cptm.php:1217-1257 (columns), css/overview.css, js/overview.js
+    screenshots: [screens/DS-cptm-post-type-list.light.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-taxonomy-list
+    kind: screen
+    source: class-cptm.php:1265-1301 (columns), css/overview.css, js/overview.js
+    screenshots: []
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-post-type-edit
+    kind: screen
+    source: class-cptm.php:479-862 (cptm_meta_box), css/add-edit.css, js/add-edit.js
+    screenshots: [screens/DS-cptm-post-type-edit.light.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-taxonomy-edit
+    kind: screen
+    source: class-cptm.php:864-1030 (cptm_tax_meta_box), css/add-edit.css
+    screenshots: [screens/DS-cptm-taxonomy-edit.light.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-sidebar
+    kind: component
+    source: class-cptm.php:1306-1332, css/overview.css:30-100, js/overview.js:4
+    screenshots: []
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-other-registered-table
+    kind: component
+    source: class-cptm.php:1334-1540, js/overview.js:2-8
+    screenshots: []
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-icon-picker
+    kind: component
+    source: class-cptm.php:735-759, js/add-edit.js:4-50
+    screenshots: []
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-brand
+    kind: foundation
+    source: docs/design/brand/icon.svg, docs/design/brand/banner.html
+    screenshots: [../../assets/icon-256x256.png, ../../assets/banner-1544x500.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-tools
+    kind: screen
+    source: includes/class-cptm-tools.php render(), css/tools.css, js/code.js
+    screenshots: [screens/DS-cptm-tools.light.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-code-box
+    kind: component
+    source: class-cptm.php cptm_code_meta_box(), js/code.js, css/add-edit.css
+    screenshots: [screens/DS-cptm-post-type-edit.light.png]
+    design_ref: none
+    status: implemented

@@ -1,0 +1,16 @@
+/* Tools page (Post Types → Tools) */
+.cptm-tools .card {
+	max-width: 820px;
+}
+
+.cptm-tools fieldset {
+	margin: 0 0 12px;
+}
+
+.cptm-code {
+	font-size: 12px;
+	white-space: pre;
+	tab-size: 4;
+	overflow-wrap: normal;
+	overflow-x: auto;
+}
