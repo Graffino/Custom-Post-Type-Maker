@@ -12,7 +12,7 @@
 - PATTERN-004 · Flush rewrite rules through an option flag · approved
 - PATTERN-005 · Read definition meta with array_key_exists and a default · approved
 - PATTERN-006 · Conventional commit subjects · approved
-- PATTERN-007 · A new definition setting is optional and passed only when set · candidate
+- PATTERN-007 · A new definition setting is optional and passed only when set · approved
 - PATTERN-008 · Build meta box rows with the row helpers · candidate
 - PATTERN-009 · Read and write definitions only through Cptm_Definition · candidate
 
@@ -72,12 +72,13 @@
 - **Source:** git · confidence medium
 
 ## PATTERN-007 · A new definition setting is optional and passed only when set
-- **Status:** candidate
+- **Status:** approved
 - **Use when:** you add a register_post_type or register_taxonomy argument to the forms.
 - **How:** Store '1', '0' or '' (or text, '' when empty). Show "WordPress default" as the first option (`optional_bool_row()`). In the register code, pass the argument only when the value is not empty (`meta_optional_flag()`).
 - **Example:** class-cptm.php `register_post_type_definition()` (the "Settings added in 1.3.0" loops)
 - **Why:** Definitions saved by older versions do not have the key; they must keep the WordPress default (C-001).
-- **Source:** code · confidence medium
+- **Source:** code, user · confidence high
+- **Confirmed:** 2026-11-03
 
 ## PATTERN-008 · Build meta box rows with the row helpers
 - **Status:** candidate
