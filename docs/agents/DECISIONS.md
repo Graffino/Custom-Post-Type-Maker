@@ -17,6 +17,8 @@
 - D-008 · Only users with manage_options may manage definitions
 - D-009 · The plugin requires WordPress 6.5 or later
 - D-010 · Definition names are sanitized with sanitize_key and validated on save
+- D-011 · Tests are Playground smoke tests, run locally; no CI for now
+- D-012 · A custom capability type grants its capabilities to the Administrator role
 
 ---
 
@@ -108,4 +110,22 @@
 - **Why:** Release 1.3.0 plan, approved by Zeno on 2026-11-03. WordPress rejects names over these limits, and a reserved name breaks core queries.
 - **Rejected:** The 1.2.0 rule (D-003), which accepted any characters and any length.
 - **Evidence:** class-cptm.php `name_error()`, `save_name()`
+- **Source:** user · confidence high
+
+## D-011 · Tests are Playground smoke tests, run locally; no CI for now
+- **Status:** approved
+- **Date:** 2026-11-03
+- **Rule:** Automated tests live in `tests/` and run in WordPress Playground with `tests/run.sh`. Plugin Check runs with `tests/plugin-check.sh` on the built release. Both must pass before a release. There is no CI workflow until Zeno picks a runner.
+- **Why:** Zeno's answers to Q-001 and to the CI runner question on 2026-11-03. The plugin has no PHP toolchain on the dev machine; Playground needs only Node.js.
+- **Rejected:** A GitHub Actions workflow now (runner not chosen); PHPUnit with wp-env (needs Docker).
+- **Evidence:** tests/run.sh, tests/plugin-check.sh
+- **Source:** user · confidence high
+
+## D-012 · A custom capability type grants its capabilities to the Administrator role
+- **Status:** approved
+- **Date:** 2026-11-03
+- **Rule:** When a post type definition uses a custom capability type, register it with `map_meta_cap` true and add the derived primitive capabilities to the Administrator role on save or import. Record them in the option `cptm_granted_caps`, so the opt-in uninstall can remove them.
+- **Why:** Zeno's decision on 2026-11-03. Without the grant, nobody can edit the posts of that post type.
+- **Rejected:** Grant nothing and rely on a role plugin (as Custom Post Type UI does).
+- **Evidence:** includes/class-cptm-definition.php `grant_capabilities()`
 - **Source:** user · confidence high

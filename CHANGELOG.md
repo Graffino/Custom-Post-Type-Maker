@@ -1,7 +1,16 @@
 # Changelog
 
-## 1.3.0
+## 2.0.0
 
+- New: Tools page (Post Types → Tools) with JSON export and import of definitions. Imports are saved as drafts unless you select "Publish".
+- New: import your post types and taxonomies from Custom Post Type UI (read only; Custom Post Type UI is not changed).
+- New: "Get code" box on each definition and on the Tools page: PHP code that registers the same type without this plugin.
+- New: WP-CLI commands: `wp cptm list`, `wp cptm export`, `wp cptm import`, `wp cptm code`.
+- New post type options: Block Template, Template Lock, Embeddable (WordPress 6.8+), and a Custom capability type. Administrators get the custom capabilities automatically.
+- New taxonomy option: Sort.
+- New: optional data removal on uninstall (Tools page). Your posts and terms are never deleted.
+- Changed: the 16×16 menu icon size is no longer made for every upload; it is made only for the image you select as an icon.
+- Multisite: network activation now flushes the permalinks of every site.
 - Security: only administrators (`manage_options`) can view, create, edit or delete post type and taxonomy definitions. Before, Editors could reach these screens through a direct URL.
 - Security: the save handler checks the user's capability, sanitizes every field, and accepts only known values for supports, built-in taxonomies and post types.
 - Security: all values on the admin screens are escaped on output. Stored data is read without `unserialize()` of objects.

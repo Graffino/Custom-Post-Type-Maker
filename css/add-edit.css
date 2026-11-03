@@ -93,3 +93,12 @@ div#cptm_options div.inside, div#cptm_tax_options div.inside {
 			float: left;
 			margin: 0 10px 0 0;
 		}
+#cptm_capability_type_custom {
+	margin-left: 8px;
+	width: 12em;
+}
+
+#cptm_code .cptm-code {
+	font-size: 11px;
+	white-space: pre;
+}

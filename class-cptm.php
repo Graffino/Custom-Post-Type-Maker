@@ -3,7 +3,7 @@
 Plugin Name: Custom Post Type Maker
 Plugin URI: https://github.com/Graffino/Custom-Post-Type-Maker
 Description: Custom Post Type Maker lets you create Custom Post Types and custom Taxonomies in a user friendly way.
-Version: 1.3.0
+Version: 2.0.0
 Requires at least: 6.5
 Requires PHP: 8.1
 Author: Graffino
@@ -33,12 +33,18 @@ GNU General Public License for more details.
  * @copyright Copyright (c) 2018, Graffino
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  * @package   Custom_Post_Types_Maker
- * @version   1.3.0
+ * @version   2.0.0
  */
 
 // Avoid direct calls to this file.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+require_once __DIR__ . '/includes/class-cptm-definition.php';
+require_once __DIR__ . '/includes/class-cptm-tools.php';
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once __DIR__ . '/includes/class-cptm-cli.php';
 }
 
 /**
@@ -49,24 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Cptm {
 	/** Capability needed to manage definitions (D-008). */
 	const CAPABILITY = 'manage_options';
-
-	/** Max post type name length (WordPress limit). */
-	const MAX_POST_TYPE_LENGTH = 20;
-
-	/** Max taxonomy name length (WordPress limit). */
-	const MAX_TAXONOMY_LENGTH = 32;
-
-	/** Values allowed in cptm_supports. */
-	const SUPPORTS = array( 'title', 'editor', 'excerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'thumbnail', 'author', 'page-attributes', 'post-formats' );
-
-	/** Values allowed in cptm_builtin_taxonomies. */
-	const BUILTIN_TAXONOMIES = array( 'category', 'post_tag' );
-
-	/** Post type names that WordPress core uses or reserves. */
-	const RESERVED_POST_TYPES = array( 'post', 'page', 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache', 'user_request', 'wp_block', 'wp_template', 'wp_template_part', 'wp_global_styles', 'wp_navigation', 'wp_font_family', 'wp_font_face', 'action', 'author', 'order', 'theme', 'cptm', 'cptm_tax' );
-
-	/** Taxonomy names that WordPress core uses or reserves (registered taxonomies and public query vars). */
-	const RESERVED_TAXONOMIES = array( 'category', 'post_tag', 'nav_menu', 'link_category', 'post_format', 'wp_theme', 'wp_template_part_area', 'wp_pattern_category', 'attachment', 'attachment_id', 'author', 'author_name', 'calendar', 'cat', 'category_name', 'category__and', 'category__in', 'category__not_in', 'comments_per_page', 'comments_popup', 'custom', 'customize_messenger_channel', 'customized', 'cpage', 'day', 'debug', 'embed', 'error', 'exact', 'feed', 'fields', 'hour', 'm', 'minute', 'monthnum', 'more', 'name', 'nav_menu', 'nonce', 'nopaging', 'offset', 'order', 'orderby', 'p', 'page', 'page_id', 'paged', 'pagename', 'pb', 'perm', 'post', 'post__in', 'post__not_in', 'post_mime_type', 'post_status', 'post_tag', 'post_type', 'posts', 'posts_per_archive_page', 'posts_per_page', 'preview', 'robots', 's', 'search', 'second', 'sentence', 'showposts', 'static', 'status', 'subpost', 'subpost_id', 'tag', 'tag__and', 'tag__in', 'tag__not_in', 'tag_id', 'tag_slug__and', 'tag_slug__in', 'taxonomy', 'tb', 'term', 'terms', 'theme', 'title', 'type', 'types', 'w', 'withcomments', 'withoutcomments', 'year' );
 
 	/** @var string Plugin URL */
 	private string $dir;
@@ -87,7 +75,7 @@ class Cptm {
 		// vars
 		$this->dir     = plugins_url( '', __FILE__ );
 		$this->path    = plugin_dir_path( __FILE__ );
-		$this->version = '1.3.0';
+		$this->version = '2.0.0';
 
 		// actions
 		add_action( 'init', array( $this, 'init' ) );
@@ -102,6 +90,7 @@ class Cptm {
 		add_action( 'manage_cptm_posts_custom_column', array( $this, 'cptm_custom_columns' ), 10, 2 );
 		add_action( 'manage_cptm_tax_posts_custom_column', array( $this, 'cptm_tax_custom_columns' ), 10, 2 );
 		add_action( 'admin_footer', array( $this, 'cptm_admin_footer' ) );
+		add_action( 'wp_initialize_site', array( $this, 'cptm_initialize_site' ) );
 
 		// filters
 		add_filter( 'manage_cptm_posts_columns', array( $this, 'cptm_change_columns' ) );
@@ -118,6 +107,8 @@ class Cptm {
 		register_activation_hook( __FILE__, array( $this, 'cptm_plugin_activate_flush_rewrite' ) );
 
 		// Translations load on demand from translate.wordpress.org (D-006).
+
+		new Cptm_Tools();
 	}
 
 	/**
@@ -200,10 +191,7 @@ class Cptm {
 			)
 		);
 
-		// Add image size for the Custom Post Type icon
-		if ( ! defined( 'CPTM_DONT_GENERATE_ICON' ) ) {
-			add_image_size( 'cptm_icon', 16, 16, true );
-		}
+		// The 16x16 cptm_icon size is made on demand for the selected icon only (C-007).
 	}
 
 	/**
@@ -275,374 +263,33 @@ class Cptm {
 			);
 			wp_enqueue_media();
 		}
-	}
 
-	/**
-	 * One raw meta value, or null when the key does not exist.
-	 *
-	 * @param  array  $meta All meta of a definition (get_post_meta( $id )).
-	 * @param  string $key  Meta key.
-	 * @return string|null
-	 */
-	private function meta_value( array $meta, string $key ): ?string {
-		return isset( $meta[ $key ][0] ) ? (string) $meta[ $key ][0] : null;
-	}
-
-	/**
-	 * A '1'/'0' flag. A missing key gives $default (C-001).
-	 *
-	 * @param  array  $meta    All meta of a definition.
-	 * @param  string $key     Meta key.
-	 * @param  bool   $default Value for a missing key.
-	 * @return bool
-	 */
-	private function meta_flag( array $meta, string $key, bool $default = false ): bool {
-		$value = $this->meta_value( $meta, $key );
-		return null === $value ? $default : '1' === $value;
-	}
-
-	/**
-	 * A setting added in 1.3.0: '1', '0' or '' (WordPress default). Null means "do not pass the argument".
-	 *
-	 * @param  array  $meta All meta of a definition.
-	 * @param  string $key  Meta key.
-	 * @return bool|null
-	 */
-	private function meta_optional_flag( array $meta, string $key ): ?bool {
-		$value = $this->meta_value( $meta, $key );
-		if ( '1' === $value ) {
-			return true;
+		// "Copy code" buttons on the edit screens and the Tools page
+		$screen = get_current_screen();
+		if ( $this->is_plugin_screen( 'post' ) || ( $screen && Cptm_Tools::$hook === $screen->id ) ) {
+			wp_enqueue_script( 'cptm_code_js', $this->dir . '/js/code.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_style( 'cptm_tools_styles', $this->dir . '/css/tools.css', array(), $this->version );
+			wp_localize_script( 'cptm_code_js', 'cptmCodeL10n', array( 'copied' => __( 'Copied.', 'custom-post-type-maker' ) ) );
 		}
-		if ( '0' === $value ) {
-			return false;
-		}
-		return null;
 	}
 
 	/**
-	 * A stored list of strings. Never creates objects.
-	 *
-	 * @param  string|null $raw Raw (serialized) meta value.
-	 * @return string[]
-	 */
-	private function meta_array( ?string $raw ): array {
-		if ( null === $raw || '' === $raw || ! is_serialized( $raw ) ) {
-			return array();
-		}
-		$value = unserialize( $raw, array( 'allowed_classes' => false ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize -- classes are not allowed.
-		return is_array( $value ) ? array_values( array_filter( $value, 'is_string' ) ) : array();
-	}
-
-	/**
-	 * The labels of a custom post type.
-	 *
-	 * @param  string $plural   Plural label.
-	 * @param  string $singular Singular label.
-	 * @return array<string, string>
-	 */
-	private function post_type_labels( string $plural, string $singular ): array {
-		/* translators: %s: singular post type name */
-		$s = fn( string $text ): string => sprintf( $text, $singular );
-		/* translators: %s: plural post type name */
-		$p = fn( string $text ): string => sprintf( $text, $plural );
-
-		return array(
-			'name'                     => $plural,
-			'singular_name'            => $singular,
-			'menu_name'                => $plural,
-			/* translators: %s: singular post type name */
-			'add_new'                  => $s( __( 'Add %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'add_new_item'             => $s( __( 'Add New %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'edit_item'                => $s( __( 'Edit %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'new_item'                 => $s( __( 'New %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'view_item'                => $s( __( 'View %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'view_items'               => $p( __( 'View %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'search_items'             => $p( __( 'Search %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'not_found'                => $p( __( 'No %s found', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'not_found_in_trash'       => $p( __( 'No %s found in Trash', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'parent_item_colon'        => $s( __( 'Parent %s:', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'all_items'                => $p( __( 'All %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'archives'                 => $s( __( '%s Archives', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'attributes'               => $s( __( '%s Attributes', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'insert_into_item'         => $s( __( 'Insert into %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'uploaded_to_this_item'    => $s( __( 'Uploaded to this %s', 'custom-post-type-maker' ) ),
-			'featured_image'           => __( 'Featured image', 'custom-post-type-maker' ),
-			'set_featured_image'       => __( 'Set featured image', 'custom-post-type-maker' ),
-			'remove_featured_image'    => __( 'Remove featured image', 'custom-post-type-maker' ),
-			'use_featured_image'       => __( 'Use as featured image', 'custom-post-type-maker' ),
-			/* translators: %s: plural post type name */
-			'filter_items_list'        => $p( __( 'Filter %s list', 'custom-post-type-maker' ) ),
-			'filter_by_date'           => __( 'Filter by date', 'custom-post-type-maker' ),
-			/* translators: %s: plural post type name */
-			'items_list_navigation'    => $p( __( '%s list navigation', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'items_list'               => $p( __( '%s list', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_published'           => $s( __( '%s published.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_published_privately' => $s( __( '%s published privately.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_reverted_to_draft'   => $s( __( '%s reverted to draft.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_trashed'             => $s( __( '%s trashed.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_scheduled'           => $s( __( '%s scheduled.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_updated'             => $s( __( '%s updated.', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_link'                => $s( __( '%s Link', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular post type name */
-			'item_link_description'    => $s( __( 'A link to a %s.', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural post type name */
-			'template_name'            => $p( __( 'Single item: %s', 'custom-post-type-maker' ) ),
-		);
-	}
-
-	/**
-	 * The labels of a custom taxonomy.
-	 *
-	 * @param  string $plural   Plural label.
-	 * @param  string $singular Singular label.
-	 * @return array<string, string>
-	 */
-	private function taxonomy_labels( string $plural, string $singular ): array {
-		$s = fn( string $text ): string => sprintf( $text, $singular );
-		$p = fn( string $text ): string => sprintf( $text, $plural );
-
-		return array(
-			'name'                       => $plural,
-			'singular_name'              => $singular,
-			'menu_name'                  => $plural,
-			/* translators: %s: plural taxonomy name */
-			'search_items'               => $p( __( 'Search %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'popular_items'              => $p( __( 'Popular %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'all_items'                  => $p( __( 'All %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'parent_item'                => $s( __( 'Parent %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'parent_item_colon'          => $s( __( 'Parent %s:', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'edit_item'                  => $s( __( 'Edit %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'view_item'                  => $s( __( 'View %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'update_item'                => $s( __( 'Update %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'add_new_item'               => $s( __( 'Add New %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'new_item_name'              => $s( __( 'New %s Name', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'separate_items_with_commas' => $p( __( 'Separate %s with commas', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'add_or_remove_items'        => $p( __( 'Add or remove %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'choose_from_most_used'      => $p( __( 'Choose from the most used %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'not_found'                  => $p( __( 'No %s found', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'no_terms'                   => $p( __( 'No %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'filter_by_item'             => $s( __( 'Filter by %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'items_list_navigation'      => $p( __( '%s list navigation', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'items_list'                 => $p( __( '%s list', 'custom-post-type-maker' ) ),
-			'most_used'                  => __( 'Most Used', 'custom-post-type-maker' ),
-			/* translators: %s: plural taxonomy name */
-			'back_to_items'              => $p( __( '&larr; Go to %s', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'item_link'                  => $s( __( '%s Link', 'custom-post-type-maker' ) ),
-			/* translators: %s: singular taxonomy name */
-			'item_link_description'      => $s( __( 'A link to a %s.', 'custom-post-type-maker' ) ),
-			/* translators: %s: plural taxonomy name */
-			'template_name'              => $p( __( '%s Archives', 'custom-post-type-maker' ) ),
-		);
-	}
-
-	/**
-	 * Get all published definitions of one kind.
-	 *
-	 * @param  string $post_type 'cptm' or 'cptm_tax'.
-	 * @return WP_Post[]
-	 */
-	private function get_definitions( string $post_type ): array {
-		return get_posts(
-			array(
-				'numberposts'      => -1,
-				'post_type'        => $post_type,
-				'post_status'      => 'publish',
-				'suppress_filters' => false,
-			)
-		);
-	}
-
-	/**
-	 * Create custom post types and custom taxonomies from the definitions.
+	 * Create custom post types and custom taxonomies from the published definitions.
 	 */
 	public function cptm_create_custom_post_types(): void {
-		foreach ( $this->get_definitions( 'cptm' ) as $cptm ) {
-			$this->register_post_type_definition( get_post_meta( $cptm->ID ) );
-		}
-
-		foreach ( $this->get_definitions( 'cptm_tax' ) as $cptm_tax ) {
-			$this->register_taxonomy_definition( get_post_meta( $cptm_tax->ID ) );
-		}
-	}
-
-	/**
-	 * Register one custom post type. Reads the meta exactly as 1.2.0 did (C-001).
-	 *
-	 * @param array $meta All meta of a post type definition.
-	 */
-	private function register_post_type_definition( array $meta ): void {
-		// text (escaped as in 1.2.0, so existing names do not change)
-		$name          = esc_html( $this->meta_value( $meta, 'cptm_name' ) ?: 'no_name' );
-		$label         = esc_html( $this->meta_value( $meta, 'cptm_label' ) ?: $name );
-		$singular_name = esc_html( $this->meta_value( $meta, 'cptm_singular_name' ) ?: $label );
-		$description   = $this->meta_value( $meta, 'cptm_description' ) ?: '';
-
-		if ( 'no_name' === $name ) {
-			return;
-		}
-
-		// A Dashicon slug overrides an uploaded icon (D-004).
-		$icon_slug = $this->meta_value( $meta, 'cptm_icon_slug' );
-		$icon_url  = $this->meta_value( $meta, 'cptm_icon_url' );
-		$menu_icon = $icon_slug ? sanitize_html_class( $icon_slug ) : ( $icon_url ? esc_url_raw( $icon_url ) : null );
-
-		$custom_rewrite_slug = esc_html( $this->meta_value( $meta, 'cptm_custom_rewrite_slug' ) ?: $name );
-		$menu_position       = $this->meta_value( $meta, 'cptm_menu_position' ) ? (int) $this->meta_value( $meta, 'cptm_menu_position' ) : null;
-		$has_archive         = $this->meta_flag( $meta, 'cptm_has_archive' );
-		$archive_slug        = $this->meta_value( $meta, 'cptm_archive_slug' );
-
-		// Rewrite: with_front is always set, also when false (D-005).
-		$rewrite = array();
-		if ( $this->meta_flag( $meta, 'cptm_rewrite' ) ) {
-			$rewrite['slug'] = $custom_rewrite_slug;
-		}
-		$rewrite['with_front'] = $this->meta_flag( $meta, 'cptm_withfront' );
-		if ( $this->meta_flag( $meta, 'cptm_feeds' ) ) {
-			$rewrite['feeds'] = true;
-		}
-		if ( $this->meta_flag( $meta, 'cptm_pages' ) ) {
-			$rewrite['pages'] = true;
-		}
-
-		// A missing supports key means title + editor.
-		$supports_raw = $this->meta_value( $meta, 'cptm_supports' );
-		$supports     = $supports_raw ? $this->meta_array( $supports_raw ) : array( 'title', 'editor' );
-
-		$args = array(
-			'labels'              => $this->post_type_labels( $label, $singular_name ),
-			'description'         => $description,
-			'menu_icon'           => $menu_icon,
-			'rewrite'             => $rewrite,
-			'menu_position'       => $menu_position,
-			'public'              => $this->meta_flag( $meta, 'cptm_public' ),
-			'show_ui'             => $this->meta_flag( $meta, 'cptm_show_ui' ),
-			'has_archive'         => ( $has_archive && $archive_slug ) ? $archive_slug : $has_archive,
-			'exclude_from_search' => $this->meta_flag( $meta, 'cptm_exclude_from_search' ),
-			'capability_type'     => $this->meta_value( $meta, 'cptm_capability_type' ) ?: 'post',
-			'hierarchical'        => $this->meta_flag( $meta, 'cptm_hierarchical' ),
-			'show_in_menu'        => $this->meta_flag( $meta, 'cptm_show_in_menu' ),
-			'query_var'           => $this->meta_flag( $meta, 'cptm_query_var' ),
-			'show_in_rest'        => $this->meta_flag( $meta, 'cptm_show_in_rest' ),
-			// A missing key means true (D-002).
-			'publicly_queryable'  => $this->meta_flag( $meta, 'cptm_publicly_queryable', true ),
-			'supports'            => $supports,
-			'taxonomies'          => $this->meta_array( $this->meta_value( $meta, 'cptm_builtin_taxonomies' ) ),
-		);
-
-		// Settings added in 1.3.0: pass them only when set, so older definitions keep the WordPress defaults.
-		foreach ( array(
-			'cptm_show_in_nav_menus' => 'show_in_nav_menus',
-			'cptm_show_in_admin_bar' => 'show_in_admin_bar',
-			'cptm_can_export'        => 'can_export',
-			'cptm_delete_with_user'  => 'delete_with_user',
-		) as $key => $arg ) {
-			$value = $this->meta_optional_flag( $meta, $key );
-			if ( null !== $value ) {
-				$args[ $arg ] = $value;
-			}
-		}
-		foreach ( array(
-			'cptm_rest_base'      => 'rest_base',
-			'cptm_rest_namespace' => 'rest_namespace',
-		) as $key => $arg ) {
-			$value = $this->meta_value( $meta, $key );
-			if ( $value ) {
-				$args[ $arg ] = $value;
+		foreach ( Cptm_Definition::posts( 'cptm', 'publish' ) as $cptm ) {
+			$reg = Cptm_Definition::post_type_registration( get_post_meta( $cptm->ID ) );
+			if ( $reg ) {
+				register_post_type( $reg['name'], $reg['args'] );
 			}
 		}
 
-		register_post_type( $name, $args );
-	}
-
-	/**
-	 * Register one custom taxonomy. Reads the meta exactly as 1.2.0 did (C-001).
-	 *
-	 * @param array $meta All meta of a taxonomy definition.
-	 */
-	private function register_taxonomy_definition( array $meta ): void {
-		$name          = esc_html( $this->meta_value( $meta, 'cptm_tax_name' ) ?: 'no_name' );
-		$label         = esc_html( $this->meta_value( $meta, 'cptm_tax_label' ) ?: $name );
-		$singular_name = esc_html( $this->meta_value( $meta, 'cptm_tax_singular_name' ) ?: $label );
-		$rewrite_slug  = esc_html( $this->meta_value( $meta, 'cptm_tax_custom_rewrite_slug' ) ?: $name );
-
-		if ( 'no_name' === $name ) {
-			return;
-		}
-
-		$args = array(
-			'label'             => $label,
-			'labels'            => $this->taxonomy_labels( $label, $singular_name ),
-			'rewrite'           => $this->meta_flag( $meta, 'cptm_tax_rewrite' ) ? array( 'slug' => $rewrite_slug ) : false,
-			'show_ui'           => $this->meta_flag( $meta, 'cptm_tax_show_ui' ),
-			'hierarchical'      => $this->meta_flag( $meta, 'cptm_tax_hierarchical' ),
-			'query_var'         => $this->meta_flag( $meta, 'cptm_tax_query_var' ),
-			'show_in_rest'      => $this->meta_flag( $meta, 'cptm_tax_show_in_rest' ),
-			'show_admin_column' => $this->meta_flag( $meta, 'cptm_tax_show_admin_column' ),
-		);
-
-		// Settings added in 1.3.0: pass them only when set.
-		foreach ( array(
-			'cptm_tax_public'             => 'public',
-			'cptm_tax_publicly_queryable' => 'publicly_queryable',
-			'cptm_tax_show_in_nav_menus'  => 'show_in_nav_menus',
-			'cptm_tax_show_tagcloud'      => 'show_tagcloud',
-			'cptm_tax_show_in_quick_edit' => 'show_in_quick_edit',
-		) as $key => $arg ) {
-			$value = $this->meta_optional_flag( $meta, $key );
-			if ( null !== $value ) {
-				$args[ $arg ] = $value;
+		foreach ( Cptm_Definition::posts( 'cptm_tax', 'publish' ) as $cptm_tax ) {
+			$reg = Cptm_Definition::taxonomy_registration( get_post_meta( $cptm_tax->ID ) );
+			if ( $reg ) {
+				register_taxonomy( $reg['name'], $reg['object_types'], $reg['args'] );
 			}
 		}
-		$rest_base = $this->meta_value( $meta, 'cptm_tax_rest_base' );
-		if ( $rest_base ) {
-			$args['rest_base'] = $rest_base;
-		}
-		$default_term = $this->meta_value( $meta, 'cptm_tax_default_term' );
-		if ( $default_term ) {
-			$args['default_term'] = array( 'name' => $default_term );
-		}
-
-		register_taxonomy( $name, $this->meta_array( $this->meta_value( $meta, 'cptm_tax_post_types' ) ), $args );
 	}
 
 	/**
@@ -658,6 +305,9 @@ class Cptm {
 			'advanced',
 			'high'
 		);
+		foreach ( array( 'cptm', 'cptm_tax' ) as $kind ) {
+			add_meta_box( 'cptm_code', __( 'Get code', 'custom-post-type-maker' ), array( $this, 'cptm_code_meta_box' ), $kind, 'side', 'low' );
+		}
 		add_meta_box(
 			'cptm_tax_options',
 			__( 'Options', 'custom-post-type-maker' ),
@@ -666,6 +316,24 @@ class Cptm {
 			'advanced',
 			'high'
 		);
+	}
+
+	/**
+	 * The "Get code" meta box: PHP that registers the same post type or taxonomy without the plugin.
+	 *
+	 * @param WP_Post $post Definition.
+	 */
+	public function cptm_code_meta_box( WP_Post $post ): void {
+		$code = Cptm_Definition::code( $post->post_type, get_post_meta( $post->ID ) );
+		if ( '' === $code ) {
+			echo '<p>' . esc_html__( 'Save the definition with a name to see its code.', 'custom-post-type-maker' ) . '</p>';
+			return;
+		}
+		?>
+		<p><?php esc_html_e( 'Paste this code in a theme or plugin to register the same type without Custom Post Type Maker. Then delete this definition.', 'custom-post-type-maker' ); ?></p>
+		<textarea class="widefat code cptm-code" rows="12" readonly aria-label="<?php esc_attr_e( 'PHP code', 'custom-post-type-maker' ); ?>"><?php echo esc_textarea( $code ); ?></textarea>
+		<p><button type="button" class="button cptm-copy-code"><?php esc_html_e( 'Copy code', 'custom-post-type-maker' ); ?></button> <span class="cptm-copied" aria-live="polite"></span></p>
+		<?php
 	}
 
 	/**
@@ -806,13 +474,13 @@ class Cptm {
 		global $pagenow;
 
 		$meta     = get_post_meta( $post->ID );
-		$v        = fn( string $key ): string => (string) $this->meta_value( $meta, $key );
+		$v        = fn( string $key ): string => (string) Cptm_Definition::value( $meta, $key );
 		$is_new   = 'post-new.php' === $pagenow;
 		$icon_url = $v( 'cptm_icon_url' );
 		$icon     = $v( 'cptm_icon_slug' );
 
-		$supports = $is_new ? array( 'title', 'editor', 'excerpt' ) : $this->meta_array( $this->meta_value( $meta, 'cptm_supports' ) );
-		$taxs     = $this->meta_array( $this->meta_value( $meta, 'cptm_builtin_taxonomies' ) );
+		$supports = $is_new ? array( 'title', 'editor', 'excerpt' ) : Cptm_Definition::list_value( Cptm_Definition::value( $meta, 'cptm_supports' ) );
+		$taxs     = Cptm_Definition::list_value( Cptm_Definition::value( $meta, 'cptm_builtin_taxonomies' ) );
 
 		$this->tab = 1;
 		wp_nonce_field( 'cptm_meta_box_nonce_action', 'cptm_meta_box_nonce_field' );
@@ -884,13 +552,19 @@ class Cptm {
 			<?php
 			$this->section_row( __( 'WordPress Integration', 'custom-post-type-maker' ) );
 			?>
+			<?php
+			$capability_type = $v( 'cptm_capability_type' );
+			$is_custom_type  = Cptm_Definition::is_custom_capability_type( $capability_type );
+			?>
 			<tr>
-				<?php $this->label_cell( 'cptm_capability_type', __( 'Capability Type', 'custom-post-type-maker' ), array( __( 'The post type to use to build the read, edit, and delete capabilities.', 'custom-post-type-maker' ) ) ); ?>
+				<?php $this->label_cell( 'cptm_capability_type_select', __( 'Capability Type', 'custom-post-type-maker' ), array( __( 'The post type to use to build the read, edit, and delete capabilities.', 'custom-post-type-maker' ), __( 'Custom: the post type gets its own capabilities. Administrators get them automatically; give them to other roles with a role editor plugin.', 'custom-post-type-maker' ) ) ); ?>
 				<td>
-					<select name="cptm_capability_type" id="cptm_capability_type" tabindex="<?php echo (int) $this->tab++; ?>">
-						<option value="post" <?php selected( $v( 'cptm_capability_type' ), 'post' ); ?>><?php esc_html_e( 'Post', 'custom-post-type-maker' ); ?> (<?php esc_html_e( 'default', 'custom-post-type-maker' ); ?>)</option>
-						<option value="page" <?php selected( $v( 'cptm_capability_type' ), 'page' ); ?>><?php esc_html_e( 'Page', 'custom-post-type-maker' ); ?></option>
+					<select name="cptm_capability_type_select" id="cptm_capability_type_select" tabindex="<?php echo (int) $this->tab++; ?>">
+						<option value="post" <?php selected( $capability_type, 'post' ); ?>><?php esc_html_e( 'Post', 'custom-post-type-maker' ); ?> (<?php esc_html_e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="page" <?php selected( $capability_type, 'page' ); ?>><?php esc_html_e( 'Page', 'custom-post-type-maker' ); ?></option>
+						<option value="custom" <?php selected( $is_custom_type ); ?>><?php esc_html_e( 'Custom', 'custom-post-type-maker' ); ?></option>
 					</select>
+					<input type="text" name="cptm_capability_type_custom" id="cptm_capability_type_custom" class="cptm-capability-custom" tabindex="<?php echo (int) $this->tab++; ?>" value="<?php echo esc_attr( $is_custom_type ? $capability_type : '' ); ?>" placeholder="<?php esc_attr_e( 'e.g. book', 'custom-post-type-maker' ); ?>" aria-label="<?php esc_attr_e( 'Custom capability type', 'custom-post-type-maker' ); ?>" />
 				</td>
 			</tr>
 			<?php
@@ -902,6 +576,28 @@ class Cptm {
 			$this->bool_row( 'cptm_publicly_queryable', __( 'Publicly Queryable', 'custom-post-type-maker' ), array( __( 'Whether the post is visible on the front-end.', 'custom-post-type-maker' ) ), $v( 'cptm_publicly_queryable' ), true );
 			$this->optional_bool_row( 'cptm_can_export', __( 'Can Export', 'custom-post-type-maker' ), array( __( 'Whether the content of this post type can be exported with the WordPress export tool.', 'custom-post-type-maker' ) ), $v( 'cptm_can_export' ) );
 			$this->optional_bool_row( 'cptm_delete_with_user', __( 'Delete With User', 'custom-post-type-maker' ), array( __( 'Whether to delete the posts of a user when the user is deleted.', 'custom-post-type-maker' ) ), $v( 'cptm_delete_with_user' ) );
+			$this->optional_bool_row( 'cptm_embeddable', __( 'Embeddable', 'custom-post-type-maker' ), array( __( 'Whether other sites can embed posts of this type (WordPress 6.8 or later).', 'custom-post-type-maker' ) ), $v( 'cptm_embeddable' ) );
+
+			$this->section_row( __( 'Block Editor', 'custom-post-type-maker' ) );
+			?>
+			<tr>
+				<?php $this->label_cell( 'cptm_template', __( 'Block Template', 'custom-post-type-maker' ), array( __( 'The blocks a new post starts with, as a JSON list. "Show in REST" must be true.', 'custom-post-type-maker' ), __( 'e.g. [["core/image"], ["core/paragraph", {"placeholder": "Summary"}]]', 'custom-post-type-maker' ) ), true ); ?>
+				<td>
+					<textarea name="cptm_template" id="cptm_template" class="widefat code" tabindex="<?php echo (int) $this->tab++; ?>" rows="4"><?php echo esc_textarea( $v( 'cptm_template' ) ); ?></textarea>
+				</td>
+			</tr>
+			<tr>
+				<?php $this->label_cell( 'cptm_template_lock', __( 'Template Lock', 'custom-post-type-maker' ), array( __( 'Whether users can change the blocks of the template.', 'custom-post-type-maker' ) ) ); ?>
+				<td>
+					<select name="cptm_template_lock" id="cptm_template_lock" tabindex="<?php echo (int) $this->tab++; ?>">
+						<option value="" <?php selected( $v( 'cptm_template_lock' ), '' ); ?>><?php esc_html_e( 'Not locked', 'custom-post-type-maker' ); ?> (<?php esc_html_e( 'default', 'custom-post-type-maker' ); ?>)</option>
+						<option value="insert" <?php selected( $v( 'cptm_template_lock' ), 'insert' ); ?>><?php esc_html_e( 'Insert: no new blocks, no moves, no removals', 'custom-post-type-maker' ); ?></option>
+						<option value="all" <?php selected( $v( 'cptm_template_lock' ), 'all' ); ?>><?php esc_html_e( 'All: blocks cannot be added, moved or removed', 'custom-post-type-maker' ); ?></option>
+						<option value="contentOnly" <?php selected( $v( 'cptm_template_lock' ), 'contentOnly' ); ?>><?php esc_html_e( 'Content only: users edit the content of the blocks only', 'custom-post-type-maker' ); ?></option>
+					</select>
+				</td>
+			</tr>
+			<?php
 
 			$this->checkbox_row(
 				'cptm_supports',
@@ -944,8 +640,8 @@ class Cptm {
 	 */
 	public function cptm_tax_meta_box( WP_Post $post ): void {
 		$meta       = get_post_meta( $post->ID );
-		$v          = fn( string $key ): string => (string) $this->meta_value( $meta, $key );
-		$post_types = $this->meta_array( $this->meta_value( $meta, 'cptm_tax_post_types' ) );
+		$v          = fn( string $key ): string => (string) Cptm_Definition::value( $meta, $key );
+		$post_types = Cptm_Definition::list_value( Cptm_Definition::value( $meta, 'cptm_tax_post_types' ) );
 
 		$choices = array(
 			'post' => __( 'Posts', 'custom-post-type-maker' ),
@@ -969,6 +665,7 @@ class Cptm {
 			$this->optional_bool_row( 'cptm_tax_show_in_nav_menus', __( 'Show in Navigation Menus', 'custom-post-type-maker' ), array( __( 'Makes this taxonomy available for selection in navigation menus.', 'custom-post-type-maker' ) ), $v( 'cptm_tax_show_in_nav_menus' ) );
 			$this->optional_bool_row( 'cptm_tax_show_tagcloud', __( 'Show in Tag Cloud', 'custom-post-type-maker' ), array( __( 'Whether to list the taxonomy in the Tag Cloud widget.', 'custom-post-type-maker' ) ), $v( 'cptm_tax_show_tagcloud' ) );
 			$this->optional_bool_row( 'cptm_tax_show_in_quick_edit', __( 'Show in Quick Edit', 'custom-post-type-maker' ), array( __( 'Whether to show the taxonomy in the quick and bulk edit panels.', 'custom-post-type-maker' ) ), $v( 'cptm_tax_show_in_quick_edit' ) );
+			$this->optional_bool_row( 'cptm_tax_sort', __( 'Sort', 'custom-post-type-maker' ), array( __( 'Whether to remember the order in which terms are added to posts.', 'custom-post-type-maker' ) ), $v( 'cptm_tax_sort' ) );
 			$this->bool_row( 'cptm_tax_hierarchical', __( 'Hierarchical', 'custom-post-type-maker' ), array( __( 'Whether the taxonomy is hierarchical (e.g. category).', 'custom-post-type-maker' ) ), $v( 'cptm_tax_hierarchical' ), false );
 			$this->bool_row( 'cptm_tax_rewrite', __( 'Rewrite', 'custom-post-type-maker' ), array( __( 'Triggers the handling of rewrites for this taxonomy.', 'custom-post-type-maker' ) ), $v( 'cptm_tax_rewrite' ), true );
 			$this->text_row( 'cptm_tax_custom_rewrite_slug', __( 'Custom Rewrite Slug', 'custom-post-type-maker' ), array( __( 'Customize the permastruct slug.', 'custom-post-type-maker' ), __( 'Default: [Custom Taxonomy Name]', 'custom-post-type-maker' ) ), $v( 'cptm_tax_custom_rewrite_slug' ) );
@@ -1018,108 +715,49 @@ class Cptm {
 	}
 
 	/**
-	 * A posted list of values, unslashed, keys sanitized, limited to $allowed (or all keys when null).
+	 * The posted values of the known keys of a kind, unslashed. Checkbox lists are always present (an empty list when nothing is checked).
 	 *
-	 * @param  string        $key     Field name.
-	 * @param  string[]|null $allowed Allowed values.
-	 * @return string[]
+	 * @param  string $kind 'cptm' or 'cptm_tax'.
+	 * @return array
 	 */
-	private function posted_list( string $key, ?array $allowed ): array {
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in can_save().
-		$raw = isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ? wp_unslash( $_POST[ $key ] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized below.
-		$out = array();
-		foreach ( $raw as $value ) {
-			if ( ! is_scalar( $value ) ) {
+	private function posted_input( string $kind ): array {
+		$input = array();
+		foreach ( Cptm_Definition::all_keys( $kind ) as $key ) {
+			if ( in_array( $key, Cptm_Definition::KEYS[ $kind ]['arrays'], true ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- verified in can_save(); sanitized by Cptm_Definition::sanitize().
+				$input[ $key ] = isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ? wp_unslash( $_POST[ $key ] ) : array();
 				continue;
 			}
-			$value = sanitize_key( (string) $value );
-			if ( '' !== $value && ( null === $allowed || in_array( $value, $allowed, true ) ) ) {
-				$out[] = $value;
-			}
-		}
-		return array_values( array_unique( $out ) );
-	}
-
-	/**
-	 * Save posted '1'/'0' flags. Other values are ignored.
-	 *
-	 * @param int      $post_id WordPress Post ID
-	 * @param string[] $keys    Field names.
-	 * @param bool     $allow_empty Also accept '' (WordPress default) for settings added in 1.3.0.
-	 */
-	private function save_flags( int $post_id, array $keys, bool $allow_empty = false ): void {
-		foreach ( $keys as $key ) {
 			$value = $this->posted( $key );
-			if ( '1' === $value || '0' === $value || ( $allow_empty && '' === $value ) ) {
-				update_post_meta( $post_id, $key, $value );
+			if ( null !== $value ) {
+				$input[ $key ] = $value;
 			}
 		}
+		if ( 'cptm' === $kind ) {
+			$select = $this->posted( 'cptm_capability_type_select' );
+			if ( null !== $select ) {
+				$input['cptm_capability_type'] = 'custom' === $select ? (string) $this->posted( 'cptm_capability_type_custom' ) : $select;
+			}
+		}
+		return $input;
 	}
 
 	/**
-	 * Save a posted REST base or archive slug: lower-case letters, numbers, dashes, underscores and slashes. Spaces become dashes.
+	 * Clean and save the posted definition of a kind. Errors keep the old values and show a notice.
 	 *
 	 * @param int    $post_id WordPress Post ID
-	 * @param string $key     Field name.
+	 * @param string $kind    'cptm' or 'cptm_tax'.
 	 */
-	private function save_path( int $post_id, string $key ): void {
-		$value = $this->posted( $key );
-		if ( null !== $value ) {
-			$value = (string) preg_replace( '#\s+#', '-', trim( strtolower( $value ) ) );
-			$value = trim( (string) preg_replace( '#[^a-z0-9_\-/]#', '', $value ), '/' );
-			update_post_meta( $post_id, $key, $value );
-		}
-	}
-
-	/**
-	 * Check a new definition name. Returns an error message, or '' when the name is valid.
-	 *
-	 * @param  string $name     Sanitized name.
-	 * @param  string $current  The name saved before.
-	 * @param  bool   $taxonomy True for a taxonomy name.
-	 * @return string
-	 */
-	private function name_error( string $name, string $current, bool $taxonomy ): string {
-		$max      = $taxonomy ? self::MAX_TAXONOMY_LENGTH : self::MAX_POST_TYPE_LENGTH;
-		$reserved = $taxonomy ? self::RESERVED_TAXONOMIES : self::RESERVED_POST_TYPES;
-
-		if ( '' === $name ) {
-			return __( 'The name is required. Use lower-case letters, numbers, dashes and underscores only.', 'custom-post-type-maker' );
-		}
-		if ( strlen( $name ) > $max ) {
-			/* translators: %d: maximum number of characters */
-			return sprintf( __( 'The name is too long. Use at most %d characters.', 'custom-post-type-maker' ), $max );
-		}
-		if ( $name === $current ) {
-			return '';
-		}
-		if ( in_array( $name, $reserved, true ) || ( $taxonomy ? taxonomy_exists( $name ) : post_type_exists( $name ) ) ) {
-			/* translators: %s: the name */
-			return sprintf( __( 'The name "%s" is reserved or already registered. Use a different name.', 'custom-post-type-maker' ), $name );
-		}
-		return '';
-	}
-
-	/**
-	 * Save a posted definition name, or keep the old one and show an error.
-	 *
-	 * @param int    $post_id  WordPress Post ID
-	 * @param string $key      Field name.
-	 * @param bool   $taxonomy True for a taxonomy name.
-	 */
-	private function save_name( int $post_id, string $key, bool $taxonomy ): void {
-		$raw = $this->posted( $key );
-		if ( null === $raw ) {
+	private function save_definition( int $post_id, string $kind ): void {
+		if ( ! $this->can_save( $post_id ) ) {
 			return;
 		}
-		$name    = sanitize_key( str_replace( ' ', '', $raw ) );
-		$current = (string) get_post_meta( $post_id, $key, true );
-		$error   = $this->name_error( $name, $current, $taxonomy );
-		if ( $error ) {
-			set_transient( 'cptm_notice_' . get_current_user_id(), $error, MINUTE_IN_SECONDS );
-			return;
+		$current = (string) get_post_meta( $post_id, Cptm_Definition::KEYS[ $kind ]['name'], true );
+		$clean   = Cptm_Definition::sanitize( $kind, $this->posted_input( $kind ), $current );
+		if ( $clean['errors'] ) {
+			set_transient( 'cptm_notice_' . get_current_user_id(), implode( ' ', $clean['errors'] ), MINUTE_IN_SECONDS );
 		}
-		update_post_meta( $post_id, $key, $name );
+		Cptm_Definition::save( $post_id, $clean['meta'] );
 	}
 
 	/**
@@ -1128,55 +766,7 @@ class Cptm {
 	 * @param int $post_id WordPress Post ID
 	 */
 	public function cptm_save_post( int $post_id ): void {
-		if ( ! $this->can_save( $post_id ) ) {
-			return;
-		}
-
-		$this->save_name( $post_id, 'cptm_name', false );
-
-		foreach ( array( 'cptm_label', 'cptm_singular_name', 'cptm_custom_rewrite_slug' ) as $key ) {
-			$value = $this->posted( $key );
-			if ( null !== $value ) {
-				update_post_meta( $post_id, $key, sanitize_text_field( $value ) );
-			}
-		}
-
-		// Stored HTML-encoded, as in 1.2.0 (C-001).
-		$description = $this->posted( 'cptm_description' );
-		if ( null !== $description ) {
-			update_post_meta( $post_id, 'cptm_description', esc_textarea( sanitize_textarea_field( $description ) ) );
-		}
-
-		$icon_slug = $this->posted( 'cptm_icon_slug' );
-		if ( null !== $icon_slug ) {
-			update_post_meta( $post_id, 'cptm_icon_slug', sanitize_html_class( $icon_slug ) );
-		}
-
-		$icon_url = $this->posted( 'cptm_icon_url' );
-		if ( null !== $icon_url ) {
-			update_post_meta( $post_id, 'cptm_icon_url', esc_url_raw( $icon_url ) );
-		}
-
-		$menu_position = $this->posted( 'cptm_menu_position' );
-		if ( null !== $menu_position ) {
-			update_post_meta( $post_id, 'cptm_menu_position', is_numeric( trim( $menu_position ) ) ? (string) absint( $menu_position ) : '' );
-		}
-
-		$capability_type = $this->posted( 'cptm_capability_type' );
-		if ( in_array( $capability_type, array( 'post', 'page' ), true ) ) {
-			update_post_meta( $post_id, 'cptm_capability_type', $capability_type );
-		}
-
-		$this->save_flags( $post_id, array( 'cptm_public', 'cptm_show_ui', 'cptm_has_archive', 'cptm_exclude_from_search', 'cptm_hierarchical', 'cptm_rewrite', 'cptm_withfront', 'cptm_feeds', 'cptm_pages', 'cptm_query_var', 'cptm_show_in_rest', 'cptm_publicly_queryable', 'cptm_show_in_menu' ) );
-		$this->save_flags( $post_id, array( 'cptm_show_in_nav_menus', 'cptm_show_in_admin_bar', 'cptm_can_export', 'cptm_delete_with_user' ), true );
-		$this->save_path( $post_id, 'cptm_archive_slug' );
-		$this->save_path( $post_id, 'cptm_rest_base' );
-		$this->save_path( $post_id, 'cptm_rest_namespace' );
-
-		update_post_meta( $post_id, 'cptm_supports', $this->posted_list( 'cptm_supports', array_map( 'sanitize_key', self::SUPPORTS ) ) );
-		update_post_meta( $post_id, 'cptm_builtin_taxonomies', $this->posted_list( 'cptm_builtin_taxonomies', self::BUILTIN_TAXONOMIES ) );
-
-		update_option( 'cptm_plugin_settings_changed', true );
+		$this->save_definition( $post_id, 'cptm' );
 	}
 
 	/**
@@ -1185,27 +775,7 @@ class Cptm {
 	 * @param int $post_id WordPress Post ID
 	 */
 	public function cptm_tax_save_post( int $post_id ): void {
-		if ( ! $this->can_save( $post_id ) ) {
-			return;
-		}
-
-		$this->save_name( $post_id, 'cptm_tax_name', true );
-
-		foreach ( array( 'cptm_tax_label', 'cptm_tax_singular_name', 'cptm_tax_custom_rewrite_slug', 'cptm_tax_default_term' ) as $key ) {
-			$value = $this->posted( $key );
-			if ( null !== $value ) {
-				update_post_meta( $post_id, $key, sanitize_text_field( $value ) );
-			}
-		}
-
-		$this->save_flags( $post_id, array( 'cptm_tax_show_ui', 'cptm_tax_hierarchical', 'cptm_tax_rewrite', 'cptm_tax_query_var', 'cptm_tax_show_in_rest', 'cptm_tax_show_admin_column' ) );
-		$this->save_flags( $post_id, array( 'cptm_tax_public', 'cptm_tax_publicly_queryable', 'cptm_tax_show_in_nav_menus', 'cptm_tax_show_tagcloud', 'cptm_tax_show_in_quick_edit' ), true );
-		$this->save_path( $post_id, 'cptm_tax_rest_base' );
-
-		$post_types = array_values( array_filter( $this->posted_list( 'cptm_tax_post_types', null ), 'post_type_exists' ) );
-		update_post_meta( $post_id, 'cptm_tax_post_types', $post_types );
-
-		update_option( 'cptm_plugin_settings_changed', true );
+		$this->save_definition( $post_id, 'cptm_tax' );
 	}
 
 	/**
@@ -1231,11 +801,33 @@ class Cptm {
 	}
 
 	/**
-	 * Flush rewrite rules on plugin activation
+	 * Flush rewrite rules on plugin activation. On network activation, every site flushes on its next admin visit.
+	 *
+	 * @param bool $network_wide Whether the plugin is network activated.
 	 */
-	public function cptm_plugin_activate_flush_rewrite(): void {
+	public function cptm_plugin_activate_flush_rewrite( $network_wide = false ): void {
+		if ( is_multisite() && $network_wide ) {
+			foreach ( get_sites( array( 'fields' => 'ids', 'number' => 0 ) ) as $site_id ) {
+				update_blog_option( (int) $site_id, 'cptm_plugin_settings_changed', true );
+			}
+			return;
+		}
 		$this->cptm_create_custom_post_types();
 		flush_rewrite_rules();
+	}
+
+	/**
+	 * A new site in a network where the plugin is network active.
+	 *
+	 * @param WP_Site $site New site.
+	 */
+	public function cptm_initialize_site( WP_Site $site ): void {
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		if ( is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
+			update_blog_option( (int) $site->blog_id, 'cptm_plugin_settings_changed', true );
+		}
 	}
 
 	/**
@@ -1521,7 +1113,7 @@ class Cptm {
 	}
 
 	/**
-	 * Prepare attachment for Ajax Upload Request (C-004)
+	 * Prepare attachment for Ajax Upload Request (C-007)
 	 *
 	 * @param  array       $response   Response
 	 * @param  WP_Post     $attachment Attachment

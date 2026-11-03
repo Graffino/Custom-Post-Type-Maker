@@ -7,18 +7,18 @@
 <!-- graffino-agentic:end -->
 
 ## Index
-- Q-001 · Does the repo get an automated test suite, and which runner?
+- Q-001 · Does the repo get an automated test suite, and which runner? · _answered_
 - Q-002 · How do we run WordPress locally for checks and screenshots? · _answered_
 - Q-003 · Who may manage definitions: only users with manage_options, or also Editors? · _answered_
 
 ---
 
 ## Q-001 · Does the repo get an automated test suite, and which runner?
-- **Status:** open
+- **Status:** answered 2026-11-03
 - **Blocks:** "tests first" in /build. Until then, each behaviour is checked by hand.
 - **Who answers:** Zeno
-- **Answer:**
-- **Recorded as:**
+- **Answer:** Playground smoke tests in `tests/`, run locally with `tests/run.sh`. No CI for now (Zeno, 2026-11-03).
+- **Recorded as:** D-011
 
 ## Q-002 · How do we run WordPress locally for checks and screenshots?
 - **Status:** answered 2026-11-03

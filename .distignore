@@ -13,3 +13,7 @@ AGENTS.md
 CLAUDE.md
 CONTEXT.md
 phpcs.xml
+tests
+bin
+dist
+.gitkeep

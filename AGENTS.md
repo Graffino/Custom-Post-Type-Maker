@@ -79,7 +79,11 @@ phpcs --standard=phpcs.xml class-cptm.php
 # PHP syntax check. Not run: php is not installed here.
 php -l class-cptm.php
 
-# Tests: none. The repo has no test suite (see Q-001).
+# Smoke tests in a fresh Playground (D-011). Run 2026-11-03: PASS (72 + 6 + CLI).
+tests/run.sh
+
+# Build dist/ (no dev files) and run Plugin Check on it. Run 2026-11-03: 0 errors, 0 warnings.
+tests/plugin-check.sh
 
 # Local WordPress + screenshots (Q-002). Admin login is automatic with --login.
 npx @wp-playground/cli@latest server --port=9400 --wp=latest --login \
@@ -100,7 +104,10 @@ svn ls https://plugins.svn.wordpress.org/custom-post-type-maker/tags/
 ```
 
 ## 3. Layout
-- `class-cptm.php` — the whole plugin: plugin header, class `Cptm`, all hooks and admin UI.
+- `class-cptm.php` — plugin header, class `Cptm`: hooks, admin menu, meta box forms, save handlers.
+- `includes/` — `Cptm_Definition` (the definition mapper), `Cptm_Tools` (Tools page), `Cptm_CLI` (WP-CLI).
+- `uninstall.php` — opt-in data removal.
+- `tests/`, `bin/` — Playground smoke tests, Plugin Check, release build (never shipped).
 - `css/`, `js/` — admin styles and scripts for the overview lists and the add/edit screens.
 - `lang/` — translation template `custom-post-type-maker.pot`.
 - `assets/` — wordpress.org banners, icons and screenshots (go to SVN `assets/`, not trunk).
@@ -115,15 +122,14 @@ svn ls https://plugins.svn.wordpress.org/custom-post-type-maker/tags/
 
 ## 5. Release
 Git-flow: work on `develop`; `release/vX.Y.Z` branch; merge to `master`; tag `vX.Y.Z`;
-merge the tag back into `develop`. Then copy the shipped files (everything not in `.distignore`) to SVN `trunk/` in the working copy
+merge the tag back into `develop`. Then run `tests/run.sh` and `tests/plugin-check.sh`, and copy `dist/custom-post-type-maker/` (from `bin/build.sh`) to SVN `trunk/` in the working copy
 `/Users/Zeno/Work/Graffino/WordPress/wordpress.org/Custom-Post-Type-Maker`, `svn cp trunk tags/X.Y.Z`,
 and `svn commit` (PATTERN-001; needs the wordpress.org SVN password, typed by Zeno). Banners, icons, screenshots and `blueprints/blueprint.json` go to SVN `assets/`.
 Zeno says go for each tag, push and SVN commit.
 
 ## 6. Definition of done
-- `php -l class-cptm.php` passes (on a machine with PHP).
-- `phpcs --standard=phpcs.xml` shows no new errors in changed lines.
-- The plugin activates on the current WordPress release with `WP_DEBUG` on and logs no notices.
-- Existing post types and taxonomies saved by older versions still register (C-001).
+- `tests/run.sh` passes (includes the C-001 check of data saved by 1.2.0).
+- `tests/plugin-check.sh` shows 0 errors.
+- A new behaviour gets a smoke test in `tests/smoke/run.php`.
 - Screenshots of every changed admin screen, compared with `docs/design/DESIGN.md`.
 - New practices recorded as candidate patterns; open points recorded as Q- entries.

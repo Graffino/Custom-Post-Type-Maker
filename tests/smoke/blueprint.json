@@ -1,0 +1,33 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "steps": [
+    {
+      "step": "activatePlugin",
+      "pluginPath": "custom-post-type-maker/class-cptm.php"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); register_shutdown_function( function () { $e = error_get_last(); if ( $e && in_array( $e['type'], array( E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ), true ) ) { echo \"\\nPHP FATAL: {$e['message']} @ {$e['file']}:{$e['line']}\\n\"; } } ); require '/wordpress/wp-load.php'; try { require '/wordpress/wp-content/plugins/custom-post-type-maker/tests/smoke/run.php'; } catch ( Throwable $t ) { echo \"\\nUNCAUGHT \" . get_class( $t ) . ': ' . $t->getMessage() . ' @ ' . $t->getFile() . ':' . $t->getLine() . \"\\n\" . implode( \"\\n\", $GLOBALS['cptm_t']['fail'] ?? array() ); throw $t; }"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp cptm list"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp cptm code book"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp cptm export --file=/results/export.json"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp cptm import /results/export.json --mode=replace"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); register_shutdown_function( function () { $e = error_get_last(); if ( $e && in_array( $e['type'], array( E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ), true ) ) { echo \"\\nPHP FATAL: {$e['message']} @ {$e['file']}:{$e['line']}\\n\"; } } ); require '/wordpress/wp-load.php'; try { require '/wordpress/wp-content/plugins/custom-post-type-maker/tests/smoke/uninstall.php'; } catch ( Throwable $t ) { echo \"\\nUNCAUGHT \" . get_class( $t ) . ': ' . $t->getMessage() . ' @ ' . $t->getFile() . ':' . $t->getLine() . \"\\n\" . implode( \"\\n\", $GLOBALS['cptm_t']['fail'] ?? array() ); throw $t; }"
+    }
+  ]
+}

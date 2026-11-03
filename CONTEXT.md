@@ -40,3 +40,12 @@ _Avoid_: deploy, publish (for this step)
 
 **Stable tag** (noun) — the `readme.txt` header that tells wordpress.org which SVN tag to serve.
 _Avoid_: current version, live version
+
+**Export file** (noun) — the JSON file that Post Types → Tools → Export and `wp cptm export` make (C-008).
+_Avoid_: backup file, dump
+
+**Tools page** (noun) — the admin page Post Types → Tools: export, import, Custom Post Type UI import, Get code, uninstall setting.
+_Avoid_: settings page, import page
+
+**Definition mapper** (noun) — the class `Cptm_Definition`, the only code that reads or writes definitions (PATTERN-009).
+_Avoid_: model, helper

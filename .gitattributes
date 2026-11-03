@@ -11,3 +11,5 @@ AGENTS.md export-ignore
 CLAUDE.md export-ignore
 CONTEXT.md export-ignore
 phpcs.xml export-ignore
+tests export-ignore
+bin export-ignore

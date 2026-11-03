@@ -30,7 +30,25 @@ Please ask your question in the [Support Forums](https://wordpress.org/support/p
 
 ## Feature requests
 
-We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
+We maintain this plugin and add features that many users ask for. Open a feature request in [Issues](https://github.com/Graffino/custom-post-type-maker/issues), or submit a pull request.
+
+## WP-CLI
+
+```bash
+wp cptm list
+wp cptm export --file=types.json
+wp cptm import types.json --mode=replace --publish
+wp cptm code book
+```
+
+## Development
+
+Needs Node.js. Tests run in WordPress Playground:
+
+```bash
+tests/run.sh            # smoke tests
+tests/plugin-check.sh   # builds dist/ and runs Plugin Check
+```
 
 ## Localization
 

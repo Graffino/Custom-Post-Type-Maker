@@ -50,3 +50,15 @@ designs:
     screenshots: [../../assets/icon-256x256.png, ../../assets/banner-1544x500.png]
     design_ref: none
     status: implemented
+  - id: DS-cptm-tools
+    kind: screen
+    source: includes/class-cptm-tools.php render(), css/tools.css, js/code.js
+    screenshots: [screens/DS-cptm-tools.light.png]
+    design_ref: none
+    status: implemented
+  - id: DS-cptm-code-box
+    kind: component
+    source: class-cptm.php cptm_code_meta_box(), js/code.js, css/add-edit.css
+    screenshots: [screens/DS-cptm-post-type-edit.light.png]
+    design_ref: none
+    status: implemented

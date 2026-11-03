@@ -4,7 +4,7 @@ Tags: custom post type, custom post types, taxonomy, custom taxonomy, cpt
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.3.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.me/zenopopovici/
@@ -24,6 +24,9 @@ Originally by [Bakhuys](http://www.bakhuys.com/).
 * Provides almost all the parameters of the WordPress CPT API
 * Shows you a list of all other registered Custom Post Types and custom Taxonomies in WordPress
 * Uses the WordPress Media Uploader or Dash Icons (Native WordPress Icons) to let you manage the Custom Post Type icon
+* Block editor templates and template locks for your post types
+* Export and import as JSON, import from Custom Post Type UI, and PHP code export
+* WP-CLI commands: `wp cptm list`, `export`, `import` and `code`
 
 == Installation ==
 
@@ -59,7 +62,19 @@ Make sure you attach to the report:
 5. Anything else you think would be useful to pinpoint the problem
 
 = How do I request a feature? =
-We're supporting this plugin but not actively developing it. If you're interested to contribute you can submit a PR on [GitHub](https://github.com/Graffino/custom-post-type-maker/pulls).
+We maintain this plugin and add features that many users ask for. Open a feature request on [GitHub](https://github.com/Graffino/custom-post-type-maker/issues), or submit a pull request.
+
+= How do I move my post types to another site? =
+Go to Post Types → Tools, download the export file, and import it on the other site. With WP-CLI: `wp cptm export --file=types.json` and `wp cptm import types.json`.
+
+= Can I switch from Custom Post Type UI? =
+Yes. Go to Post Types → Tools → Import from Custom Post Type UI. The import makes drafts. Deactivate Custom Post Type UI, then publish the drafts.
+
+= Can I stop using this plugin later? =
+Yes. Each definition has a "Get code" box with the PHP code that registers the same type. Paste it in your theme or plugin, then deactivate this plugin.
+
+= What happens to my content when I delete the plugin? =
+Nothing. Your posts and terms stay in the database. Without the plugin, their types are not registered until you register them in code. Definitions are removed only if you select that option on the Tools page.
 
 = How do I get the plugin in my own language? =
 You'll have to do it yourself. Help [translate this plugin](https://translate.wordpress.org/projects/wp-plugins/custom-post-type-maker).
@@ -69,11 +84,21 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 1. Creating Custom Post Types
 2. Overview of your created Custom Post Types
 3. Creating custom Taxonomies
+4. Tools: export, import, import from Custom Post Type UI, and PHP code
 
 == Changelog ==
 
-= 1.3.0 =
+= 2.0.0 =
 
+- New: Tools page (Post Types → Tools) with JSON export and import of definitions. Imports are saved as drafts unless you select "Publish".
+- New: import your post types and taxonomies from Custom Post Type UI (read only; Custom Post Type UI is not changed).
+- New: "Get code" box on each definition and on the Tools page: PHP code that registers the same type without this plugin.
+- New: WP-CLI commands: `wp cptm list`, `wp cptm export`, `wp cptm import`, `wp cptm code`.
+- New post type options: Block Template, Template Lock, Embeddable (WordPress 6.8+), and a Custom capability type. Administrators get the custom capabilities automatically.
+- New taxonomy option: Sort.
+- New: optional data removal on uninstall (Tools page). Your posts and terms are never deleted.
+- Changed: the 16×16 menu icon size is no longer made for every upload; it is made only for the image you select as an icon.
+- Multisite: network activation now flushes the permalinks of every site.
 - Security: only administrators (`manage_options`) can view, create, edit or delete post type and taxonomy definitions. Before, Editors could reach these screens through a direct URL.
 - Security: the save handler checks the user's capability, sanitizes every field, and accepts only known values for supports, built-in taxonomies and post types.
 - Security: all values on the admin screens are escaped on output. Stored data is read without `unserialize()` of objects.
@@ -169,8 +194,8 @@ You'll have to do it yourself. Help [translate this plugin](https://translate.wo
 
 == Upgrade Notice ==
 
-= 1.3.0 =
-- Security release. Requires PHP 8.1 and WordPress 6.5. Only administrators can now manage post types and taxonomies.
+= 2.0.0 =
+- Major release with security hardening. Requires PHP 8.1 and WordPress 6.5. Only administrators can now manage post types and taxonomies.
 
 = 1.1.3 =
 - Removed forgotten development dump in v1.1.2. Sorry about that.

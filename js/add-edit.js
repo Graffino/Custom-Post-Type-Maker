@@ -37,6 +37,14 @@
 		return false;
 	});
 
+	// Capability type: show the name field only for "Custom".
+	var $capabilitySelect = $('#cptm_capability_type_select');
+	var toggleCapability = function() {
+		$('#cptm_capability_type_custom').toggle( 'custom' === $capabilitySelect.val() );
+	};
+	$capabilitySelect.on('change', toggleCapability);
+	toggleCapability();
+
 	$('.remove-cptm-icon').on('click', function(e) {
 		e.preventDefault();
 		$('#cptm_icon_url').val('');
