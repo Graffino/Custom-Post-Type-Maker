@@ -90,6 +90,11 @@ npx @wp-playground/cli@latest server --port=9400 --wp=latest --login \
 npx @wp-playground/cli@latest run-blueprint --wp=latest --php=8.1 \
   --mount=.:/wordpress/wp-content/plugins/custom-post-type-maker --blueprint=<makepot.json>
 
+# Screenshots of admin screens and brand PNGs (headless Chrome; Playground must run).
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+  --user-data-dir=<scratch profile> --force-device-scale-factor=1 --virtual-time-budget=8000 \
+  --window-size=1280,1500 --screenshot=<out.png> "http://127.0.0.1:9400/wp-admin/<screen>"
+
 # Read the release channel (read-only).
 svn ls https://plugins.svn.wordpress.org/custom-post-type-maker/tags/
 ```
@@ -110,9 +115,9 @@ svn ls https://plugins.svn.wordpress.org/custom-post-type-maker/tags/
 
 ## 5. Release
 Git-flow: work on `develop`; `release/vX.Y.Z` branch; merge to `master`; tag `vX.Y.Z`;
-merge the tag back into `develop`. Then copy the shipped files to SVN `trunk/` in the working copy
+merge the tag back into `develop`. Then copy the shipped files (everything not in `.distignore`) to SVN `trunk/` in the working copy
 `/Users/Zeno/Work/Graffino/WordPress/wordpress.org/Custom-Post-Type-Maker`, `svn cp trunk tags/X.Y.Z`,
-and `svn commit` (PATTERN-001; needs the wordpress.org SVN password, typed by Zeno). Banners and icons go to SVN `assets/`.
+and `svn commit` (PATTERN-001; needs the wordpress.org SVN password, typed by Zeno). Banners, icons, screenshots and `blueprints/blueprint.json` go to SVN `assets/`.
 Zeno says go for each tag, push and SVN commit.
 
 ## 6. Definition of done

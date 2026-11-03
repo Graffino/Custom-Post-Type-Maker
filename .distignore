@@ -1,0 +1,15 @@
+# Files that never ship to wordpress.org SVN trunk (PATTERN-001).
+.git
+.github
+.gitignore
+.gitattributes
+.distignore
+.DS_Store
+.claude
+.dev
+docs
+assets
+AGENTS.md
+CLAUDE.md
+CONTEXT.md
+phpcs.xml

@@ -109,6 +109,8 @@ class Cptm {
 		add_filter( 'manage_cptm_tax_posts_columns', array( $this, 'cptm_tax_change_columns' ) );
 		add_filter( 'manage_edit-cptm_tax_sortable_columns', array( $this, 'cptm_tax_sortable_columns' ) );
 		add_filter( 'post_updated_messages', array( $this, 'cptm_post_updated_messages' ) );
+		add_filter( 'parent_file', array( $this, 'cptm_parent_file' ) );
+		add_filter( 'submenu_file', array( $this, 'cptm_submenu_file' ) );
 		add_filter( 'wp_prepare_attachment_for_js', array( $this, 'wp_prepare_attachment_for_js' ), 10, 3 );
 
 		// hooks
@@ -222,6 +224,28 @@ class Cptm {
 	private function is_plugin_screen( string $base ): bool {
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 		return $screen && $base === $screen->base && in_array( $screen->post_type, array( 'cptm', 'cptm_tax' ), true );
+	}
+
+	/**
+	 * Keep the "Post Types" menu open on the taxonomy screens.
+	 *
+	 * @param  string $parent_file Parent menu file.
+	 * @return string
+	 */
+	public function cptm_parent_file( $parent_file ) {
+		$screen = get_current_screen();
+		return ( $screen && 'cptm_tax' === $screen->post_type ) ? 'edit.php?post_type=cptm' : $parent_file;
+	}
+
+	/**
+	 * Highlight the "Taxonomies" submenu on the taxonomy screens.
+	 *
+	 * @param  string|null $submenu_file Submenu file.
+	 * @return string|null
+	 */
+	public function cptm_submenu_file( $submenu_file ) {
+		$screen = get_current_screen();
+		return ( $screen && 'cptm_tax' === $screen->post_type ) ? 'edit.php?post_type=cptm_tax' : $submenu_file;
 	}
 
 	/**

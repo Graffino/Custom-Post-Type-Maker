@@ -18,12 +18,12 @@ Custom Post Type Maker is the perfect plugin to create Custom Post Types and cus
 Originally by [Bakhuys](http://www.bakhuys.com/).
 
 = Features =
-* Fully integrates with the Wordpress API, for the best compatibility
+* Fully integrates with the WordPress API, for the best compatibility
 * Lets you create Custom Post Types and custom Taxonomies without the need of writing any code
 * Provides an interface to manage your Custom Post Types, just like managing your regular posts and pages
 * Provides almost all the parameters of the WordPress CPT API
-* Shows you a list of all other registered Custom Post Types and custom Taxonomies in Wordpress
-* Uses the WordPress Media Uploader or Dash Icons (Native Wordpress Icons) to let you manage the Custom Post Type icon
+* Shows you a list of all other registered Custom Post Types and custom Taxonomies in WordPress
+* Uses the WordPress Media Uploader or Dash Icons (Native WordPress Icons) to let you manage the Custom Post Type icon
 
 == Installation ==
 
@@ -43,8 +43,8 @@ Ask your question in the [Support Forums](https://wordpress.org/support/plugin/c
 
 = What should I try before reporting a bug? =
 1. Disable all your plugins except "Custom Post Type Maker".
-2. See if the plugin behaves normally with the default Wordpress theme.
-3. Try to run the plugin on a clean Wordpress install.
+2. See if the plugin behaves normally with the default WordPress theme.
+3. Try to run the plugin on a clean WordPress install.
 
 If all of this fails, see: "How should I report bugs?" section.
 
@@ -52,7 +52,7 @@ If all of this fails, see: "How should I report bugs?" section.
 Please report your bug on [GitHub](https://github.com/Graffino/custom-post-type-maker/issues). Issues will not be handled elsewhere.
 
 Make sure you attach to the report:
-1. Your Wordpress version
+1. Your WordPress version
 2. Your plugin version
 3. Screenshots
 4. Steps to reproduce the problem

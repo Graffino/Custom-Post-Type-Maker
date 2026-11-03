@@ -42,7 +42,7 @@ div#cptm_options div.inside, div#cptm_tax_options div.inside {
 	}
 
 		table.cptm td.label {
-			width: 24%;
+			width: 40%;
 			border-right: 1px solid #e1e1e1;
 			background: #f9f9f9;
 			vertical-align: middle;
@@ -54,7 +54,10 @@ div#cptm_options div.inside, div#cptm_tax_options div.inside {
 
 			table.cptm td.label label {
 				font-weight: bold;
-				width: 24%;
+			}
+
+			table.cptm td.label p {
+				margin: 4px 0 0;
 			}
 
 				table.cptm td.label label span.required {
