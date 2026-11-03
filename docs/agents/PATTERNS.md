@@ -13,8 +13,8 @@
 - PATTERN-005 · Read definition meta with array_key_exists and a default · approved
 - PATTERN-006 · Conventional commit subjects · approved
 - PATTERN-007 · A new definition setting is optional and passed only when set · approved
-- PATTERN-008 · Build meta box rows with the row helpers · candidate
-- PATTERN-009 · Read and write definitions only through Cptm_Definition · candidate
+- PATTERN-008 · Build meta box rows with the row helpers · approved
+- PATTERN-009 · Read and write definitions only through Cptm_Definition · approved
 
 ---
 
@@ -81,17 +81,19 @@
 - **Confirmed:** 2026-11-03
 
 ## PATTERN-008 · Build meta box rows with the row helpers
-- **Status:** candidate
+- **Status:** approved
 - **Use when:** you add a field to the Options meta box.
 - **How:** Call `text_row()`, `bool_row()`, `optional_bool_row()` or `checkbox_row()`. They escape all output and keep the `tabindex` order.
 - **Example:** class-cptm.php `cptm_meta_box()`
 - **Why:** The 1.2.0 forms repeated the markup per field, and several fields printed values without escaping.
-- **Source:** code · confidence medium
+- **Source:** code, user · confidence high
+- **Confirmed:** 2026-11-03
 
 ## PATTERN-009 · Read and write definitions only through Cptm_Definition
-- **Status:** candidate
+- **Status:** approved
 - **Use when:** any code reads, writes, imports, exports or registers a definition.
 - **How:** Read with `post_type_registration()` / `taxonomy_registration()` / `flat()`. Clean any input with `sanitize()`, then write with `save()`. Add a new key to `Cptm_Definition::KEYS` first; the form, import, export and code export then pick it up.
 - **Example:** includes/class-cptm-definition.php; class-cptm.php `save_definition()`; includes/class-cptm-tools.php `handle_import()`
 - **Why:** The form, the JSON import, the Custom Post Type UI import and WP-CLI must apply the same rules (C-001, D-010).
-- **Source:** code · confidence medium
+- **Source:** code, user · confidence high
+- **Confirmed:** 2026-11-03
