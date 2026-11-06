@@ -14,13 +14,22 @@ From the default branch (develop if present): `feat|fix|chore/<short-name>`. Com
 only on that branch. Never push, merge to a shared branch, tag or release without
 the user's go.
 
-For several independent parts, spawn one `builder` agent per part with
-`isolation: "worktree"`; keep parts that share files in one agent.
+**Parallel parts** only when they are truly independent (disjoint files, contracts
+and behaviour): one `builder` agent per part with `isolation: "worktree"`, each on a
+branch cut from yours. Parts that overlap go to one agent, in order; when in doubt,
+one. Bring each part's commits onto your branch as soon as it returns (rebase or
+cherry-pick, then fast-forward; history stays linear); a conflict in code or tests
+goes back to a builder, then the affected tests run again. Remove a worktree only
+after its commits are on your branch.
 
-**Team addon** (AGENTS.md has the "Team workflow" block): use the ticket branch,
-push it, open the draft PR and comment both links on the ticket first; commit
-titles `<ticket> - <type>(<scope>): …`; when a test author wrote the tests, skip
-step 2; end the session with the ticket journal; never merge.
+**Team addon** (AGENTS.md has the "Team workflow" block): work on the delivery's
+integration branch: if it doesn't exist yet, push it, open the draft PR and comment
+both links on every ticket it covers first. Parallel parts use private worker
+branches that are never pushed (`/start` integrates them). Commit titles
+`<ticket> - <type>(<scope>): …`, naming the ticket each commit implements. When a
+test author wrote the tests, skip step 2. Under `/start`, return the handoff
+(`.claude/agents/builder.md`) and leave the journal to the conductor; otherwise end
+the session with the ticket journal. Never merge.
 
 ## 2. Tests first (repos with tests)
 1. Write the tests for the plan's behaviours, in the repo's existing test style.
@@ -35,10 +44,21 @@ No test suite: list each behaviour as "checked by hand" with how you will check 
   fixes (compile error, path, setup) are allowed and named in the report.
 - Read the nearest existing example; match its idiom, naming and comment density.
 - Follow the approved patterns the plan cites. Copy no `candidate`.
-- Fix related defects you find on the way; name each one in the report.
+- **As simply as the plan allows.** The smallest change that meets the approved
+  criteria, reusing existing code. A new abstraction, dependency, configuration
+  option, extension point or broad refactor needs a concrete reason today, written
+  in the report. Never save effort by weakening a test or dropping error handling.
+- **Defects you meet.** One your own work introduced: fix it. An existing one that
+  blocks an approved acceptance criterion, with clear expected behaviour and a small
+  fix: write the failing reproduction first (team addon: the test author writes it),
+  then fix it, and name cause, fix and check in the report. Anything else: don't fix
+  it; name it in the report as an observation. Unspecified behaviour or conflicting
+  requirements: stop and ask.
 
 ## 4. UI changes (visual apps)
-1. Use only tokens from `docs/design/DESIGN.md`. A new color, size or font is a
+1. A new or changed screen is built only from its **confirmed** mock in
+   `docs/design/mocks/` (DESIGN.md → Procedure), never from the board or Figma. Not
+   confirmed yet: stop and ask. Use only tokens from `docs/design/DESIGN.md`. A new color, size or font is a
    PROPOSAL, not a code change.
 2. Cover the states: empty, loading, error, long text, many items; light and dark;
    the smallest and largest supported window/viewport; keyboard focus.
@@ -61,7 +81,9 @@ reported with its output; never call a failed or skipped check done.
 
 ## 7. Report
 What changed (files), tests (added · passing · assertions changed: must be 0),
-checks run and results, screenshots (UI), deviations from the plan and why,
-candidate patterns and Q- entries added, what remains. Then ask whether to merge
+checks run and results, screenshots (UI), defects fixed on the way (with their
+reproduction), deviations from the plan and why, new abstractions or dependencies
+and their reason, candidate patterns and Q- entries added, observations, what
+remains. Then ask whether to merge
 the branch into the default branch.
 <!-- graffino-agentic:end -->

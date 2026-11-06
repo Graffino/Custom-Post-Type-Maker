@@ -8,9 +8,18 @@ non-fast-forward or on uncommitted changes you did not make.
 
 **Always load** (indexes; open the entry, or its topic file, before you rely on it):
 `docs/agents/DECISIONS.md`, `docs/agents/PATTERNS.md`,
-`docs/agents/CONTRACTS.md`, `docs/agents/OPEN-QUESTIONS.md`, `CONTEXT.md`. Load
-`docs/agents/ARCHITECTURE.md` before structural work. UI work also loads
-`docs/design/DESIGN.md` and `docs/design/registry.yaml`.
+`docs/agents/CONTRACTS.md`, `docs/agents/OPEN-QUESTIONS.md`, `CONTEXT.md`.
+
+**Load on demand:**
+
+| When | Load |
+|---|---|
+| You rely on an entry | the entry, or its topic file under `docs/agents/<kind>/` |
+| Structural work | `docs/agents/ARCHITECTURE.md` |
+| Old code or a past decision needs explaining | `docs/agents/DECISIONS-SUPERSEDED.md`, `PATTERNS-SUPERSEDED.md` (never obeyed) |
+| UI work | `docs/design/DESIGN.md`, `docs/design/registry.yaml` |
+| Banners, icons or other brand images change | `docs/design/brand/` (the sources) and `docs/design/DESIGN.md` → Source |
+| The wordpress.org listing changes (description, stable tag, tested up to, changelog) | `readme.txt` |
 
 **Flow:** a change to more than a few lines, or one with a design choice, starts with
 `/plan`. The approved plan runs with `/build`. Small fixes go straight to build, with
@@ -19,8 +28,9 @@ tests first where tests exist.
 ### The gate
 Ask yourself: **does this change something already approved?**
 - **Do, then report:** add a `candidate` pattern; add or answer an open question
-  (only with an answer the user gave); fix a typo, link or moved path; code that
-  follows the approved entries.
+  (only with an answer the user gave); write a `Proposed answer` the evidence
+  supports (the question stays `investigating` until the user confirms it); fix a
+  typo, link or moved path; code that follows the approved entries.
 - **Propose and wait:** change, supersede or delete an `approved` pattern or
   decision; promote `candidate → approved`; add a decision; code that contradicts an
   entry. Use this shape, then stop:
@@ -40,6 +50,9 @@ without new evidence. A rejected proposal is added there with the reason.
 - Build only from `approved` entries. Unanswered means out of scope: record a Q-,
   never invent a value, a requirement or a behaviour.
 - Add nothing nobody asked for. Note it as a suggestion instead.
+- Build the smallest change that meets the approved criteria, reusing existing code.
+  A new abstraction, dependency, configuration option, extension point or broad
+  refactor needs a concrete reason today. Never at the cost of tests or error handling.
 - Tests first where the repo has tests. Never change what an existing test asserts
   to make code pass; an assertion you think is wrong goes to the user.
 - Never write a secret, token, password or personal data into a file, commit or log.
@@ -55,6 +68,8 @@ without new evidence. A rejected proposal is added there with the reason.
 - A provided contract (C-) lives here only; consumers link to it. Changing one is a
   PROPOSAL, and the plan names the consumer files too.
 - Superseded entries stay (`status: superseded-by <ID>`) so old code stays explainable.
+  Their index lines live in `DECISIONS-SUPERSEDED.md` / `PATTERNS-SUPERSEDED.md`, not
+  in the always-loaded indexes; the lint (`--fix`) moves them.
 - After any ledger change: `python3 docs/agents/tools/ledger-lint.py --fix` (next free
   ID: `--next D`). It must pass.
 - **Confirmed:** when the user confirms an entry in a plan, set `- **Confirmed:** <date>`

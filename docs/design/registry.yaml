@@ -1,6 +1,6 @@
 # docs/design/registry.yaml — every screen and shared component, by DS- ID.
-# Plans and commits cite the ID. kind: foundation | component | screen
-# status: draft | approved | implemented | deprecated (never delete an entry; tasks may cite it)
+# Plans, commits, mocks and board files use the ID (tickets don't). kind: foundation | component | screen
+# status: draft (mock drawn) | approved (confirmed on the board) | implemented | deprecated (never delete an entry)
 designs:
   - id: DS-cptm-post-type-list
     kind: screen

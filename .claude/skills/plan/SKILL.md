@@ -35,7 +35,9 @@ question**: ask it now, all in one message. A gap the user cannot answer becomes
 S | M | L — <what drives it>
 
 ## Approach
-<2–4 sentences: what changes where, and why this way. Alternatives rejected and why.>
+<2–4 sentences: what changes where, and why this way. The smallest change that meets
+the criteria: name the existing code reused, and give a concrete reason for any new
+abstraction, dependency, option or broad refactor. Alternatives rejected and why.>
 
 ## Files
 | Action | Path | What |
@@ -44,7 +46,10 @@ S | M | L — <what drives it>
 | # | Behaviour | Test (file · kind) | Not automated? why |
 
 ## Design (UI only)
-<DS- IDs touched or added · tokens used · states covered: empty, loading, error, long text · light/dark>
+<DS- IDs touched or added · mock confirmed, or to draw and confirm first (DESIGN.md) · tokens used · states covered: empty, loading, error, long text · light/dark>
+
+## Sequencing
+one builder | parallel: <part → files, only for disjoint files, contracts and behaviour>
 
 ## Risks
 <what could go wrong, the fallback, what is hard to reverse>
@@ -80,8 +85,16 @@ every step looks right.
 
 ## Team addon
 If `AGENTS.md` has the "Team workflow" block: a ticket ID is required (ask if
-missing), read the ticket and every comment first, and also write the plan to
-`docs/agents/tasks/<ticket>/PLAN.md`. Record each knowledge call there.
+missing), read the ticket, its parent and every comment first, and also write the
+plan to `docs/agents/tasks/<ticket>/PLAN.md`. Record each knowledge call there.
+- One plan per **delivery**: it may cover the ticket's dependent subtasks. Add under
+  Size: `Repos · branches` (the integration branch) and `Tasks covered`
+  (`<ticket> (Fixes | Part of)` each). Sequencing may also be `separate PR stacked
+  on <ticket>`, only when a part is independently reviewable or releasable.
+- Complete the **context brief** in `OVERVIEW.md`: where the code is, ownership (one
+  builder, or worker → part), the commands that verify it.
+- **Fast mode** (the `/start` fast lane): the planner reads the ticket itself and
+  fills the whole context brief (`.claude/agents/planner.md`).
 
 ## 4. Gate
 Show the plan. Ask the user to approve, adjust or drop it, and to call each
