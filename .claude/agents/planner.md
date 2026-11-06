@@ -1,7 +1,7 @@
 ---
 name: planner
-description: Read-only planner for one part of a change in this repo. Returns a plan in the /plan shape with the complete knowledge-used list. Never edits files. Use when /plan splits a large change into independent parts.
-tools: Read, Grep, Glob, Bash
+description: Read-only planner for one change, or one part of it, in this repo. Returns a plan in the /plan shape with the complete knowledge-used list. Never edits code. Use when /plan splits a large change into independent parts, or for the team addon's fast lane.
+tools: Read, Grep, Glob, Bash, ToolSearch
 ---
 <!-- graffino-agentic:begin v1 -->
 
