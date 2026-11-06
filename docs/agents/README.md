@@ -15,7 +15,9 @@
 | See what another system expects from us | `CONTRACTS.md` (provided, consumed, external) |
 | Understand the structure | `ARCHITECTURE.md` |
 | See what is still unknown | `OPEN-QUESTIONS.md` |
-| UI work | `../design/DESIGN.md` (rules + procedure) and `../design/registry.yaml` (DS- IDs) |
+| UI work | `../design/DESIGN.md` (rules + procedure) and `../design/registry.yaml` (DS- IDs); a new screen is drawn in `../design/mocks/` and confirmed on the board first |
+| Show a design to people | "publish the board" (one way: repo → board; edits on the board are lost) |
+| Explain old code | `DECISIONS-SUPERSEDED.md`, `PATTERNS-SUPERSEDED.md` (never obeyed) |
 | Re-check the ledger | `python3 docs/agents/tools/ledger-lint.py` (`--fix` rebuilds the indexes, `--next D` gives the next ID) |
 | Update this setup | `/graffino-agentic-code-setup` (needs the skill installed) |
 | Mine the code again | "backfill again" → review only the clashes in the page that opens |

@@ -9,7 +9,6 @@
 ## Index
 - D-001 · Definitions are stored as posts of the private post types cptm and cptm_tax
 - D-002 · A missing cptm_publicly_queryable key means true
-- D-003 · Definition names are lowercased and spaces are removed on save · _superseded-by D-010_
 - D-004 · A Dashicon slug overrides an uploaded icon
 - D-005 · rewrite.with_front is always set, also when false
 - D-006 · Translations come from translate.wordpress.org; the repo ships only the .pot
@@ -38,15 +37,6 @@
 - **Why:** Commit db5575d: this default fixes permalink errors on sites that upgraded to 1.1.0.
 - **Rejected:** none recorded.
 - **Evidence:** class-cptm.php:265-272, commit db5575d
-- **Source:** code, git · confidence high
-
-## D-003 · Definition names are lowercased and spaces are removed on save
-- **Status:** superseded-by D-010
-- **Date:** 2026-11-03
-- **Rule:** Save `cptm_name` and `cptm_tax_name` as `sanitize_text_field( strtolower( str_replace( ' ', '', … ) ) )`.
-- **Why:** Commits 77ca7e0 ("Enforces lowercase custom post name") and f733bd2 ("Better sanitize taxonomy name").
-- **Rejected:** none recorded.
-- **Evidence:** class-cptm.php:1051, class-cptm.php:1147
 - **Source:** code, git · confidence high
 
 ## D-004 · A Dashicon slug overrides an uploaded icon
